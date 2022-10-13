@@ -35,7 +35,7 @@ rm -r open-csp
 3. Go to your mediawiki installation and add the line `require_once('./settings/CSPSettings.php');` to your `LocalSettings.php`.
 ```sh
 cd /path/to/your/mediawiki/core/
-echo -e "\n\n#Settings for the OpenCSP framework\nrequire_once('./settings/CSPSettings.php')\n" >> LocalSettings.php
+echo -e "\n\n#Settings for the OpenCSP framework\nrequire_once('./settings/CSPSettings.php');\n" >> LocalSettings.php
 ```
 4. Use your favorite text editor to set `$wgSiteName` and `smwgElasticsearchEndpoints` in `./settings/CSPSettings.php` to the correct values.
 5. Add the public WikibaseSolutions repository to your `composer.json` and run `composer update --no-dev` twice to install all required extensions and dependencies.
@@ -52,8 +52,8 @@ php extensions/SemanticMediaWiki/maintenance/setupStore.php
 php extensions/SemanticMediaWiki/maintenance/rebuildElasticIndex.php
 ```
 7. Use [PageSync]() to install the pages for a basic CSP wiki.
--- You can go to `https://your.wiki.example.com/Special:PageSync` and upload the zip found in this repository.
--- You can do this using the terminal (if you have copied the complete `wsps`-directory in step 2) with the following command:
+    - You can go to `https://your.wiki.example.com/Special:WSps?action=share` and upload the zip found in this repository.
+    - You can do this using the terminal (if you have copied the complete `wsps`-directory in step 2) with the following command:
 ```sh
   php extensions/PageSync/maintenance/WSps.maintenance.php --user 'Maintenance script'
 ```
