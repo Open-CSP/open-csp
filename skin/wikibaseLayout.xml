@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<structure>
+    <grid class="flex-fill" mode="fluid">
+        <row class="row-WSHeader">
+            <cell span="12">
+                <component type="WSHeader" class="noprint"/>
+            </cell>
+        </row>
+        <row class="ws-page-tools">
+            <component type="PageTools" class="noprint">
+                <modification type="ShowOnlyFor" group="sysop"/>
+            </component>
+            <component type="PersonalTools" class="noprint">
+                <modification type="ShowOnlyFor" group="sysop"/>
+            </component>
+        </row>
+        <row class="ws-grid">
+            <component type="WSSubHeader" class="cp-sub-header"/>
+            <component type="WSContent" class="cp-main"/>
+            <component type="WSSidebar" class="cp-sidebar"/>
+            <component type="WSFooter" class="cp-footer"/>
+        </row>
+        <row class="mt-1">
+            <cell>
+                <component type="NavbarHorizontal" collapsible="no" class="small mb-2">
+                    <component type="Toolbox" flatten="no" class="dropup">
+                        <modification type="ShowOnlyFor" group="sysop"/>
+                    </component>
+                    <component type="LangLinks" flatten="no" class="dropup"/>
+                </component>
+            </cell>
+        </row>
+        <row class="ws-page-tools"/>
+    </grid>
+</structure>

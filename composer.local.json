@@ -1,0 +1,237 @@
+{
+  "require": {
+    "mediawiki/admin-Links": "dev-REL1_35",
+    "mediawiki/bootstrap": "4.5.0",
+    "mediawiki/chameleon-skin": "3.4.3",
+    "mediawiki/code-mirror": "dev-REL1_35",
+    "mediawiki/data-transfer": "dev-REL1_35",
+    "mediawiki/delete-batch": "dev-REL1_35",
+    "mediawiki/display-title": "dev-REL1_35",
+    "mediawiki/echo": "dev-REL1_35",
+    "mediawiki/lockdown": "dev-REL1_35",
+    "mediawiki/my-variables": "dev-REL1_35",
+    "mediawiki/number-format": "dev-REL1_35",
+    "mediawiki/realnames": "dev-master",
+    "mediawiki/regex-fun": "dev-REL1_35",
+    "mediawiki/replace-text": "dev-REL1_35",
+    "mediawiki/semantic-extra-special-properties": "3.0.1",
+    "mediawiki/semantic-media-wiki": "3.2.3",
+    "mediawiki/semantic-result-formats": "3.2.0",
+    "mediawiki/url-get-parameters": "dev-REL1_35",
+    "mediawiki/user-functions": "dev-REL1_35",
+    "mediawiki/user-merge": "dev-REL1_35",
+    "mediawiki/variables": "dev-REL1_35",
+    "mediawiki/widgets": "dev-REL1_35",
+    "open-csp/w-s-slots": "^4.0",
+    "open-csp/w-s-spaces": "^2.2",
+    "open-csp/wiki-search": "v4.3.0",
+    "wikibase-solutions/flex-form": "^1.1",
+    "wikibase-solutions/c-s-p-resources": "v1.7.9",
+    "wikibase-solutions/page-sync": "^2.0",
+    "wikibase-solutions/wiki-search-front": "v2.0.4",
+    "wikibase-solutions/w-s-semantic-parsed-text": "dev-smw-3.2.2-comp",
+    "wikibase-solutions/w-s-arrays": "v5.5.3"
+  },
+  "repositories": {
+    "adminlinks": {
+      "url": "https://github.com/wikimedia/mediawiki-extensions-AdminLinks.git",
+      "type": "vcs"
+    },
+    "codemirror": {
+      "package": {
+        "name": "mediawiki/code-mirror",
+        "type": "mediawiki-extension",
+        "version": "dev-REL1_35",
+        "source": {
+          "reference": "REL1_35",
+          "type": "git",
+          "url": "https://github.com/wikimedia/mediawiki-extensions-CodeMirror.git"
+        }
+      },
+      "type": "package"
+    },
+    "deletebatch": {
+      "package": {
+        "name": "mediawiki/delete-batch",
+        "type": "mediawiki-extension",
+        "version": "dev-REL1_35",
+        "source": {
+          "reference": "REL1_35",
+          "type": "git",
+          "url": "https://github.com/wikimedia/mediawiki-extensions-DeleteBatch.git"
+        }
+      },
+      "type": "package"
+    },
+    "displaytitle": {
+      "package": {
+        "name": "mediawiki/display-title",
+        "type": "mediawiki-extension",
+        "version": "dev-REL1_35",
+        "source": {
+          "reference": "REL1_35",
+          "type": "git",
+          "url": "https://github.com/wikimedia/mediawiki-extensions-DisplayTitle.git"
+        }
+      },
+      "type": "package"
+    },
+    "echo": {
+      "package": {
+        "name": "mediawiki/echo",
+        "type": "mediawiki-extension",
+        "version": "dev-REL1_35",
+        "source": {
+          "reference": "REL1_35",
+          "type": "git",
+          "url": "https://github.com/wikimedia/mediawiki-extensions-Echo.git"
+        }
+      },
+      "type": "package"
+    },
+    "lockdown": {
+      "package": {
+        "name": "mediawiki/lockdown",
+        "type": "mediawiki-extension",
+        "version": "dev-REL1_35",
+        "source": {
+          "reference": "REL1_35",
+          "type": "git",
+          "url": "https://github.com/wikimedia/mediawiki-extensions-Lockdown.git"
+        }
+      },
+      "type": "package"
+    },
+    "myvariables": {
+      "package": {
+        "name": "mediawiki/my-variables",
+        "type": "mediawiki-extension",
+        "version": "dev-REL1_35",
+        "source": {
+          "reference": "REL1_35",
+          "type": "git",
+          "url": "https://github.com/wikimedia/mediawiki-extensions-MyVariables.git"
+        }
+      },
+      "type": "package"
+    },
+    "numberformat": {
+      "package": {
+        "name": "mediawiki/number-format",
+        "type": "mediawiki-extension",
+        "version": "dev-REL1_35",
+        "source": {
+          "reference": "REL1_35",
+          "type": "git",
+          "url": "https://github.com/wikimedia/mediawiki-extensions-NumberFormat.git"
+        }
+      },
+      "type": "package"
+    },
+    "realnames": {
+      "package": {
+        "name": "mediawiki/realnames",
+        "type": "mediawiki-extension",
+        "version": "dev-master",
+        "source": {
+          "reference": "master",
+          "type": "git",
+          "url": "https://github.com/ofbeaton/mediawiki-realnames.git"
+        }
+      },
+      "type": "package"
+    },
+    "regexfun": {
+      "package": {
+        "name": "mediawiki/regex-fun",
+        "type": "mediawiki-extension",
+        "version": "dev-REL1_35",
+        "source": {
+          "reference": "REL1_35",
+          "type": "git",
+          "url": "https://github.com/wikimedia/mediawiki-extensions-RegexFun.git"
+        }
+      },
+      "type": "package"
+    },
+    "replacetext": {
+      "package": {
+        "name": "mediawiki/replace-text",
+        "type": "mediawiki-extension",
+        "version": "dev-REL1_35",
+        "source": {
+          "reference": "REL1_35",
+          "type": "git",
+          "url": "https://github.com/wikimedia/mediawiki-extensions-ReplaceText.git"
+        }
+      },
+      "type": "package"
+    },
+    "urlgetparameters": {
+      "package": {
+        "name": "mediawiki/url-get-parameters",
+        "type": "mediawiki-extension",
+        "version": "dev-REL1_35",
+        "source": {
+          "reference": "REL1_35",
+          "type": "git",
+          "url": "https://github.com/wikimedia/mediawiki-extensions-UrlGetParameters.git"
+        }
+      },
+      "type": "package"
+    },
+    "usermerge": {
+      "package": {
+        "name": "mediawiki/user-merge",
+        "type": "mediawiki-extension",
+        "version": "dev-REL1_35",
+        "source": {
+          "reference": "REL1_35",
+          "type": "git",
+          "url": "https://github.com/wikimedia/mediawiki-extensions-UserMerge.git"
+        }
+      },
+      "type": "package"
+    },
+    "variables": {
+      "package": {
+        "name": "mediawiki/variables",
+        "type": "mediawiki-extension",
+        "version": "dev-REL1_35",
+        "source": {
+          "reference": "REL1_35",
+          "type": "git",
+          "url": "https://github.com/wikimedia/mediawiki-extensions-Variables.git"
+        }
+      },
+      "type": "package"
+    },
+    "widgets": {
+      "package": {
+        "name": "mediawiki/widgets",
+        "type": "mediawiki-extension",
+        "version": "dev-REL1_35",
+        "source": {
+          "reference": "REL1_35",
+          "type": "git",
+          "url": "https://github.com/wikimedia/mediawiki-extensions-Widgets.git"
+        }
+      },
+      "type": "package"
+    }
+  },
+  "extra": {
+    "merge-plugin": {
+      "include": [
+        "./extensions/OATHAuth/composer.json",
+        "./extensions/Widgets/composer.json"
+      ],
+      "merge-replace": false
+    }
+  },
+  "autoload": {
+    "classmap": [
+      "skin/components"
+    ]
+  }
+}
