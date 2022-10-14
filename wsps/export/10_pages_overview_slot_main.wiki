@@ -1,0 +1,28 @@
+<noinclude>
+{{CSP alert}}
+This is the '''Pages overview''' template. It should be called in the following format:
+
+<pre>
+{{Pages overview}}
+</pre>
+
+{{Pages overview}}
+
+</noinclude><includeonly>__NOTOC__{{#vardefine:@classes |{{#ask:[[Defines class::!Wiki]] |mainlabel=- |?Defines class= |limit=999 |sep=,}} }}<!--
+
+-->{{#widget:Button link |href=#new-page-modal |datatoggle=modal |class=btn btn-primary |buttontext={{Fa|plus}} New page}}<!--
+-->{{Modal
+|Targetid=new-page-modal
+|ModalHeading=New page
+|BodyText={{Create page form
+  |Class options={{#var:@classes}}
+  }}
+|FooterText={{#widget:Button link |type=a |href=#new-page-modal |datatoggle=modal |class=btn btn-default |buttontext=X}}
+|Hide link=Yes
+}}<!--
+
+
+-->{{#caamap:{{#var:@classes}} |,|__Class__
+|<h2>__Class__</h2>{{#ask:[[Class::__Class__]] |?Modification date |mainlabel=Page |sort=Modification date |order=desc |default=No pages found |class=table table-striped sortable}}
+|<br>
+}}</includeonly>

@@ -1,0 +1,25 @@
+<noinclude>
+{{CSP alert}}
+This is the "Layout" template. It should be called in the following format:
+
+<pre>
+{{#widget:Layout
+|rows=
+|columns=
+|areas=
+|display= 
+}}
+</pre>
+  
+Widget for css layout block 
+  
+</noinclude><includeonly><style>
+.ws-grid {
+    grid-gap: 2em;
+    grid-template-areas: <!--{$areas}-->;
+   <!--{if (isset($columns) && $columns!="")}-->grid-template-columns: <!--{$columns}-->;<!--{/if}-->
+    <!--{if (isset($rows) && $rows!="")}-->grid-template-rows: <!--{$rows}-->;<!--{/if}-->
+}
+<!--{$display}-->
+</style>
+</includeonly>

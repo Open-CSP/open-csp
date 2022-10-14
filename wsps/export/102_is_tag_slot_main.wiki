@@ -1,0 +1,4 @@
+<noinclude>{{CSP alert}}</noinclude>
+[[Has type::Boolean]]
+
+This property is used to mark pages that can be used as tags for other pages.

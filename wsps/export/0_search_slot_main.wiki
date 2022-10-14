@@ -1,0 +1,25 @@
+__NOTOC__{{#ifsysop: {{CSP alert}}}}{{#WikiSearchConfig:
+|base query=[[Class::!Wiki]]
+|post filter properties=Class, Tags
+|aggregation size=50
+|Class
+|Title
+|Tag
+}}
+<div class="main-search">
+{{#WikiSearchFrontend:size=10
+|facets=4
+|title=_DTITLE
+|clear=term
+|@Modification date
+    #display=date
+    #label=Updated
+    #type=date
+|@Class
+  #logic=or
+|@Tag
+  #display=pill
+|?Class
+|?Tag
+}}
+</div>

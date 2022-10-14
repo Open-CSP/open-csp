@@ -1,0 +1,170 @@
+<noinclude>
+{{CSP alert}}
+This is the "Class definition" template. It should be called in the following format:
+
+<pre>
+{{Class definition
+|Defines class= <text> value that is used for Class property in content pages of this type
+|Pagetitle format= <value options: title, next_available> the wscreate in "Template:Create page form" will be based on this option, default "next_available"
+|Allowed namespaces= <optional: comma-separted namespaces> namespaces in which pages of this class are allowed to be created, e.g. "(Main), Project, Article"
+|Short description= <optional: text>
+
+layout settings (used to order chameleon components)
+|Areas= <components> for example 'sidebar main'. Base csp components are: sidebar, sub-header, main
+|Columns= <size attribute of components> for example: 15em 2fr
+|Rows=
+
+storage templates
+|Base properties template= <optional: page> default "Template:Base properties"
+|Page properties template <optional: page> default "Template:{{{Defines class|}}} properties"
+
+component templates
+|Sidebar template= <optional: page> default "Template:{{{Defines class|}}} sidebar"
+|Sidebar form= <optional: page> no default
+|Sub header template= <optional: page> no default
+
+|Parameters= (multiple instance template)
+}}
+ {{Parameter definition 
+|...
+|...
+}}{{Parameter definition 
+|...
+|...
+}}
+}}
+</pre>
+
+Pagetitle formats:
+* '''title''' will result in a pagetitle with format <code>Class/title-entered-by-user</code> such as <code>Organization/wikibase-solutions</code>
+* '''next_available''' will result in a pagetitle with format <code>Class/incremental_number</code> such as <code>Organization/1</code> <code>Organization/2</code> <code>Organization/3</code> etc.
+
+Different Chameleon components can be ordered for different page classes
+
+* Base csp components are: sidebar, sub-header, main
+* They are defined in the Chameleon skin XML and the default values are set in [https://bitbucket.org/wikibasesolutions/cspmodules/src/master/modules/css/layout.css layout.css]
+* You can define different layouts on the Areas parameter, see [https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas grid-template-areas] for syntax 
+* You can define sizes for the columns and rows for this layout, see [https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns grid-template-columns] and [https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns grid-template-rows] for syntax 
+
+==Example== 
+The example below creates to rows on all pages with the Article class
+  
+The first row holds the Sidebar and the Sub-header components the Sidebar is set to be 15em wide and the Sub-header is set to 1 fraction, the hieght of this row is set to Auto
+  
+The second row holds the Main content component it spans over two columns the height of this row is set to 1 fraction
+<pre>
+{{Class definition
+|Defines class=Article
+
+|Areas='sidebar sub-header' 'main main'
+|Columns=15em 2fr
+|Rows=auto 1fr
+}}
+</pre>
+
+</noinclude><includeonly>__NOTOC__<!--
+
+-->{{#vardefine:@base-props-template |{{#if:{{{Base properties template|}}} |{{{Base properties template|}}} |Template:Base properties}} }}<!--
+-->{{#vardefine:@page-props-template |{{#if:{{{Page properties template|}}} |{{{Page properties template|}}} |Template:{{{Defines class|}}} properties}} }}<!--
+-->{{#vardefine:@sidebar-template | {{#if: {{{Sidebar template|}}} | {{{Sidebar template|}}} | Template:{{{Defines class|}}} sidebar}} }}<!--
+-->{{#vardefine:@pagetitle-format |{{#switch:{{{Pagetitle format|}}} |title=title |#default=next_available}} }}<!--
+
+-->{{{Parameters|}}}<!--
+-->{{#set:Defines class={{{Defines class|}}} 
+|Short description={{{Short description|}}} 
+|Pagetitle format={{{Pagetitle format|}}}
+|Allowed namespaces={{{Allowed namespaces|}}} |+sep=,
+
+|Layout areas={{{Layout areas|}}}
+|Layout columns={{{Layout columns|}}}
+|Layout rows={{{Layout rows|}}}
+
+|Base properties template={{#var:@base-props-template}}
+|Page properties template={{#var:@page-props-template}}
+
+|Sidebar template={{#var:@sidebar-template}}
+|Sidebar form={{{Sidebar form|}}}
+|Sub header template={{{Sub header template|}}}
+
+|Parameters={{{Parameters|}}}
+}}<!--
+
+-->{{#ask:[[-Has subobject::{{FULLPAGENAME}}]] [[Parameter definition name::+]] 
+|?Parameter definition name=Name
+|?Parameter definition property name=Property name
+|?Parameter definition sorting number=Sorting number
+|?Parameter definition required=Required
+|?Parameter definition multiple=Multiple
+|?Parameter definition formfield type=Formfield type
+|?Parameter definition allowed values=Allowed values
+|?Parameter definition slot=Slot
+|format=complexarray
+|name=$defined parameters
+|sort=Parameter definition slot, Parameter definition name
+}}<!--
+-->{{#vardefine:@has defined parameters |{{#if:{{#casize:$defined parameters}} |yes}} }}<!--
+
+--><!--
+
+--><h2>Class</h2>
+<p>'''{{{Defines class|}}}''' with pagetitle format {{#var:@pagetitle-format}}</p><!--
+-->{{#if:{{{Allowed namespaces|}}} |<p>Allowed namespaces:</p>
+<ul>{{#caamap:{{{Allowed namespaces|}}} |,|@@|<li>@@</li>|}}</ul>
+}}<!--
+-->{{#if:{{{Short description|}}}|<p>{{{Short description|}}}</p> }}
+
+<h2>Layout</h2>
+* Areas : {{{Layout areas|}}}
+* Columns : {{{Layout columns|}}}
+* Rows : {{{Layout rows|}}}
+
+<h2>Storage templates</h2>
+* Base properties: [[{{#var: @base-props-template}}]]
+* Page properties: [[{{#var: @page-props-template}}]]
+
+<h2>Component templates</h2>
+* Sidebar template: [[{{#var: @sidebar-template}}]]
+{{#if:{{{Sidebar form|}}} |* Sidebar form: [[ {{{Sidebar form|}}}]] }}
+{{#if:{{{Sub header template|}}} |* Sub header template: [[ {{{Sub header template|}}} ]] }}
+
+{{#ifeq:{{#var:@has defined parameters}} |yes |<h2>Defined parameters</h2>
+{{{!}} class="wikitable sortable"
+! Name
+! Property
+! Slot
+! Formfield type
+! Allowed values
+! Required
+! Multiple
+{{#camap:$defined parameters |$parameter |<tr>
+<td>$parameter[Name]</td>
+<td>[[Property:{{#if:$parameter[Property name]|$parameter[Property name]|$parameter[Name]}}]]</td>
+<td>$parameter[Slot]</td>
+<td>$parameter[Formfield type]</td>
+<td>$parameter[Allowed values]</td>
+<td>{{#ifeq:$parameter[Required] |1|Yes|No}}</td>
+<td>{{#ifeq:$parameter[Multiple] |1|Yes|No}}</td>
+<tr>|}}
+{{!}}}
+}}
+
+<h2>Automatically generated template code</h2>
+<ul class="nav nav-tabs" >
+<li class="nav-item">{{#widget:Link |type=a |href=#template-code-info |class=nav-link active |id=nav-home-tab |datatoggle=tab |text=Info}}</li>
+<li class="nav-item">{{#widget:Link |type=a |href=#template-code-page-properties |class=nav-link |id=nav-profile-tab |datatoggle=tab |text=Page properties template }}</li>
+<li class="nav-item">{{#widget:Link |type=a |href=#template-code-sidebar |class=nav-link |id=nav-contact-tab |datatoggle=tab |text=Sidebar template }}</li>
+</ul><!--
+
+--><div class="tab-content">
+<div class="tab-pane fade show active" id="template-code-info" >Open one of the tabs to view automatically generated template code. This is meant to be used when creating new templates. 
+
+
+If you are modifying an existing template, it might still be useful to update the parameter definitions and use parts of the generated code, but be careful not to completely overwrite existing templates. Existing templates will likely have had other modifications that are not included in the automatically generated code.
+</div>
+<div class="tab-pane fade" id="template-code-page-properties" >[[{{#var:@page-props-template}}]] 
+
+{{Generate page properties template code |Class={{{Defines class|}}} }}</div>
+<div class="tab-pane fade" id="template-code-sidebar" >[[{{#var:@sidebar-template}}]] {{Generate sidebar template code |Class={{{Defines class|}}} }}</div>
+</div>
+
+</includeonly>

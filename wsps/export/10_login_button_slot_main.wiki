@@ -1,0 +1,41 @@
+<noinclude>
+{{CSP alert}}
+{{Login button}}
+
+{{#widget:Button link
+|target=_self
+|class=btn btn-default
+|href=https://{{SERVERNAME}}/index.php?title=Special:UserLogin&returntoquery=action%3{{#urlget:action|}}
+|title={{int: ws-login}}
+|buttontext={{int: ws-login}}
+|style=width:100px;
+}}
+
+</noinclude><includeonly><!--
+
+// Logout 
+
+-->{{#if:{{CURRENTLOGGEDUSER}}
+|{{#Widget:Link
+|type=a
+|target=_self
+|class=nav-link
+|href=https://{{SERVERNAME}}/index.php?title=Special:UserLogout&returnto={{urlencode:{{FULLPAGENAME}}|WIKI}}&returntoquery=action%3{{#urlget:action|}}
+|title={{int: ws-logout}}
+|text={{int: ws-logout}}
+|style=min-width:100px;color:#fff
+}}
+|<!--
+
+
+// Login through current wiki
+
+-->{{#widget:Button link
+|target=_self
+|class=btn  text-nowrap btn-outline-light 
+|href={{#ifexist:Template:Get login url |{{Get login url}} |{{fullurl:Special:UserLogin}} }}
+|title={{int: ws-login}}
+|buttontext={{int: ws-login}}
+|style=width:100px;
+}}
+}}</includeonly>

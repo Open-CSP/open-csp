@@ -1,0 +1,28 @@
+<noinclude>{{CSP alert}}</noinclude><includeonly>{{#vardefine:@page |{{#urldecode:{{#urlget:page}} }} }}<!--
+-->{{#if:{{#var:@page}} |Slots of [[{{#var:@page}}]]
+
+ws-base-props
+{{#tag:pre |{{#slot:ws-base-props |{{#var:@page}} }} }}
+
+<wsform action="addToWiki">
+<wscreate mwwrite="{{#var:@page}}" mwtemplate="wsnone" mwslot="ws-base-props" formfield="Content" />
+
+<wsfield type="textarea" rows="10" name="Content">{{#slot:ws-base-props |{{#var:@page}} }}</wsfield>
+
+<wsfield type="submit" value="Save" />
+</wsform>
+
+ws-class-props
+{{#tag:pre |{{#slot:ws-class-props |{{#var:@page}} }} }}
+
+<wsform action="addToWiki">
+<wscreate mwwrite="{{#var:@page}}" mwtemplate="wsnone" mwslot="ws-class-props" formfield="Content" />
+
+<wsfield type="textarea" rows="10" name="Content">{{#slot:ws-class-props |{{#var:@page}} }}</wsfield>
+
+<wsfield type="submit" value="Save" />
+</wsform>
+|Please pass a url parameter 'page' to this page to display the slots for that page.
+
+eg. <code>/Wiki:Slots?page=Main Page</code>}}
+</includeonly>

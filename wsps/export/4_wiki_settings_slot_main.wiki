@@ -1,0 +1,5 @@
+{{#ifsysop: {{CSP alert}}}}
+{{Class definition
+|Defines class=Wiki
+|Layout areas='main'
+}}

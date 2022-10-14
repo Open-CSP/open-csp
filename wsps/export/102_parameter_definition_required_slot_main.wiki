@@ -1,0 +1,2 @@
+<noinclude>{{CSP alert}}</noinclude>
+[[Has type::Boolean]]

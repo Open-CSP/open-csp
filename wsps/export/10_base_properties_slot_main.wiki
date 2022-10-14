@@ -1,0 +1,18 @@
+<noinclude>
+{{CSP alert}}
+
+<pre>
+{{Base properties
+|Class= <text>
+|Title= <text>
+|Is tag= <optional: true>
+|Tags= <optional: comma-separated pages> for example "Tag/1, Tag/2, Tag/3" 
+}}
+</pre>
+
+</noinclude><includeonly>{{#set: 
+|Class={{{Class|}}} 
+|Title={{{Title|}}}
+|Is tag={{#ifeq:{{{Is tag|}}} |true |true}} 
+|Tags={{{Tags|}}} |+sep=,
+}}{{DISPLAYTITLE:{{{Title|}}}|noerror}}</includeonly>

@@ -1,0 +1,127 @@
+<noinclude>
+{{CSP alert}}
+This is the '''WSNavMenu''' template. It should be called in the following format:
+
+<pre>
+{{WSNavMenu
+|Input=<text> enter a list of pages, with each subitem on a new line and an empty line between main menu items (see example below). Use "*" to add a linktext different from the pagetitle and "-" to add a divider between lines.
+}}
+</pre>
+
+<pre>
+{{WSNavMenu
+|Input=Main Page*{{Fa|home}} Home
+
+Pages
+
+Search*Search
+
+{{Fa|lock}} Spaces
+Special:AddSpace*Add a Space
+Special:ActiveSpaces*Manage Active Spaces
+Special:ArchivedSpaces*Manage Archived Spaces
+
+{{Fa|lock}} Tools
+MediaWiki:Ws-navmenu*NavMenu
+MediaWiki:Ws-header*Header
+MediaWiki:Ws-footer*Footer
+-
+Wiki:page-types*Page types
+Wiki:Wiki pages*Wiki pages
+-
+File:Logo.png*Logo
+}}
+</pre>
+
+==Test==
+{{WSNavMenu
+|Input=Main Page*{{Fa|home}} Home
+
+Pages
+
+Search*Search
+
+{{#ifingroup:moderator,sysop |{{Fa|lock}} Spaces
+Special:AddSpace*Add a Space
+Special:ActiveSpaces*Manage Active Spaces
+Special:ArchivedSpaces*Manage Archived Spaces
+}}
+
+{{#ifingroup:sysop |{{Fa|lock}} Tools
+MediaWiki:Ws-navmenu*NavMenu
+MediaWiki:Ws-header*Header
+MediaWiki:Ws-footer*Footer
+-
+Wiki:page-types*Page types
+Wiki:Wiki pages*Wiki pages
+-
+File:Logo.png*Logo
+}}
+}}
+
+</noinclude><includeonly><!--
+-->{{#vardefine:@lt|*}}<!--
+  --><div class="navbar navbar-dark navbar-expand-md bg-primary mt-3 mt-md-0" ><!--
+    -->{{#widget:Link |type=button |class=navbar-toggler |datatoggle=collapse |datatarget=#navbar1}}<!--
+    --><div class="collapse navbar-collapse justify-content-between w-100" id="navbar1"><!--
+      --><ul class="navbar-nav align-items-center"><!--
+        -->{{#caamap: {{{Input|}}}  |\n\n |xxx |<!--
+        -->{{#cadefine:@item|{{#regex:xxx|/\n/|_@_}}|_@_}}<!--
+        -->{{#ifeq: {{#casize:@item}} |1<!--
+        -->|<!--
+        --><li class="nav-item"><!--
+          -->{{#vardefine:@navitem| xxx |{{#var:@lt }} }}<!--
+          -->{{#vardefine:@navitem page |{{#explode:{{#var:@navitem}} |{{#var:@lt}} |0}} }}<!--
+          -->{{#vardefine:@navitem title |{{#explode:{{#var:@navitem}} |{{#var:@lt}} |1}} }}<!--
+          -->{{#widget:Link |type=a<!--
+          -->|href={{fullurl:{{#var:@navitem page}} }}<!--
+          -->|text={{#var:@navitem title |{{#var:@navitem page}} }}<!--
+          -->|class=nav-link<!--
+          -->|style=color:#fff<!--
+        -->}}<!--
+        --></li><!--
+        -->|<!--
+        --><li class="nav-item dropdown"><!--
+          -->{{#widget:Link |type=a<!--
+          -->|href=#<!--
+          -->|text={{#caprint:@item[0] }} <!--
+          --><b class="caret"><!--
+          --></b><!--
+          -->|class=nav-link dropdown-toggle<!--
+          -->|style=color:#fff<!--
+          -->|datatoggle=dropdown<!--
+          -->}}<!--
+          -->{{#caslice:@sub items|@item|1}}<!--
+          --><ul class="dropdown-menu" role="menu" aria-labelledby=""><!--
+            -->{{#camap:@sub items |yyy <!--
+            -->|{{#switch: yyy<!--
+            -->|-=<!--
+            --><li class="divider"><!--
+            --></li><!--
+            -->|#default={{#vardefine:@navitem| yyy |{{#var:@lt }} }}<!--
+              -->{{#vardefine:@navitem page |{{#explode:{{#var:@navitem}} |{{#var:@lt}} |0}} }}<!--
+              -->{{#vardefine:@navitem title |{{#explode:{{#var:@navitem}} |{{#var:@lt}} |1}} }}<!--
+              -->{{#vardefine:@navitem type |{{#explode:{{#var:@navitem}} |{{#var:@lt}} |2}} }}<!--
+              -->{{#switch:{{#var:@navitem type}} <!--
+              -->|Href={{Dropdown link<!--
+                -->|Href={{#var:@navitem page}}<!--
+                -->|Text={{#var:@navitem title |{{#var:@navitem page}} }}<!--
+                -->}}<!--
+              -->|#default={{Dropdown link<!--
+                -->|Page={{#var:@navitem page}}<!--
+                -->|Text={{#var:@navitem title |{{#var:@navitem page}} }}<!--
+                -->}}<!-- 
+              -->}}<!--
+            -->}}<!--
+            -->|}}<!--
+          --></ul><!--
+        --></li><!--
+        -->}}<!--
+      --></li>|\s}}<!--
+    --></ul><!-- 
+    --><div class="d-flex justify-conent-end"><!--
+       -->{{Login button}}<!-- 
+    --></div><!-- 
+ --></div><!--
+--></div><!--
+--></includeonly>

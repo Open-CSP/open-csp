@@ -1,0 +1,5 @@
+<noinclude>{{CSP alert}}</noinclude><includeonly>{{Alert
+|Text=Please be aware that this page originates from the '''Open CSP framework'''. Altering this page will result in difficulties down the line when updates are made to the framework. If you absolutely must alter this page, please consider copying this page to your own version and altering that, instead.<br/><br/>''For example:'' a template called 'Template:Foo' can be copied and pasted in a template called 'Template:Foobar'. Now you can reference this template without interrupting future upgrades to the framework. 
+|Type=info
+|Fa icon=info-circle
+}}</includeonly>

@@ -1,0 +1,39 @@
+<noinclude>
+{{CSP alert}}
+This is the "Layout" template. It should be called in the following format:
+
+
+<pre>
+{{Layout}}
+</pre>
+
+It genarates CSS for grid layout based on the class of the current page  
+
+</noinclude><includeonly><!-- 
+ -->{{#vardefine:@class|{{#show:{{FULLPAGENAME}}|?Class|link=none}} }}<!-- get the class of current page
+ -->{{#if:{{#var:@class}}|<!-- 
+        -->{{#ask:[[Defines class::{{#var:@class}}]]
+			|?Layout areas=Areas
+			|?Layout columns=Columns
+			|?Layout rows=Rows
+			|format=complexarray
+			|name=@layout
+		   }}<!-- get layout settings for the class
+        -->{{#cadefine:@areas|<!-- create array for areas to enable
+          -->{{#replace:<!--  remove '
+             -->{{#replace:<!-- remove main
+                -->{{#replace:<!-- replace spaces with ,
+                  -->{{#caprint:@layout[0][Areas]}}<!-- 
+                -->|'| }}<!-- 
+             -->|main| }}<!-- 
+           -->|<nowiki> </nowiki>|,}}<!-- 
+        -->|,}}<!-- 
+      -->{{#caunique:@areas}}<!-- remove doubles from array
+      -->{{#widget:layout <!-- widget creates the css -->
+          |rows={{#caprint:@layout[0][Rows]}}
+          |columns={{#caprint:@layout[0][Columns]}}
+          |areas={{#caprint:@layout[0][Areas]}}
+          |display={{#camap:@areas|@@@|.cp-@@@{display:block;}| }} <!-- set display block for component classes-->
+         }}<!-- 
+ -->}}
+</includeonly>

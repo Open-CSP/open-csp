@@ -1,0 +1,1 @@
+<noinclude>{{CSP alert}}</noinclude><includeonly><i {{#if:{{{Title|}}}|data-toggle="tooltip"}} class="fa fa-{{{1|}}} {{{2|}}}" {{{3|}}} {{#if:{{{Style|}}}|style="{{{Style|}}}"}} {{#if:{{{Title|}}}|title="{{{Title|}}}"}}></i></includeonly>

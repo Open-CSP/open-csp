@@ -1,0 +1,30 @@
+<noinclude>
+{{CSP alert}}
+==Syntax==
+<pre>
+{{#widget: Button link
+|class=
+|id=
+|href=
+|title=
+|buttontext=
+|target=
+|style=
+|datatarget=
+|datatoggle=
+|datadismiss=
+}}
+</pre>
+
+==Example==
+{{#widget: Button link
+|class=btn btn-default
+|href={{fullurl:Main Page}}
+|title=test
+|datatoggle=collapse
+|buttontext=click here
+|target=_blank
+}}
+
+
+</noinclude><includeonly><a <!--{if (isset($id) && $id!="" )}-->id="<!--{$id|escape:'quotes'}-->"<!--{/if}--> <!--{if (isset($style) && $style!="" )}-->style="<!--{$style|escape:'quotes'}-->"<!--{/if}--> <!--{if (isset($href) && $href!="" )}-->href="<!--{$href|escape:'html'}-->"<!--{/if}--> <!--{if (isset($title) && $title!="" )}-->title="<!--{$title|escape:'html'}-->"<!--{/if}-->  <!--{if (isset($target) && $target!="" )}-->target="<!--{$target|escape:'html'}-->"<!--{/if}--> <!--{if (isset($datatoggle))}-->data-toggle="<!--{$datatoggle|escape:'html'}-->"<!--{/if}--> <!--{if (isset($datadismiss))}-->data-dismiss="<!--{$datadismiss|escape:'html'}-->"<!--{/if}--> <!--{if (isset($datatarget))}-->data-target="<!--{$datatarget|escape:'html'}-->"<!--{/if}-->><button  type="button"  role="button" <!--{if (isset($class) && $class!="" )}-->class="<!--{$class|escape:'quotes'}-->"<!--{/if}--> ><!--{if (isset($buttontext) && $buttontext!="" )}--><!--{$buttontext|escape:'quotes'}--><!--{/if}--></button></a></includeonly>

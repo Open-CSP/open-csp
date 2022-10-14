@@ -1,0 +1,73 @@
+<noinclude>
+{{CSP alert}}
+==Parameters==
+<pre>
+{{Modal
+|Targetid= <id> of the modal div, also used for the button that links to it. e.g. "myModal", "myModal1", "myModal2"
+|ButtonText= <text> text for button that links to modal 
+|ButtonClass= <class> class for button that links to modal. defaults to btn btn-success btn-sm
+|TargetClass=defaults to modal fade
+|Show modal header= <optional: "No"> to hide the modal header (default Yes)
+|ModalHeading=
+|BodyClass=defaults to modal-body
+|BodyText=
+|FooterText=
+|VisitPage=
+|contentstyle=add class and/or style (default: class="modal-content")
+|width=
+|Hide link=<optional: "Yes"> if you do not want this template to generate a link to your modal
+}}
+</pre>
+;test
+{{Modal
+|Targetid=myModalOverHere
+|ButtonClass=btn btn-ghost btn-sm
+|ButtonText=This is a sick modal m8
+|TargetClass=modal fade
+|ModalHeading =You've clicked me
+|BodyText =Thanks for doing so!
+|FooterText={{#widget:Button link |href=#|buttontext=Some button|class=btn btn-viewmore btn-sm}}
+|contentstyle=
+|width=
+|Dialog class=
+|Content class=
+}}
+
+Example modal with custom {{#widget:Button link |type=a |href=#test-modal |datatoggle=modal |class=btn btn-primary |buttontext=Link}}: {{Modal
+|Targetid=test-modal |ModalHeading=My modal header |BodyText=text fdfsafs afsfas sdfsd |FooterText=Footertext with close button! {{#widget:Button link |type=a |href=#test-modal |datatoggle=modal |class=btn btn-default |buttontext=X}} |Hide link=Yes }}
+<pre>
+{{#widget:Button link |href=#test-modal |datatoggle=modal |class=btn btn-primary |buttontext=Link}}
+
+{{Modal
+|Targetid=test-modal
+|ModalHeading=My modal header
+|BodyText=text fdfsafs
+afsfas
+sdfsd
+|FooterText=Footertext with close button! {{#widget:Button link |type=a |href=#test-modal |datatoggle=modal |class=btn btn-default |buttontext=X}}
+|Hide link=Yes
+}}
+</pre>
+
+
+</noinclude><includeonly>{{#ifeq:{{{Hide link|}}}|Yes||<div class="{{#if:{{{ButtonClass|}}}|{{{ButtonClass|}}}|btn btn-success btn-sm}}" data-toggle="modal" data-target="#{{{Targetid|}}}" >{{{ButtonText|}}}</div>}}
+    <div id="{{{Targetid|}}}" class="{{#if:{{{TargetClass|}}}|{{{TargetClass|}}}|modal fade}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog {{{Dialog class|}}}" {{#if:{{{width|}}}|style="width:{{{width|}}};"}}>
+        <div {{#if:{{{contentstyle|}}}|{{{contentstyle|}}}|class="modal-content {{{Content class|}}}"}}><!--
+-->{{#switch:{{{Show modal header|}}} 
+|No=
+|#default=<div class="modal-header">
+            <div class="close" data-dismiss="modal" aria-hidden="true"></div>
+{{#if:{{{ModalHeading|}}}|<h4 class="modal-title" id="myModalLabel">{{{ModalHeading|}}}</h4>}}
+          </div>}}
+          <div class="{{{BodyClass|modal-body}}}">
+{{{BodyText|}}}
+          </div>
+{{#if:{{{Dismiss|}}}{{{VisitPage|}}}{{{FooterText|}}}|<div class="modal-footer"><!--
+-->{{#if:{{{Dismiss|}}}|<div class="btn btn-default" data-dismiss="modal">{{Fa|times fa-fw}} {{{Dismiss|}}}</div>}}<!--
+-->{{#if:{{{VisitPage|}}}|<div class="btn btn-primary">{{{VisitPage|}}}</div>}}<!--
+-->{{#if:{{{FooterText|}}}|{{{FooterText|}}} }}<!--
+--></div>}}
+        </div>
+      </div>
+    </div></includeonly>

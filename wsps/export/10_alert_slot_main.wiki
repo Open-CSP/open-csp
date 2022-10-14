@@ -1,0 +1,16 @@
+<noinclude>
+{{CSP alert}}
+This is the "Alert" template.
+It should be called in the following format:
+<pre>
+{{Alert
+|yourmessagehere
+|Text=orlikethis
+|Type=danger/warning/info/success (default 'danger')
+|Fa icon=default 'exclamation-triangle'
+}}
+</pre>
+</noinclude><includeonly><!---
+--->{{#vardefine:@alert-type|{{lc:{{{Type|warning}}} }} }}<!---
+--->{{#vardefine:@alert-icon|{{{Fa icon|exclamation-triangle}}} }}<!---
+---><div class="alert alert-{{#var:@alert-type}}">{{Fa|{{#var:@alert-icon}} }} {{#if:{{{Text|{{{1|}}} }}}|'''Note:''' {{{Text|{{{1|}}} }}}|Use 'Text=yourmessagehere' to fill this alert with text}}</div></includeonly>

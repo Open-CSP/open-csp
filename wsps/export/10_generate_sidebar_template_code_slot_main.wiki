@@ -1,0 +1,182 @@
+<noinclude>
+{{CSP alert}}
+This is the "Generate sidebar template code" template. It should be called in the following format:
+
+<pre>
+{{Generate sidebar template code
+|Class= (text) class for which a "Class definition" page exists
+}}
+</pre>
+  
+==Test==
+{{Generate sidebar template code |Class=Kaas}}
+  
+</noinclude><includeonly>{{#vardefine:@class definition page |{{#ask:[[Defines class::{{{Class|}}}]] |link=none |limit=1 |searchlabel=}} }}<!--
+-->{{#vardefine:@sidebar template |{{#show:{{#var:@class definition page}} |?Sidebar template |link=none}} }}<!--
+-->{{#vardefine:@sidebar template name |{{PAGENAME:{{#var:@sidebar template}} }} }}<!--
+
+-->{{#vardefine:@page properties template |{{#show:{{#var:@class definition page}} |?Page properties template |link=none}} }}<!--
+-->{{#vardefine:@page properties template name |{{PAGENAME:{{#var:@page properties template}} }} }}<!--
+
+-->{{#vardefine:@base properties template |{{#show:{{#var:@class definition page}} |?Base properties template |link=none}} }}<!--
+-->{{#vardefine:@base properties template name |{{PAGENAME:{{#var:@base properties template}} }} }}<!--
+
+-->{{#ask:[[-Has subobject::{{#var:@class definition page}}]] [[Parameter definition name::+]] [[Parameter definition slot::ws-base-props]]
+|?Parameter definition sorting number=Sorting number
+|?Parameter definition name=Name
+|?Parameter definition required=Required
+|?Parameter definition multiple=Multiple
+|?Parameter definition formfield type=Formfield type
+|?Parameter definition allowed values=Allowed values
+|?Parameter definition slot=Slot
+|format=complexarray
+|name=$base parameters
+|sort=Parameter definition sorting number
+}}<!--
+
+-->{{#ask:[[-Has subobject::{{#var:@class definition page}}]] [[Parameter definition name::+]] [[Parameter definition slot::ws-class-props]]
+|?Parameter definition sorting number=Sorting number
+|?Parameter definition name=Name
+|?Parameter definition required=Required
+|?Parameter definition multiple=Multiple
+|?Parameter definition formfield type=Formfield type
+|?Parameter definition allowed values=Allowed values
+|?Parameter definition slot=Slot
+|format=complexarray
+|name=$class parameters
+|sort=Parameter definition sorting number
+}}<!--
+
+-->{{#camerge:$parameters |$base parameters |$class parameters}}<!--
+
+-->{{#tag:pre |<nowiki><noi</nowiki><nowiki>nclude>
+
+</nowiki>This is the '''{{#var:@sidebar template name}}''' template. It should be called in the following format:<nowiki>
+
+<pre>
+{{</nowiki>{{#var:@sidebar template name}}<nowiki>}}
+</pre>
+
+</noin</nowiki><nowiki>clude><incl</nowiki><nowiki>udeonly><!--
+
+-->{{#vardefine:@allow sidebar edit |{{#ifingroup:user |{{#if:{{#urlget:veaction}}{{#urlget:action}}||yes}} }} }}<!--
+
+--><div class="tab-content"><!--
+-->{{#tag:_input||type=radio|id=sidebar-view|name=toggle-sidebar|checked=checked|class=d-none}}<!--
+--><div class="card" id="sidebar-view">
+<div class="card-header">{{#ifeq:{{#var:@allow sidebar edit}} |yes |<span style="float:right">{{#tag:wslabel|Edit|for=sidebar-edit|class=btn btn-secondary}}</span>}}
+<b class="d-block">{{#caprint:$base[Base properties][Class]}}</b>
+{{#caprint:$base[Base properties][Title]}}
+</div><!-- end of .card-header -->
+<div class="card-body">
+</nowiki><!--
+-->{{#camap:$base parameters |$parameter |<nowiki>{{Sidebar item
+|Label=</nowiki>$parameter[Name]<nowiki>
+|Value={{#caprint:$base[</nowiki>{{#var:@base properties template name}}<nowiki>][</nowiki>$parameter[Name]<nowiki>]}}
+}}</nowiki>|}}{{#camap:$class parameters |$parameter |<nowiki>{{Sidebar item
+|Label=</nowiki>$parameter[Name]<nowiki>
+|Value=</nowiki>{{#switch:$parameter[Formfield type]
+  |text|#default=<nowiki>{{#caprint:$class[</nowiki>{{#var:@page properties template name}}<nowiki>][</nowiki>$parameter[Name]<nowiki>]}}</nowiki>
+  |date=<nowiki>{{#if:{{#caprint:$class[</nowiki>{{#var:@page properties template name}}<nowiki>][</nowiki>$parameter[Name]<nowiki>]}} |{{#time: j M Y |{{#caprint:$class[</nowiki>{{#var:@page properties template name}}<nowiki>][</nowiki>$parameter[Name]<nowiki>]}} }} }}</nowiki>
+  |datetimelocal=<nowiki>{{#if:{{#caprint:$class[</nowiki>{{#var:@page properties template name}}<nowiki>][</nowiki>$parameter[Name]<nowiki>]}} |{{#time: j M Y H:i |{{#caprint:$class[</nowiki>{{#var:@page properties template name}}<nowiki>][</nowiki>$parameter[Name]<nowiki>]}} }} }}</nowiki>
+  |ask token=<nowiki>{{#caamap:{{#caprint:$class[</nowiki>{{#var:@page properties template name}}<nowiki>][</nowiki>$parameter[Name]<nowiki>]}} |,|@@|[[@@ |{{#show:@@ |?Title}} ]]|<br>}}</nowiki>
+  }}<nowiki>
+}}</nowiki>|}}<nowiki>
+</div><!-- end of .card-body -->
+</div><!-- end of .card 
+
+-->{{#ifeq:{{#var:@allow sidebar edit}} |yes |<!--
+-->{{#tag:wsfield||type=radio|id=sidebar-edit|name=toggle-sidebar|class=d-none}}<!--
+--><div class="card" id="sidebar-edit"><!--
+--><wsform action="addToWiki"><!--
+
+// wsedits for base properties
+--></nowiki>{{#camap:$base parameters |$parameter |<nowiki>{{#tag:wsedit ||target={{PAGEID}} |template=</nowiki>{{#var:@base properties template name}}<nowiki> |formfield=</nowiki>$parameter[Name]<nowiki> |mwslot=ws-base-props}}</nowiki>|\n}}<nowiki><!--
+
+// wscreate or wsedits for page properties
+// use casize to check if the slot already exists. Then wsedit, else wscreate.
+-->{{#if:{{#casize:$class}}
+|</nowiki>{{#camap:$class parameters |$parameter |<nowiki>{{#tag:wsedit ||target={{PAGEID}} |template=</nowiki>{{#var:@page properties template name}}<nowiki> |formfield=</nowiki>$parameter[Name]<nowiki> |mwslot=ws-class-props}}</nowiki>|\n}}<nowiki>
+|<wscreate mwwrite="{{FULLPAGENAME}}" mwtemplate="</nowiki>{{#var:@page properties template name}}<nowiki>" mwslot="ws-class-props" mwfields="</nowiki>{{#camap:$class parameters |$parameter |$parameter[Name] |,}}<nowiki>" />
+}}<!-- end of #if  -->
+
+<div class="card-header"><span style="float:right">{{#tag:wslabel|Close|for=sidebar-view|class=btn btn-secondary}}</span>
+<b class="d-block">{{#caprint:$base[Base properties][Class]}}</b>
+{{#caprint:$base[Base properties][Title]}}
+</div><!-- end of .card-header -->
+<div class="card-body">
+</nowiki><!--
+
+// Form fields
+-->{{#camap:$parameters |$parameter |{{#vardefine:@parameter value |{{#switch:$parameter[Slot] |ws-base-props=<nowiki>{{#caprint:$base[</nowiki>{{#var:@base properties template name}} |#default=<nowiki>{{#caprint:$class[</nowiki>{{#var:@page properties template name}} }}<nowiki>]</nowiki>[$parameter[Name]<nowiki>]}}</nowiki>}}<!--
+-->{{#vardefine:@required |{{#ifeq:$parameter[Required]|1|<nowiki> |required=required</nowiki>}} }}<!--
+--><nowiki>{{Sidebar item
+|Label=</nowiki>{{#switch:$parameter[Formfield type]
+|text|#default=$parameter[Name] |checkbox=<nowiki>{{#tag: wslabel|$parameter[Name] |for=</nowiki>{{lc:{{anchorencode:$parameter[Name] }} }}<nowiki>}}</nowiki> }}<nowiki>
+|Value=</nowiki>{{#switch:$parameter[Formfield type]
+  |text|#default=<nowiki>{{#tag:wsfield ||type=text |name=</nowiki>$parameter[Name]{{#var:@required}}<nowiki> |class=form-control |value=</nowiki>{{#var:@parameter value}}<nowiki> }}</nowiki>
+
+  |number=<nowiki>{{#tag:wsfield ||type=number |name=</nowiki>$parameter[Name]{{#var:@required}}<nowiki> |class=form-control |value=</nowiki>{{#var:@parameter value}}<nowiki> }}</nowiki>
+
+  |date=<nowiki>{{#tag:wsfield ||type=date |name=</nowiki>$parameter[Name]<nowiki> |class=form-control |value=</nowiki>{{#var:@parameter value}}<nowiki> }}</nowiki>
+
+  |checkbox={{#vardefine:@checked value |{{#if:{{#explode:$parameter[Allowed values]|,|0}} |{{#explode:$parameter[Allowed values]|,|0}} |Yes }} }}<!--
+    -->{{#vardefine:@unchecked value |{{#explode:$parameter[Allowed values]|,|1}} }}<!--
+    --><nowiki>{{#tag:wsfield ||type=hidden |name=</nowiki>$parameter[Name]<nowiki> |value=</nowiki>{{#var:@unchecked value}}<nowiki> }}<!-- default value for unchecked -->
+{{#tag:wsfield ||type=checkbox |id=</nowiki>{{lc:{{anchorencode:$parameter[Name] }} }}<nowiki>|name=</nowiki>$parameter[Name]{{#var:@required}}<nowiki> |checked={{#ifeq:</nowiki>{{#var:@parameter value}}<nowiki> |</nowiki>{{#var:@checked value}}<nowiki> |checked}} |class=form-control |value=</nowiki>{{#var:@checked value}}<nowiki> }}</nowiki>
+
+  |datetimelocal=<nowiki>{{#tag:wsfield ||type=datetimelocal |name=</nowiki>$parameter[Name]{{#var:@required}}<nowiki> |class=form-control |value=</nowiki>{{#var:@parameter value}}<nowiki> }}</nowiki>
+
+  |select=<nowiki>{{#cadefine:$value settings |</nowiki>$parameter[Allowed values]<nowiki> }}
+{{#cadefine:$values selected |</nowiki>{{#var:@parameter value}}<nowiki> }}
+{{#camerge:$value options |$value settings |$values selected }}
+{{#caunique:$value options}}
+{{#tag:wsselect
+  |</nowiki>{{#ifeq:$parameter[Required]|1||<nowiki>{{#tag:wsfield|(none)|type=option|value=}}
+</nowiki>}}<nowiki>{{#camap:$value options |__Value__|{{#tag:wsfield|__Value__|type=option|value=__Value__|selected={{#if:{{#casearch:$values selected|__Value__}}|selected}} }} |}}
+  |name=</nowiki>$parameter[Name]{{#var:@required}}<nowiki> |class=form-control |id=</nowiki>{{lc:{{anchorencode:$parameter[Name] }} }}-field {{#ifeq:$parameter[Required]|1|<nowiki>|placeholder=select a value</nowiki>}} <nowiki>
+}}</nowiki>
+
+  |token=<nowiki>{{#cadefine:$value settings |</nowiki>$parameter[Allowed values]<nowiki> }}
+{{#cadefine:$values selected |</nowiki>{{#var:@parameter value}}<nowiki> }}
+{{#camerge:$value options |$value settings |$values selected }}
+{{#caunique:$value options}}
+{{#tag:wstoken
+  |</nowiki>{{#ifeq:$parameter[Required]|1||<nowiki>{{#tag:wsfield|(none)|type=option|value=}}
+</nowiki>}}<nowiki>{{#camap:$value options |__Value__|{{#tag:wsfield|__Value__|type=option|value=__Value__|selected={{#if:{{#casearch:$values selected|__Value__}}|selected}} }} |}}
+  |name=</nowiki>$parameter[Name][]{{#var:@required}}<nowiki> 
+  |class=form-control 
+  |id=</nowiki>{{lc:{{anchorencode:$parameter[Name] }} }}-field {{#ifeq:$parameter[Required]|1|<nowiki>|placeholder=select a value</nowiki>}}<nowiki>
+  |multiple=</nowiki>{{#ifeq:$parameter[Multiple]|1|multiple}}<nowiki>
+}}</nowiki>
+
+
+  |ask token={{#vardefine:@smw query |{{#replace:{{#replace:{{#explode:$parameter[Allowed values]|?|0}}|((|&#91;&#91;}}|))|&#93;&#93;}} }}<!--
+  -->{{#vardefine:@smw result |{{#explode:$parameter[Allowed values]|?|1}} }}{{#if:{{#var:@smw result}}||{{#vardefine:@smw result|Title}} }}<!--
+  --><nowiki>{{#tag:wstoken 
+  |{{#caamap:</nowiki>{{#var:@parameter value}}<nowiki> |,|__Value__|{{#tag:wsfield |{{#show:__Value__ |?</nowiki>{{#var:@smw result}}<nowiki>}}|type=option|value=__Value__|selected=selected}} |}}
+  |id=</nowiki>{{lc:{{anchorencode:$parameter[Name]}} }}<nowiki>-tokens
+  |name=</nowiki>$parameter[Name][]{{#var:@required}}<nowiki>
+  |placeholder=Search...
+  |multiple=</nowiki>{{#ifeq:$parameter[Multiple]|1|multiple}}<nowiki>
+  |query=</nowiki>{{#var:@smw query}}<nowiki>[[</nowiki>{{#var:@smw result}}::!!!<nowiki>]]
+  |limit=99999
+  |returntext=</nowiki>{{#var:@smw result}}<nowiki>
+  }}</nowiki>
+}}<nowiki>
+}}</nowiki>
+|\n}}<!-- end of #camap $parmaeters --><nowiki>
+
+<div class="text-right">
+{{#tag:wslabel|Close|for=sidebar-view|class=btn btn-secondary mb-0}}
+<wsfield type="submit" value="Save" class="btn btn-primary" />
+</div>
+</div><!-- end of .card-body -->
+</wsform>
+</div><!-- end of .card -->
+|}}<!-- end of #ifeq @allow sidebar edit == yes -->
+</div><!-- end of .tab-content 
+
+--></inclu</nowiki><nowiki>deonly></nowiki>}}<!--
+
+--></includeonly>
