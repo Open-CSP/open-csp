@@ -29,8 +29,8 @@ git clone https://github.com/WikibaseSolutions/open-csp.git --branch main --sing
 ```
 2. Copy the files to your Mediawiki installation and remove the clone. (Note: This might overwrite any pre-existing `composer.local.json`).
 ```sh
-cp open-csp/* /path/to/your/mediawiki/core/
-rm -r open-csp
+cp -r open-csp/* /path/to/your/mediawiki/core/
+rm -rf open-csp
 ```
 3. Go to your mediawiki installation and add the line `require_once('./settings/CSPSettings.php');` to your `LocalSettings.php`.
 ```sh
@@ -51,13 +51,15 @@ php extensions/SemanticMediaWiki/maintenance/updateEntityCountMap.php
 php extensions/SemanticMediaWiki/maintenance/setupStore.php
 php extensions/SemanticMediaWiki/maintenance/rebuildElasticIndex.php
 ```
-7. Use [PageSync]() to install the pages for a basic CSP wiki.
-    - You can go to `https://your.wiki.example.com/Special:WSps?action=share` and upload the zip found in this repository.
+7. Use [PageSync](https://www.open-csp.org/DevOps:Doc/PageSync) to install the pages for a basic CSP wiki.
+    - You can go to `https://your.wiki.example.com/Special:PageSync` and upload the zip found in this repository under the "share" menu.
     - You can do this using the terminal (if you have copied the complete `wsps`-directory in step 2) with the following command:
 ```sh
   php extensions/PageSync/maintenance/WSps.maintenance.php --user 'Maintenance script'
 ```
 8. Everything should work now! Visit your site to see if there are problems.
+    - Consider replacing `./logo/Logo.svg` with your own and/or editing `https://your.wiki.example.com/Widget:Logo`.
+
 
 ## Usage
 
