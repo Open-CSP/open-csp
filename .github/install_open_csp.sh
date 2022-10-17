@@ -64,7 +64,7 @@ validate_mw_path()
 copy_files_from_git()
 {
     echo "Cloning files from git."
-    $GIT clone git@github.com:Open-CSP/open-csp.git --branch $CSP_BRANCH --single-branch || exit 1;
+    $GIT clone https://github.com/Open-CSP/open-csp.git --branch $CSP_BRANCH --single-branch || exit 1;
     echo "Copying files from git to $1."
     cp -r open-csp/[!.]* $1 || exit 1
     echo "removing git repository."
