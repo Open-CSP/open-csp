@@ -31,7 +31,7 @@ main () {
     echo "Moving to $OLD_PATH"
     cd $OLD_PATH
 
-    succes_message $2
+    succes_message
 }
 
 usage()
@@ -73,7 +73,7 @@ copy_files_from_git()
 setup_localsettings()
 {
     # If LocalSettings.php does not include 'require_once(settings/CSPSettings.php)', add such a line.
-    grep '^require_once\(.\./settings/CSPSettings.php.\);$' LocalSettings.php ||
+    grep '^require_once(.\./settings/CSPSettings.php.);$' LocalSettings.php ||
         echo "\n#Settings for the OpenCSP framework\nrequire_once('./settings/CSPSettings.php');\n" >> LocalSettings.php
 
     #4. Use your favorite text editor to set `$wgSiteName` and `smwgElasticsearchEndpoints` in `./settings/CSPSettings.php` to the correct values.
