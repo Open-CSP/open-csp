@@ -4,7 +4,7 @@
 COMPOSER=composer
 PHP=php
 GIT=git
-CSP_BRANCH=main
+CSP_BRANCH=development
 
 main () {
 

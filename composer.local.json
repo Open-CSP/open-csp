@@ -3,15 +3,11 @@
     "mediawiki/admin-Links": "dev-REL1_35",
     "mediawiki/bootstrap": "4.5.0",
     "mediawiki/chameleon-skin": "3.4.3",
-    "mediawiki/code-mirror": "dev-REL1_35",
     "mediawiki/data-transfer": "dev-REL1_35",
-    "mediawiki/delete-batch": "dev-REL1_35",
     "mediawiki/display-title": "dev-REL1_35",
-    "mediawiki/echo": "dev-REL1_35",
     "mediawiki/lockdown": "dev-REL1_35",
     "mediawiki/my-variables": "dev-REL1_35",
     "mediawiki/number-format": "dev-REL1_35",
-    "mediawiki/realnames": "dev-master",
     "mediawiki/regex-fun": "dev-REL1_35",
     "mediawiki/replace-text": "dev-REL1_35",
     "mediawiki/semantic-extra-special-properties": "3.0.1",
@@ -19,7 +15,6 @@
     "mediawiki/semantic-result-formats": "3.2.0",
     "mediawiki/url-get-parameters": "dev-REL1_35",
     "mediawiki/user-functions": "dev-REL1_35",
-    "mediawiki/user-merge": "dev-REL1_35",
     "mediawiki/variables": "dev-REL1_35",
     "mediawiki/widgets": "dev-REL1_35",
     "open-csp/w-s-slots": "^4.0",
@@ -37,32 +32,6 @@
       "url": "https://github.com/wikimedia/mediawiki-extensions-AdminLinks.git",
       "type": "vcs"
     },
-    "codemirror": {
-      "package": {
-        "name": "mediawiki/code-mirror",
-        "type": "mediawiki-extension",
-        "version": "dev-REL1_35",
-        "source": {
-          "reference": "REL1_35",
-          "type": "git",
-          "url": "https://github.com/wikimedia/mediawiki-extensions-CodeMirror.git"
-        }
-      },
-      "type": "package"
-    },
-    "deletebatch": {
-      "package": {
-        "name": "mediawiki/delete-batch",
-        "type": "mediawiki-extension",
-        "version": "dev-REL1_35",
-        "source": {
-          "reference": "REL1_35",
-          "type": "git",
-          "url": "https://github.com/wikimedia/mediawiki-extensions-DeleteBatch.git"
-        }
-      },
-      "type": "package"
-    },
     "displaytitle": {
       "package": {
         "name": "mediawiki/display-title",
@@ -72,19 +41,6 @@
           "reference": "REL1_35",
           "type": "git",
           "url": "https://github.com/wikimedia/mediawiki-extensions-DisplayTitle.git"
-        }
-      },
-      "type": "package"
-    },
-    "echo": {
-      "package": {
-        "name": "mediawiki/echo",
-        "type": "mediawiki-extension",
-        "version": "dev-REL1_35",
-        "source": {
-          "reference": "REL1_35",
-          "type": "git",
-          "url": "https://github.com/wikimedia/mediawiki-extensions-Echo.git"
         }
       },
       "type": "package"
@@ -128,19 +84,6 @@
       },
       "type": "package"
     },
-    "realnames": {
-      "package": {
-        "name": "mediawiki/realnames",
-        "type": "mediawiki-extension",
-        "version": "dev-master",
-        "source": {
-          "reference": "master",
-          "type": "git",
-          "url": "https://github.com/ofbeaton/mediawiki-realnames.git"
-        }
-      },
-      "type": "package"
-    },
     "regexfun": {
       "package": {
         "name": "mediawiki/regex-fun",
@@ -176,19 +119,6 @@
           "reference": "REL1_35",
           "type": "git",
           "url": "https://github.com/wikimedia/mediawiki-extensions-UrlGetParameters.git"
-        }
-      },
-      "type": "package"
-    },
-    "usermerge": {
-      "package": {
-        "name": "mediawiki/user-merge",
-        "type": "mediawiki-extension",
-        "version": "dev-REL1_35",
-        "source": {
-          "reference": "REL1_35",
-          "type": "git",
-          "url": "https://github.com/wikimedia/mediawiki-extensions-UserMerge.git"
         }
       },
       "type": "package"
