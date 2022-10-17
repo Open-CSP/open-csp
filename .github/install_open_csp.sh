@@ -4,30 +4,55 @@
 COMPOSER=composer
 PHP=php
 GIT=git
+
+#The branch/ref from which we want to install the open csp framework
 CSP_BRANCH=development
 
-main () {
+main ()
+{
 
     if [ $# -lt 1 ]; then
         usage
         exit 1
     fi
 
+    CURRENT_STEP=0
+    if [ $# -ge 2 ]; then
+        SKIP_STEPS=$2
+    else
+        SKIP_STEPS=0
+    fi
+
     MW_PATH=$1
     OLD_PATH=$(pwd)
 
     validate_mw_path $MW_PATH || exit 1
-    copy_files_from_git $MW_PATH
+
+    if [ $SKIP_STEPS -le $CURRENT_STEP ]; then
+        echo ">>> Step $CURRENT_STEP: Copying files from git"
+        copy_files_from_git
+    fi
+    CURRENT_STEP=$(($CURRENT_STEP+1))
 
     echo "Moving to $MW_PATH"
-    cd $MW_PATH
+    cd $MW_PATH || exit 1
 
-    echo "Setting up \"LocalSettings.php\""
-    setup_localsettings
+    if [ $SKIP_STEPS -le $CURRENT_STEP ]; then
+        echo ">>> Step $CURRENT_STEP: Setting up \"LocalSettings.php\""
+        setup_localsettings
+    fi
+    CURRENT_STEP=$(($CURRENT_STEP+1))
 
-    do_composer
+    if [ $SKIP_STEPS -le $CURRENT_STEP ]; then
+        echo ">>> Step $CURRENT_STEP: Running composer."
+        do_composer
+    fi
+    CURRENT_STEP=$(($CURRENT_STEP+1))
 
-    run_maintenance_scripts
+    if [ $SKIP_STEPS -le $CURRENT_STEP ]; then
+        run_maintenance_scripts
+    fi
+    CURRENT_STEP=$(($CURRENT_STEP+1))
 
     echo "Moving to $OLD_PATH"
     cd $OLD_PATH
@@ -37,8 +62,25 @@ main () {
 
 usage()
 {
-    echo "Usage: $0 <mediawiki path>";
+    echo "Usage: $0 <mediawiki path> [<steps to skip>]";
     echo "Example: $0 \"/var/www/wiki/\""
+    echo ""
+    echo "<mediawiki path>:   The full path to your mediawiki installation"
+    echo "<steps to skip>:    An integer that says how many steps to skip: 0 is full installation, 1 does all but the first step, etc."
+}
+
+exit_with_message()
+{
+    echo "\n\nThe installation was unsuccessfull."
+    echo "Please read the error messages above, and act accordingly."
+    echo ""
+    echo "It could be that your problem is already mentioned on our Installation troubleshooting:"
+    echo "https://github.com/Open-CSP/open-csp/blob/development/.github/INSTALLATION_FAQ.md"
+    echo ""
+    echo "After resolving the issue, you can continue installation from the current step with the following command:"
+    echo "$0 \"$MW_PATH\" $CURRENT_STEP"
+
+    exit 1
 }
 
 validate_mw_path()
@@ -64,9 +106,14 @@ validate_mw_path()
 copy_files_from_git()
 {
     echo "Cloning files from git."
-    $GIT clone https://github.com/Open-CSP/open-csp.git --branch $CSP_BRANCH --single-branch || exit 1;
-    echo "Copying files from git to $1."
-    cp -r open-csp/[!.]* $1 || exit 1
+    $GIT clone https://github.com/Open-CSP/open-csp.git --branch $CSP_BRANCH --single-branch || exit_with_message;
+    echo "Copying files from git to $MW_PATH."
+
+    cp -i open-csp/composer.local.json $MW_PATH
+    cp -ri open-csp/settings $MW_PATH
+    cp -ri open-csp/logo $MW_PATH
+    cp -r open-csp/wsps $MW_PATH || exit_with_message
+
     echo "removing git repository."
     rm -rf open-csp
 }
@@ -86,21 +133,21 @@ setup_localsettings()
 do_composer()
 {
     #5. Add the public WikibaseSolutions repository to your `composer.json` and run `composer update --no-dev` twice to install all required extensions and dependencies.
-    $COMPOSER config repositories.38 composer https://gitlab.wikibase.nl/api/v4/group/38/-/packages/composer/ || exit 1
-    $COMPOSER update --no-dev || exit 1
-    $COMPOSER update --no-dev || exit 1
+    $COMPOSER config repositories.38 composer https://gitlab.wikibase.nl/api/v4/group/38/-/packages/composer/ || exit_with_message
+    $COMPOSER update --no-dev || exit_with_message
+    $COMPOSER update --no-dev || exit_with_message
 }
 
 run_maintenance_scripts()
 {
     #6. Run the following maintenance scripts:
-    $PHP maintenance/update.php --quick || exit 1
-    $PHP extensions/SemanticMediaWiki/maintenance/updateEntityCountMap.php || exit 1
-    $PHP extensions/SemanticMediaWiki/maintenance/setupStore.php || exit 1
-    $PHP extensions/SemanticMediaWiki/maintenance/rebuildElasticIndex.php || exit 1
+    $PHP maintenance/update.php --quick || exit_with_message
+    $PHP extensions/SemanticMediaWiki/maintenance/updateEntityCountMap.php || exit_with_message
+    $PHP extensions/SemanticMediaWiki/maintenance/setupStore.php || exit_with_message
+    $PHP extensions/SemanticMediaWiki/maintenance/rebuildElasticIndex.php || exit_with_message
 
     #7. Run the PageSync maintenance script.
-    $PHP extensions/PageSync/maintenance/WSps.maintenance.php --user 'Maintenance script' || exit 1
+    $PHP extensions/PageSync/maintenance/WSps.maintenance.php --user 'Maintenance script' || exit_with_message
 }
 
 succes_message()
