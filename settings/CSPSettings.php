@@ -58,21 +58,9 @@ $wgMessagesDirs[ 'CSP Basis' ] = __DIR__ . '/../skin/i18n';
 ##### Admin Links
 wfLoadExtension( 'AdminLinks' );
 
-##### CodeMirror
-// Required for source editing with CodeMirror.
-wfLoadExtension( 'WikiEditor' );
-wfLoadExtension( 'CodeMirror' );
-$wgDefaultUserOptions['usecodemirror'] = 1;
-
 ##### CSPResources
 wfLoadExtension( 'CSPResources' );
 $wgCSPShowSmwIndicator = false;
-
-##### DataTransfer
-wfLoadExtension( 'DataTransfer' );
-
-##### DeleteBatch
-wfLoadExtension( 'DeleteBatch' );
 
 ##### DisplayTitle
 wfLoadExtension( 'DisplayTitle' );
@@ -80,21 +68,6 @@ wfLoadExtension( 'DisplayTitle' );
 $wgAllowDisplayTitle = true;
 // defaults to true
 $wgRestrictDisplayTitle = false;
-
-##### Echo
-wfLoadExtension( 'Echo' );
-$wgEchoWatchlistNotifications = true;
-
-$wgExtensionFunctions[] = static function () {
-	global $wgEchoNotifications;
-	unset( $wgEchoNotifications["thank-you-edit"] );
-
-	global $wgEchoNotificationCategories;
-	unset( $wgEchoNotificationCategories["edit-user-talk"] );
-	unset( $wgEchoNotificationCategories["mention"] );
-	unset( $wgEchoNotificationCategories["emailuser"] );
-	unset( $wgEchoNotificationCategories["thank-you-edit"] );
-};
 
 ##### FlexForm (formerly: WSForm)
 wfLoadExtension( 'FlexForm' );
@@ -133,10 +106,6 @@ $wgPageSync['filePath'] = $IP . '/wsps';
 wfLoadExtension( 'ParserFunctions' );
 $wgPFEnableStringFunctions = true;
 $wgPFStringLengthLimit = 80000;
-
-##### Realnames
-wfLoadExtension( 'Realnames' );
-$wgRealnamesLinkStyle = "replace";
 
 ##### RegexFun
 require_once $IP . '/extensions/RegexFun/RegexFun.php';
@@ -190,10 +159,6 @@ $wgUFAllowedNamespaces = array_fill( 0,
 $wgUFAllowedNamespaces += array_fill( 50000,
 	5000,
 	true );
-
-##### UserMerge
-wfLoadExtension( 'UserMerge' );
-$wgGroupPermissions['bureaucrat']['usermerge'] = true;
 
 ##### Variables
 wfLoadExtension( 'Variables' );
