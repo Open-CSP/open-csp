@@ -7,7 +7,7 @@ GIT=git
 
 main () {
 
-    if [ $# -lt 2 ]; then
+    if [ $# -lt 1 ]; then
         usage
         exit 1
     fi
@@ -36,8 +36,8 @@ main () {
 
 usage()
 {
-    echo "Usage: $0 <mediawiki path> <elastic search endpoint>";
-    echo "Example: $0 \"/var/www/wiki/\" \"localhost:9200\""
+    echo "Usage: $0 <mediawiki path>";
+    echo "Example: $0 \"/var/www/wiki/\""
 }
 
 validate_mw_path()
@@ -63,7 +63,7 @@ validate_mw_path()
 copy_files_from_git()
 {
     echo "Cloning files from git."
-    $GIT clone git@github.com:WikibaseSolutions/open-csp.git --branch main --single-branch || exit 1;
+    $GIT clone git@github.com:Open-CSP/open-csp.git --branch main --single-branch || exit 1;
     echo "Copying files from git to $1."
     cp -r open-csp/[!.]* $1 || exit 1
     echo "removing git repository."

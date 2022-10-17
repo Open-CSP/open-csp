@@ -23,8 +23,8 @@ To install the OpenCSP framework, the following need to be installed:
 Follow these steps to set up your OpenCSP wiki:
 
 0. [Install Mediawiki](https://www.mediawiki.org/wiki/Manual:Installing_MediaWiki) version 1.35 and make sure you can connect to an ElasticSearch instance.
-1. Copy the instal script from "https://github.com/WikibaseSolutions/open-csp/blob/main/.github/install_csp.sh" to your server running mediawiki
-2. Run the install script 
+1. Copy the instal script from [https://github.com/Open-CSP/open-csp/blob/main/.github/install_csp.sh] to your mediawiki server.
+2. Run the install script
 ```sh
     ./install_csp.sh <mediawiki directory> <elasticsearch endpoint>
 ```
@@ -35,9 +35,9 @@ If installation went succesful, the wiki should show some pages with basic usage
 
 ## Support
 
-Please [open an issue](https://github.com/WikibaseSolutions/open-csp/issues/new) for support.
+Please [open an issue](https://github.com/Open-CSP/open-csp/issues/new) for support.
 If you want more support, [contact us](https://wikibase-solutions.com/contact) for possibilities of continuous support.
 
 ## Contributing
 
-Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/WikibaseSolutions/open-csp/compare/).
+Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/Open-CSP/open-csp/compare/).
