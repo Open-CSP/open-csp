@@ -26,7 +26,7 @@ Follow these steps to set up your Open CSP wiki:
 1. Copy the instal script from [this github repo](https://github.com/Open-CSP/open-csp/blob/main/.github/install_open_csp.sh) to your mediawiki server.
 2. Run the install script
 ```sh
-    ./install_csp.sh <mediawiki directory> <elasticsearch endpoint>
+    ./install_csp.sh <mediawiki directory>
 ```
 
 ## Usage
