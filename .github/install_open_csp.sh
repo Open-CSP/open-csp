@@ -50,6 +50,7 @@ main ()
     CURRENT_STEP=$(($CURRENT_STEP+1))
 
     if [ $SKIP_STEPS -le $CURRENT_STEP ]; then
+        echo ">>> Step $CURRENT_STEP: Running maintenance scripts"
         run_maintenance_scripts
     fi
     CURRENT_STEP=$(($CURRENT_STEP+1))

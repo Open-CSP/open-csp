@@ -46,3 +46,14 @@ This issue can have different causes:
   Near the top of the file, there should be something like `$GLOBALS['smwgElasticsearchEndpoints'] = [ 'localhost:9200' ];`.
   You should change this value to point to the ElasticSearch endpoint that you need.
   *Note:* When re-running the install script, do _not_ overwrite your edited settings.
+
+## Incompatible ElasticSearch version
+
+When you are running a newer version of ElasticSearch (e.g. 8+), you may receive the following error message:
+
+```txt
+Elasticsearch\Common\Exceptions\NoNodesAvailableException from line 67 of /var/www/mediawiki/vendor/elasticsearch/elasticsearch/src/Elasticsearch/ConnectionPool/StaticNoPingConnectionPool.php: No alive nodes found in your cluster
+```
+
+You should use a version of ElasticSearch that is compatible with [SemanticMediawiki](https://www.semantic-mediawiki.org/wiki/Help:ElasticStore), which is one of our core components.
+Versions of ElasticSearch >6.8 are as of this writing not supported.
