@@ -117,6 +117,7 @@ copy_files_from_git()
     cp -i open-csp/composer.local.json $MW_PATH
     cp -ri open-csp/settings $MW_PATH
     cp -ri open-csp/logo $MW_PATH
+    cp -r open-csp/skin $MW_PATH || exit_with_message
     cp -r open-csp/wsps $MW_PATH || exit_with_message
 
     echo "removing git repository."
