@@ -6,7 +6,7 @@ PHP=php
 GIT=git
 
 #The branch/ref from which we want to install the open csp framework
-CSP_BRANCH=development
+CSP_BRANCH=main
 
 main ()
 {
@@ -76,7 +76,7 @@ exit_with_message()
     echo "Please read the error messages above, and act accordingly."
     echo ""
     echo "It could be that your problem is already mentioned on our Installation troubleshooting:"
-    echo "https://github.com/Open-CSP/open-csp/blob/development/.github/INSTALLATION_FAQ.md"
+    echo "https://github.com/Open-CSP/open-csp/blob/$CSP_BRANCH/.github/INSTALLATION_FAQ.md"
     echo ""
     echo "After resolving the issue, you can continue installation from the current step with the following command:"
     echo "$0 \"$MW_PATH\" $CURRENT_STEP"
