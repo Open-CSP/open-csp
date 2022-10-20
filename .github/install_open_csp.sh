@@ -88,8 +88,8 @@ validate_mw_path()
 {
     if [ -d "$1" ]; then
         if [ -e "$1/composer.json" ]; then
-            // Use php for checking the json.
-            $PHP -r '$json = json_decode(file_get_contents("'$1/composer.json'"),true);if (!is_array($json)) {echo "composer file is not in valid json format\n";exit(1);} if (!isset($json["name"])) {echo "composer json does not have \"name\" parameter.\n";exit(1);} if($json["name"] !== "mediawiki/core") {echo "composer json \"name\" parameter is not equal to \"mediawiki/core\"\n";exit(1);}exit(0);'
+            # Use php for checking the json.
+            $PHP -r '$json = json_decode(file_get_contents("'$1'/composer.json"),true);if (!is_array($json)) {echo "composer file is not in valid json format\n";exit(1);} if (!isset($json["name"])) {echo "composer json does not have \"name\" parameter.\n";exit(1);} if($json["name"] !== "mediawiki/core") {echo "composer json \"name\" parameter is not equal to \"mediawiki/core\"\n";exit(1);}exit(0);'
             if [ $? -eq 0 ]; then
                 if [ -e "$1/LocalSettings.php" ]; then
                     return 0
