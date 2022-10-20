@@ -91,7 +91,11 @@ validate_mw_path()
             // Use php for checking the json.
             $PHP -r '$json = json_decode(file_get_contents("'$1/composer.json'"),true);if (!is_array($json)) {echo "composer file is not in valid json format\n";exit(1);} if (!isset($json["name"])) {echo "composer json does not have \"name\" parameter.\n";exit(1);} if($json["name"] !== "mediawiki/core") {echo "composer json \"name\" parameter is not equal to \"mediawiki/core\"\n";exit(1);}exit(0);'
             if [ $? -eq 0 ]; then
-                return 0
+                if [ -e "$1/LocalSettings.php" ]; then
+                    return 0
+                else
+                    echo "Could not find $1/LocalSettings.php. Please first set up your mediawiki installation."
+                fi
             else
                 echo "Not the mediawiki core composer json: $1/composer.json"
             fi
