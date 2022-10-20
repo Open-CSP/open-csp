@@ -205,12 +205,6 @@ for ( $i = 50000; $i < 55000; $i++ ) {
 // Project namespace
 $wgMetaNamespace = "Wiki";
 
-// Short URL
-// See https://www.mediawiki.org/wiki/Manual:Wiki_in_site_root_directory for a discussion about this setting.
-$wgArticlePath = "/$1";
-// See https://www.mediawiki.org/wiki/Manual:$wgUsePathInfo this may be a problem for some cgi setups
-$wgUsePathInfo = true;
-
 // Disable jobqueue on webrequest
 $wgJobRunRate = 0;
 
