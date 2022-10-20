@@ -22,7 +22,7 @@
     "open-csp/wiki-search": "v4.3.0",
     "wikibase-solutions/flex-form": "^1.1",
     "wikibase-solutions/c-s-p-resources": "v1.7.9",
-    "wikibase-solutions/page-sync": "^2.0",
+    "wikibase-solutions/page-sync": "^2.1",
     "wikibase-solutions/wiki-search-front": "v2.0.4",
     "wikibase-solutions/w-s-semantic-parsed-text": "dev-smw-3.2.2-comp",
     "wikibase-solutions/w-s-arrays": "v5.5.3"
