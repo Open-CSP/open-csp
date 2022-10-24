@@ -55,6 +55,12 @@ main ()
     fi
     CURRENT_STEP=$(($CURRENT_STEP+1))
 
+    if [ $SKIP_STEPS -le $CURRENT_STEP ]; then
+        echo ">>> Step $CURRENT_STEP: Running PageSync scripts"
+        run_pagesync_scripts
+    fi
+    CURRENT_STEP=$(($CURRENT_STEP+1))
+
     echo "Moving to $OLD_PATH"
     cd $OLD_PATH
 
@@ -129,11 +135,6 @@ setup_localsettings()
     # If LocalSettings.php does not include 'require_once(settings/CSPSettings.php)', add such a line.
     grep '^require_once(.\./settings/CSPSettings.php.);$' LocalSettings.php ||
         echo "\n#Settings for the Open CSP framework\nrequire_once('./settings/CSPSettings.php');\n" >> LocalSettings.php
-
-    #4. Use your favorite text editor to set `$wgSiteName` and `smwgElasticsearchEndpoints` in `./settings/CSPSettings.php` to the correct values.
-    #TODO
-
-    #TODO: test if settings actually work, esp. the elasticsearch connection.
 }
 
 do_composer()
@@ -151,9 +152,19 @@ run_maintenance_scripts()
     $PHP extensions/SemanticMediaWiki/maintenance/updateEntityCountMap.php || exit_with_message
     $PHP extensions/SemanticMediaWiki/maintenance/setupStore.php || exit_with_message
     $PHP extensions/SemanticMediaWiki/maintenance/rebuildElasticIndex.php || exit_with_message
+}
+
+run_pagesync_scripts()
+{
+    #TODO: Have share file not contain a datetime
+    BOILERPLATE_URL="https://raw.githubusercontent.com/Open-CSP/PageSync-SharedFiles/main/Open-CSP/Installation/PageSync_21-10-2022-12-20-53_2-1-0.zip"
 
     #7. Run the PageSync maintenance script.
-    $PHP extensions/PageSync/maintenance/WSps.maintenance.php --user 'Maintenance script' || exit_with_message
+    $PHP extensions/PageSync/maintenance/WSps.maintenance.php --user 'Open CSP installation script' || exit_with_message
+
+    #8. Install some extra pages to welcome the new users.
+    echo "Installing the Open CSP main page."
+    $PHP extensions/PageSync/maintenance/Wsps.maintenance.php --silent --user 'Open CSP installation script' --install-shared-file $BOILERPLATE_URL || exit_with_message
 }
 
 succes_message()
