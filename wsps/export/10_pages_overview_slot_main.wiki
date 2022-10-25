@@ -8,7 +8,7 @@ This is the '''Pages overview''' template. It should be called in the following 
 
 {{Pages overview}}
 
-</noinclude><includeonly>__NOTOC__{{#vardefine:@classes |{{#ask:[[Defines class::!Wiki]] |mainlabel=- |?Defines class= |limit=999 |sep=,}} }}<!--
+</noinclude><includeonly>__NOTOC__{{#vardefine:@classes |{{#ask:[[Defines class::!Wiki]] [[Defines class::!Class definition]] |mainlabel=- |?Defines class= |limit=999 |sep=,}} }}<!--
 
 -->{{#widget:Button link |href=#new-page-modal |datatoggle=modal |class=btn btn-primary |buttontext={{Fa|plus}} New page}}<!--
 -->{{Modal

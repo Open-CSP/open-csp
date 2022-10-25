@@ -4,12 +4,15 @@
 |Targetid=new-page-modal
 |ModalHeading=New page
 |BodyText={{Create page form
-  |Class options=Wiki
-  |Page=[Title]<!-- this is inserted in mwwrite in the wsform, so that the entered value of the Title form field will be used for the pagetitle -->
+  |Class options=Wiki,Setting
   }}
 |FooterText={{#widget:Button link |type=a |href=#new-page-modal |datatoggle=modal |class=btn btn-default |buttontext=X}}
 |Hide link=Yes
 }}<!--
 
 
--->{{#ask:[[Class::Wiki]] |?Modification date |mainlabel=Page |sort=Modification date |order=desc |default=No pages found |class=table table-striped sortable}}
+-->
+<h2>Settings</h2>
+{{#ask:[[Class::Setting]] |?Modification date |mainlabel=Page |sort=Modification date |order=desc |default=No pages found |class=table table-striped sortable}}
+<h2>Wiki</h2>
+{{#ask:[[Class::Wiki]] |?Modification date |mainlabel=Page |sort=Modification date |order=desc |default=No pages found |class=table table-striped sortable}}

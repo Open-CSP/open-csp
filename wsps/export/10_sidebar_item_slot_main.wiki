@@ -18,5 +18,6 @@ This is the "Sidebar item" template. It should be called in the following format
   
 </noinclude><includeonly><div class="sidebar-item"><!--
   -->{{#if:{{{Label|}}}|<div class="sidebar-item-label">{{{Label|}}}</div>}}<!-- 
-  -->{{#if:{{{Value|}}}|<div class="sidebar-item-value">{{{Value|}}}</div>}}<!--
+  -->{{#if:{{{Value|}}}|<div class="sidebar-item-value">
+{{{Value|}}}</div>}}<!--
 --></div></includeonly>

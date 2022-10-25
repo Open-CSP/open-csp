@@ -1,11 +1,6 @@
-<noinclude>{{Managed
-|Version=1.2
-|Version notes=1.2 - Added default options when there's only one thing to choose from.
-1.1 - Added show-on-select for pagetitle formats and namespace settings.
-1.0 - First managed version. Added margin below form fields.
-|Short description=Form for creating a new page, for defined page types
-}}
-  
+<noinclude>
+{{CSP alert}}
+
 This is the "Create page form" template.
 It should be called in the following format:
 <pre>
@@ -19,149 +14,50 @@ It should be called in the following format:
 |Class options=Organization, Tag
 }}
 
-</noinclude><includeonly><!-- 
- -->{{#if: {{{Class options|}}}
- 		|{{#vardefine: @Class options 
-        	|{{{Class options|}}} 
-          }} 
-        |{{#vardefine: @Class options 
-           	|{{#ask: [[Defines class::+]] 
-              |mainlabel=- 
-              |headers=hide 
-              |?Defines class 
-              }} 
-          }} 
-    }}<!--
--->{{#vardefine:@multiple class options check 
-		|{{#if:
-        	{{#pos:{{#var: @Class options}}
-            	|,
-         	}} 
-        	|yes
-        }} 
-    }}<!--
+</noinclude><includeonly>{{#if: {{{Class options|}}}|{{#vardefine: @Class options |{{{Class options|}}} }} |{{#vardefine: @Class options |{{#ask: [[Defines class::+]] |mainlabel=- |headers=hide |?Defines class }} }} }}<!--
+-->{{#vardefine:@multiple class options check |{{#if:{{#pos:{{#var: @Class options}}|,}} |yes}} }}<!--
 
---><_form action="addToWiki" show-on-select="{{#ifeq:{{#var: @multiple class options check}} |yes |show-on-select}}" >
-		<wsfield name="Title" 
-        		  type="text" 
-                  placeholder="Title" 
-                  type="text" 
-                  value="{{{Title|}}}" 
-                  class="form-control mb-3" 
-                  required="required" /><!--
+-->{{#tag:_form |
+<wsfield name="Title" type="text" placeholder="Title" type="text" value="{{{Title|}}}" class="form-control mb-3" required="required" /><!--
 
 // Class field: select when multiple, hidden when not multiple
-	-->{{#ifeq: {{#var: @multiple class options check}} 
-    		|yes
-			|<wsselect name="Class" 
-             		   placeholder="Select page type" 
-                       class="form-control mb-3" 
-                       required="required"><!-- 
-			 -->{{#caamap:{{#var: @Class options}}
-             		|,
-                    |__Optie__
-                    |{{#tag:wsfield
-                    		|__Optie__
-                            |type=option
-                            |show-on-select=__Optie__-fields
-                            |value=__Optie__
-                            |
-                      }} 
-                 }} <!-- 
- 			--></wsselect>
-			|{{#tag:wsfield||type=hidden|name=Class|value={{#var:@Class options}}|show-on-select={{#var:@Class options}}-fields}}
-		}}<!--
-	-->{{#caamap:{{#var: @Class options}}
-    		|,
-            |__Class__
-            |{{#vardefine:@pagetitle format 
-            		|{{#ask:[[Defines class::__Class__]] 
-                    		|?Pagetitle format= 
-                            |mainlabel=-
-                      }} 
-             }}<!-- 
- 		-->{{#vardefine:@allowed namespaces setting 
-        		|{{#ask:[[Defines class::__Class__]] 
-                		|?Allowed namespaces= 
-                        |mainlabel=-
-                 }} 
-            }}<!--
- // if no namespaces setting, then allow the main namespace and all namespaces defined through WSSpaces
- 		-->{{#vardefine:@allowed namespaces 
-        		|{{#if:{{#var:@allowed namespaces setting}} 
-                		|{{#var:@allowed namespaces setting}} 
-                        |(Main){{#if:{{#spaces:}}
-                        			|,{{#spaces:}} 
-                                }} 
-                 }} 
-            }}<!--
- 		-->{{#vardefine:@mwwrite 
-        		|{{#switch:{{#var:@pagetitle format}} 
-  					|title=[Namespace]:__Class__/[Title]
-  					|#default=[Namespace]:__Class__/
-				}}<!-- end of #switch -->
-           }}<!-- end of #vardefine @mwwrite
- 		-->{{#vardefine:@mwoption 
-           		|{{#switch:{{#var:@pagetitle format}} 
-  						|title= 
-  						|#default=next_available
-				}}<!-- end of #switch -->
-           }}<!-- end of #vardefine @mwoption
+-->{{#ifeq: {{#var: @multiple class options check}} |yes
+|<wsselect name="Class" placeholder="Select page type" class="form-control mb-3" required="required">
+{{#caamap:{{#var: @Class options}}|,|__Optie__|{{#tag:wsfield|__Optie__|type=option|show-on-select=__Optie__-fields|value=__Optie__|}} }} 
+</wsselect>
+|{{#tag:wsfield||type=hidden|name=Class|value={{#var:@Class options}}|show-on-select={{#var:@Class options}}-fields}}
+}}<!--
 
-		--><div show-on-select-trigger="__Class__-fields"><!-- 
- 			-->{{#if: {{#pos: {{#var:@allowed namespaces}}
-            				|,
-                            |
-                       }}
-                       |<wsselect name="Namespace" class="form-control mb-3" ><!-- 
- 						-->{{#if:{{#pos:{{#var:@allowed namespaces|(Main) }}
-                        				|(Main)
-                                        |
-                                 }}
-                                 |{{#tag:wsfield
-                                 	|(none)
-                                    |type=option
-                                    |value=
-                                  }} 
-                             }}<!-- 
- 						-->{{#caamap:{{#var:@allowed namespaces}} 
-                        			|,
-                                    |__Namespace__
-                                    |{{#switch:__Namespace__
-                                    		|
-                                            |(Main)=
-                                            |#default={{#tag:wsfield
-                                            				|__Namespace__
-                                                            |type=option
-                                                            |value=__Namespace__
-                                                       }} 
-                                     }} 
-                            |}}<!-- 
- 					--></wsselect><!-- 
- 					-->|{{#switch:{{#var:@allowed namespaces}}
-                    			|
-                                |(Main)=
-                                |#default={{#tag:wsfield
-                                				|
-                                                |type=hidden
-                                                |name=Namespace
-                                                |value={{#var:@allowed namespaces}}
-                                           }} 
-                         }}
-			}}<!-- 
- 			--><wscreate mwwrite="{{#var:@mwwrite}}" 
-            			 mwoption="{{#var:@mwoption}}" 
-                         mwtemplate="Base properties" 
-                         mwslot="ws-base-props" 
-                         mwfollow mwfields="Title,Class" /><!-- 
-		--></div>
-			|
-     }}<!-- einde #caamap --><!-- 
- 	--><div class="text-right"><!-- 
- 		--><wsfield type="submit" 
-    				class="btn btn-primary" 
-               	 	value="Submit" /><!-- 
- 	--></div>
-</_form><!--
+
+-->{{#caamap:{{#var: @Class options}}|,|__Class__|{{#vardefine:@pagetitle format |{{#ask:[[Defines class::__Class__]] |?Pagetitle format= |mainlabel=-}} }}<!-- 
+ -->{{#vardefine:@allowed namespaces setting |{{#ask:[[Defines class::__Class__]] |?Allowed namespaces= |mainlabel=-}} }}<!--
+ // if no namespaces setting, then allow the main namespace and all namespaces defined through WSSpaces
+ -->{{#vardefine:@allowed namespaces |{{#if:{{#var:@allowed namespaces setting}} |{{#var:@allowed namespaces setting}} |(Main){{#if:{{#spaces:}}|,{{#spaces:}} }} }} }}<!--
+ -->{{#vardefine:@mwwrite |{{#switch:{{#var:@pagetitle format}} 
+  |title=[Namespace]:__Class__/[Title]
+  |plain_title=[Namespace]:[Title]
+  |#default=[Namespace]:__Class__/
+}}<!-- end of #switch -->}}<!-- end of #vardefine @mwwrite
+ -->{{#vardefine:@mwoption |{{#switch:{{#var:@pagetitle format}} 
+  |next_available=next_available
+  |#default=
+}}<!-- end of #switch -->}}<!-- end of #vardefine @mwoption
+
+--><div show-on-select-trigger="__Class__-fields">{{#if: {{#pos: {{#var:@allowed namespaces}}|,|}}|
+<wsselect name="Namespace" class="form-control mb-3" >
+{{#if:{{#pos:{{#var:@allowed namespaces|(Main) }}|(Main)|}}|{{#tag:wsfield|(none)|type=option|value=}} }}
+{{#caamap:{{#var:@allowed namespaces}} |,|__Namespace__|{{#switch:__Namespace__||(Main)=|#default={{#tag:wsfield|__Namespace__|type=option|value=__Namespace__}} }} |}}
+</wsselect>
+|{{#switch:{{#var:@allowed namespaces}}||(Main)=|#default={{#tag:wsfield||type=hidden|name=Namespace|value={{#var:@allowed namespaces}}}} }}
+}}
+
+<wscreate mwwrite="{{#var:@mwwrite}}" mwoption="{{#var:@mwoption}}" mwtemplate="Base properties" mwslot="ws-base-props" mwfollow mwfields="Title,Class" />
+</div>
+|}}<!-- einde #caamap -->
+
+<div class="text-right"><wsfield type="submit" class="btn btn-primary" value="Submit" /></div>
+|action=addToWiki
+|show-on-select={{#ifeq:{{#var: @multiple class options check}} |yes |show-on-select}}
+}}<!--
 
 --></includeonly>
