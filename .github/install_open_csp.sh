@@ -61,6 +61,12 @@ main ()
     fi
     CURRENT_STEP=$(($CURRENT_STEP+1))
 
+    if [ $SKIP_STEPS -le $CURRENT_STEP ]; then
+        echo ">>> Step $CURRENT_STEP: Running rebuildData"
+        run_rebuild_data
+    fi
+    CURRENT_STEP=$((CURRENT_STEP+1))
+
     echo "Moving to $OLD_PATH"
     cd $OLD_PATH
 
@@ -165,6 +171,11 @@ run_pagesync_scripts()
     #8. Install some extra pages to welcome the new users.
     echo "Installing the Open CSP main page."
     $PHP extensions/PageSync/maintenance/Wsps.maintenance.php --silent --user 'Open CSP installation script' --install-shared-file $BOILERPLATE_URL || exit_with_message
+}
+
+run_rebuild_data()
+{
+    $PHP extensions/SemanticMediaWiki/maintenance/rebuildData.php || exit_with_message
 }
 
 succes_message()
