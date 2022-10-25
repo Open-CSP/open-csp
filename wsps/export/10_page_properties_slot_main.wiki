@@ -1,0 +1,13 @@
+<noinclude>
+
+This is the '''Page properties''' template. It should be called in the following format:
+
+<pre>
+{{Page properties
+|Short description= (optional: text) 
+}}
+</pre>
+
+</noinclude><includeonly>{{#set:
+|Short description={{{Short description|}}}
+}}</includeonly>

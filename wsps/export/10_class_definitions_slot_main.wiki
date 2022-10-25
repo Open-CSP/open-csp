@@ -1,0 +1,24 @@
+<noinclude>{{CSP alert}}</noinclude>
+{{#widget:Button link |href=#new-class-definition-modal |datatoggle=modal |class=btn btn-secondary btn-sm |buttontext={{Fa|plus}} New class definition}}<!--
+
+-->{{Modal
+|Targetid=new-class-definition-modal
+|ModalHeading=New class definition
+|BodyText={{Create page form
+  |Class options=Class definition
+  }}
+|FooterText={{#widget:Button link |type=a |href=#new-class-definition-modal |datatoggle=modal |class=btn btn-default |buttontext=X}}
+|Hide link=Yes
+}}
+
+{{#ask: [[Defines class::+]]
+|?Defines class
+|?Layout areas=Areas
+|?Layout columns=Columns
+|?Layout rows=Rows
+|?Base properties template
+|?Page properties template
+|?Sidebar template
+|mainlabel=Settings page
+|format=table
+}}

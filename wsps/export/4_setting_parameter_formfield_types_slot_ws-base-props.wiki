@@ -1,0 +1,4 @@
+{{Base properties
+|Title=Parameter formfield types
+|Class=Setting
+}}

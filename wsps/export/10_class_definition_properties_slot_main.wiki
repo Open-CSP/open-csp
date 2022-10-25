@@ -1,0 +1,30 @@
+<noinclude>
+
+This is the '''Class definition properties''' template. It should be called in the following format:
+
+<pre>
+{{Class definition properties
+|Allowed namespaces= (text) value options: ISMS,DevOps,CRM,Run,Commerce
+|Defines class= (text) 
+|Layout areas= (text) 
+|Layout columns= (text) 
+|Layout rows= (text) 
+|Page properties template= (optional: text) 
+|Pagetitle format= (text) value options: next_available,title
+|Sidebar template= (optional: text) 
+|Sub header template= (optional: text) 
+}}
+</pre>
+
+</noinclude><includeonly>{{#set:
+|Allowed namespaces={{{Allowed namespaces|}}}|+sep=,
+|Defines class={{{Defines class|}}}
+|Layout areas={{{Layout areas|}}}
+|Layout columns={{{Layout columns|}}}
+|Layout rows={{{Layout rows|}}}
+|Base properties template=Template:Base properties
+|Page properties template={{#if: {{{Page properties template|}}} | {{{Page properties template|}}} | Template:{{{Defines class|}}} properties}}
+|Pagetitle format={{{Pagetitle format|}}}
+|Sidebar template={{#if: {{{Sidebar template|}}} | {{{Sidebar template|}}} | Template:{{{Defines class|}}} sidebar}}
+|Sub header template={{#if: {{{Sub header template|}}} | {{{Sub header template|}}} }}
+}}{{DISPLAYTITLE:{{{Defines class|}}} class definition}}{{{Parameters|}}}</includeonly>

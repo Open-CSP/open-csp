@@ -1,0 +1,4 @@
+{{Base properties
+|Title=Page
+|Class=Class definition
+}}

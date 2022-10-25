@@ -1,0 +1,70 @@
+<noinclude>
+
+This is the '''Page sidebar''' template. It should be called in the following format:
+
+<pre>
+{{Page sidebar}}
+</pre>
+
+</noinclude><includeonly><!--
+
+-->{{#vardefine:@allow sidebar edit |{{#ifingroup:user |{{#if:{{#urlget:veaction}}{{#urlget:action}}||yes}} }} }}<!--
+
+--><div class="tab-content"><!--
+-->{{#tag:_input||type=radio|id=sidebar-view|name=toggle-sidebar|checked=checked|class=d-none}}<!--
+--><div class="card" id="sidebar-view">
+<div class="card-header">{{#ifeq:{{#var:@allow sidebar edit}} |yes |<span style="float:right">{{#tag:wslabel|Edit|for=sidebar-edit|class=btn btn-secondary}}</span>}}
+<b class="d-block">{{#caprint:$base[Base properties][Class]}}</b>
+{{#caprint:$base[Base properties][Title]}}
+</div><!-- end of .card-header -->
+<div class="card-body">
+{{Sidebar item
+|Label=Title
+|Value={{#caprint:$base[Base properties][Title]}}
+}}{{Sidebar item
+|Label=Short description
+|Value={{#caprint:$class[Page properties][Short description]}}
+}}
+</div><!-- end of .card-body -->
+</div><!-- end of .card 
+
+-->{{#ifeq:{{#var:@allow sidebar edit}} |yes |<!--
+-->{{#tag:wsfield||type=radio|id=sidebar-edit|name=toggle-sidebar|class=d-none}}<!--
+--><div class="card" id="sidebar-edit"><!--
+--><wsform action="addToWiki"><!--
+
+// wsedits for base properties
+-->{{#tag:wsedit ||target={{PAGEID}} |template=Base properties |formfield=Title |mwslot=ws-base-props}}<!--
+
+// wscreate or wsedits for page properties
+// use casize to check if the slot already exists. Then wsedit, else wscreate.
+-->{{#if:{{#casize:$class}}
+|{{#tag:wsedit ||target={{PAGEID}} |template=Page properties |formfield=Short description |mwslot=ws-class-props}}
+|<wscreate mwwrite="{{FULLPAGENAME}}" mwtemplate="Page properties" mwslot="ws-class-props" mwfields="Short description" />
+}}<!-- end of #if  -->
+
+<div class="card-header"><span style="float:right">{{#tag:wslabel|Close|for=sidebar-view|class=btn btn-secondary}}</span>
+<b class="d-block">{{#caprint:$base[Base properties][Class]}}</b>
+{{#caprint:$base[Base properties][Title]}}
+</div><!-- end of .card-header -->
+<div class="card-body">
+{{Sidebar item
+|Label=Title
+|Value={{#tag:wsfield ||type=text |name=Title |required=required |class=form-control |value={{#caprint:$base[Base properties][Title]}} }}
+}}
+{{Sidebar item
+|Label=Short description
+|Value={{#tag:wsfield ||type=textarea |name=Short description |class=form-control |value={{#caprint:$class[Page properties][Short description]}} }}
+}}
+
+<div class="text-right">
+{{#tag:wslabel|Close|for=sidebar-view|class=btn btn-secondary mb-0}}
+<wsfield type="submit" value="Save" class="btn btn-primary" />
+</div>
+</div><!-- end of .card-body -->
+</wsform>
+</div><!-- end of .card -->
+|}}<!-- end of #ifeq @allow sidebar edit == yes -->
+</div><!-- end of .tab-content 
+
+--></includeonly>

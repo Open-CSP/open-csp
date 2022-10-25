@@ -1,0 +1,4 @@
+{{Base properties
+|Title=Default layout columns
+|Class=Setting
+}}

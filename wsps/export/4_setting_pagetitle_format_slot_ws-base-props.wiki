@@ -1,0 +1,4 @@
+{{Base properties
+|Title=Pagetitle format
+|Class=Setting
+}}

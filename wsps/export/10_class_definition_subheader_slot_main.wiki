@@ -1,0 +1,55 @@
+__NOTOC__{{#vardefine:@allow edit |{{#ifingroup:user|yes}} }}<!--
+  --><div>{{#ifeq:{{#var:@allow edit}} |yes |<span class="hide-when-ve-active" style="float:right">{{#widget:Button link |type=a |href={{fullurl:{{FULLPAGENAME}} |veaction=edit}} |buttontext=Edit |class=btn btn-secondary}}</span> }}<!--
+  --><div class="h1">{{#if:{{#caprint:$base[Base properties][Title]}} |{{#caprint:$base[Base properties][Title]}} |{{#getdisplaytitle:{{FULLPAGENAME}} }} }}</div><!--
+  --></div>
+  <div>
+<_form action="addToWiki">
+	<_edit target="{{PAGEID}}" template="Class definition properties" formfield="Parameters" mwslot="ws-class-props"/><_instance 
+		template-parent="Class definition properties" 
+		template="Parameter definition"
+		name="Parameters" 
+		default-content="{{#caprint:$class[Class definition properties][Parameters]||true}}"
+        >
+<div class="form-row align-items-center">
+<div class="form-group col-md-3"><_input title="Name of the field" type="text" class="form-control" name="Name" placeholder="Name" ></_input></div>
+<div class="form-group col-md-1"><div class="form-check form-check-inline"><_input class="form-check-input form-control-lg" type="checkbox" id="required" name="Required" title="Is this field a required field ?" value="true" default="false" /><_label for="required" class="form-check-label col-form-label-sm">Required</_label></div></div>
+<div class="form-group col-md-2">{{#cadefine:$value settings |{{Wiki:Setting/Parameter_formfield_types}} }}{{#cadefine:$values selected |{{#caprint:$class[Class definition properties][Parameters][Formfield type]}} }}
+{{#camerge:$value options |$value settings |$values selected }}{{#caunique:$value options}}<!-- 
+ -->{{#tag:wsselect
+  |{{#tag:wsfield|(none)|type=option|value=}}
+{{#camap:$value options |__Value__|{{#tag:wsfield|__Value__|type=option|value=__Value__|selected={{#if:{{#casearch:$values selected|__Value__}}|selected}} }} |}}
+  |name=Formfield type |class=form-control |id=formfield-type-field  
+}}</div>
+<div class="form-group col-md-3"><_input type="text" class="form-control" name="Allowed values" placeholder="Allowed values" html="all" /></div>
+<div class="form-group col-md-1"><div class="form-check form-check-inline"><_input title="Allow multiple values?" type="checkbox" class="form-check-input form-control-lg" id="multiple" name="Multiple" value="true" default="false" /><_label for="multiple" class="form-check-label col-form-label-sm">Multiple</_label></div></div>
+<div class="form-group col-md-2">{{#cadefine:$value settings |{{Wiki:Setting/Available_slots}} }}{{#cadefine:$values selected |{{#caprint:$class[Class definition properties][Parameters][Slot]}} }}
+{{#camerge:$value options |$value settings |$values selected }}{{#caunique:$value options}}<!-- 
+ -->{{#tag:wsselect
+  |{{#tag:wsfield|(none)|type=option|value=}}
+{{#camap:$value options |__Value__|{{#tag:wsfield|__Value__|type=option|value=__Value__|selected={{#if:{{#casearch:$values selected|__Value__}}|selected}} }} |}}
+  |name=Slot |class=form-control |id=formfield-type-field  
+}}
+</div>
+</div>
+</_instance>
+<_input class="form-control btn btn-primary" type="submit" value="Save" />
+</_form>
+
+<h2>Automatically generated template code</h2>
+<ul class="nav nav-tabs" >
+<li class="nav-item">{{#widget:Link |type=a |href=#template-code-info |class=nav-link active |id=nav-home-tab |datatoggle=tab |text=Info}}</li>
+<li class="nav-item">{{#widget:Link |type=a |href=#template-code-page-properties |class=nav-link |id=nav-profile-tab |datatoggle=tab |text=Page properties template }}</li>
+<li class="nav-item">{{#widget:Link |type=a |href=#template-code-sidebar |class=nav-link |id=nav-contact-tab |datatoggle=tab |text=Sidebar template }}</li>
+</ul><!--
+
+--><div class="tab-content">
+<div class="tab-pane fade show active" id="template-code-info" >Open one of the tabs to view automatically generated template code. This is meant to be used when creating new templates. 
+
+
+If you are modifying an existing template, it might still be useful to update the parameter definitions and use parts of the generated code, but be careful not to completely overwrite existing templates. Existing templates will likely have had other modifications that are not included in the automatically generated code.
+</div>
+<div class="tab-pane fade" id="template-code-page-properties" >
+
+{{Generate page properties template code |Class={{#caprint:$class[Class definition properties][Defines class]}} }}</div>
+<div class="tab-pane fade" id="template-code-sidebar" >{{Generate sidebar template code |Class={{#caprint:$class[Class definition properties][Defines class]}} }}</div>
+</div>

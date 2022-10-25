@@ -1,0 +1,22 @@
+{{WSNavMenu | Input={{int:mainpage}}*{{Fa|home}} Home
+
+Pages
+
+Search*Search
+
+{{#ifingroup:moderator,sysop |{{Fa|cogs}} Spaces
+Special:AddSpace*Add a Space
+Special:ActiveSpaces*Manage Active Spaces
+Special:ArchivedSpaces*Manage Archived Spaces
+}}
+
+{{#ifingroup:sysop |{{Fa|lock}} Tools
+MediaWiki:Ws-navmenu*NavMenu
+MediaWiki:Ws-header*Header
+MediaWiki:Ws-sub-header*Sub-header
+MediaWiki:Ws-footer*Footer
+{{fullurl:Wiki:Slots |page={{FULLPAGENAME}} }}*Slots*Href
+Wiki:Class definitions*Class definitions
+Wiki:Wiki pages*Wiki pages
+}}
+}}

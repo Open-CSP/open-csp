@@ -1,0 +1,160 @@
+<noinclude>
+
+This is the '''Class definition sidebar''' template. It should be called in the following format:
+
+<pre>
+{{Class definition sidebar}}
+</pre>
+
+</noinclude><includeonly><!--
+
+-->{{#vardefine:@allow sidebar edit |{{#ifingroup:user |{{#if:{{#urlget:veaction}}{{#urlget:action}}||yes}} }} }}<!--
+
+--><div class="tab-content"><!--
+-->{{#tag:_input||type=radio|id=sidebar-view|name=toggle-sidebar|checked=checked|class=d-none}}<!--
+--><div class="card" id="sidebar-view">
+<div class="card-header">{{#ifeq:{{#var:@allow sidebar edit}} |yes |<span style="float:right">{{#tag:wslabel|Edit|for=sidebar-edit|class=btn btn-secondary}}</span>}}
+<b class="d-block">{{#caprint:$base[Base properties][Class]}}</b>
+{{#caprint:$base[Base properties][Title]}}
+</div><!-- end of .card-header -->
+<div class="card-body">{{Sidebar item
+|Label=Defines class
+|Value={{#caprint:$class[Class definition properties][Defines class]}}
+}}{{Sidebar item
+|Label=Pagetitle format
+|Value={{#caprint:$class[Class definition properties][Pagetitle format]}}
+}}{{Sidebar item
+|Label=Allowed namespaces
+|Value={{#caprint:$class[Class definition properties][Allowed namespaces]}}
+}}{{Sidebar item
+|Label=Layout
+|Value=
+{{{!}} class="simple-table"
+{{!}}-
+{{!}} Areas
+{{!}} {{#caprint:$class[Class definition properties][Layout areas]}}
+{{!}}-
+{{!}} Columns
+{{!}} {{#caprint:$class[Class definition properties][Layout columns]}}
+{{!}}-
+{{!}} Rows
+{{!}} {{#caprint:$class[Class definition properties][Layout rows]}}
+{{!}}}
+}}{{Sidebar item
+|Label=Templates
+|Value=
+{{{!}} class="simple-table"
+{{!}}-
+{{!}} Page properties
+{{!}} [[{{#if: {{#caprint:$class[Class definition properties][Page properties template]}} | {{#caprint:$class[Class definition properties][Page properties template]}} | Template:{{#caprint:$class[Class definition properties][Defines class]}} properties}}]]
+{{!}}-
+{{!}} Sidebar
+{{!}} [[{{#if: {{#caprint:$class[Class definition properties][Sidebar template]}} | {{#caprint:$class[Class definition properties][Sidebar template]}} | Template:{{#caprint:$class[Class definition properties][Defines class]}} sidebar}}]]
+{{!}}-
+{{!}} Subheader
+{{!}} {{#if: {{#caprint:$class[Class definition properties][Sub header template]}} | [[{{#caprint:$class[Class definition properties][Sub header template]}} ]] }}
+{{!}}}
+}}
+</div><!-- end of .card-body -->
+</div><!-- end of .card 
+
+-->{{#ifeq:{{#var:@allow sidebar edit}} |yes |<!--
+-->{{#tag:wsfield||type=radio|id=sidebar-edit|name=toggle-sidebar|class=d-none}}<!--
+--><div class="card" id="sidebar-edit"><!--
+--><wsform action="addToWiki"><!--
+
+// wsedits for base properties
+-->{{#tag:wsedit ||target={{PAGEID}} |template=Base properties |formfield=Title |mwslot=ws-base-props}}<!--
+
+// wscreate or wsedits for page properties
+// use casize to check if the slot already exists. Then wsedit, else wscreate.
+-->{{#if:{{#casize:$class}}
+|{{#tag:wsedit ||target={{PAGEID}} |template=Class definition properties |formfield=Defines class |mwslot=ws-class-props}}
+{{#tag:wsedit ||target={{PAGEID}} |template=Class definition properties |formfield=Layout columns |mwslot=ws-class-props}}
+{{#tag:wsedit ||target={{PAGEID}} |template=Class definition properties |formfield=Layout rows |mwslot=ws-class-props}}
+{{#tag:wsedit ||target={{PAGEID}} |template=Class definition properties |formfield=Page properties template |mwslot=ws-class-props}}
+{{#tag:wsedit ||target={{PAGEID}} |template=Class definition properties |formfield=Sidebar template |mwslot=ws-class-props}}
+{{#tag:wsedit ||target={{PAGEID}} |template=Class definition properties |formfield=Sub header template |mwslot=ws-class-props}}
+{{#tag:wsedit ||target={{PAGEID}} |template=Class definition properties |formfield=Pagetitle format |mwslot=ws-class-props}}
+{{#tag:wsedit ||target={{PAGEID}} |template=Class definition properties |formfield=Allowed namespaces |mwslot=ws-class-props}}
+{{#tag:wsedit ||target={{PAGEID}} |template=Class definition properties |formfield=Layout areas |mwslot=ws-class-props}}
+|<wscreate mwwrite="{{FULLPAGENAME}}" mwtemplate="Class definition properties" mwslot="ws-class-props" mwfields="Defines class,Layout columns,Layout rows,Page properties template,Sidebar template,Sub header template,Pagetitle format,Allowed namespaces,Layout areas" />
+}}<!-- end of #if  -->
+
+<div class="card-header"><span style="float:right">{{#tag:wslabel|Close|for=sidebar-view|class=btn btn-secondary}}</span>
+<b class="d-block">{{#caprint:$base[Base properties][Class]}}</b>
+{{#caprint:$base[Base properties][Title]}}
+</div><!-- end of .card-header -->
+<div class="card-body">
+{{Sidebar item
+|Label=Title
+|Value={{#tag:wsfield ||type=text |name=Title |required=required |class=form-control |value={{#caprint:$base[Base properties][Title]}} }}
+}}
+{{Sidebar item
+|Label=Defines class
+|Value={{#tag:wsfield ||type=text |name=Defines class |required=required |class=form-control |value={{#caprint:$class[Class definition properties][Defines class]}} }}
+}}
+{{Sidebar item
+|Label=Pagetitle format
+|Value={{#cadefine:$value settings |{{Wiki:Setting/Pagetitle_format}} }}
+{{#cadefine:$values selected |{{#caprint:$class[Class definition properties][Pagetitle format]}} }}
+{{#camerge:$value options |$value settings |$values selected }}
+{{#caunique:$value options}}
+{{#tag:wsselect
+  |{{#camap:$value options |__Value__|{{#tag:wsfield|__Value__|type=option|value=__Value__|selected={{#if:{{#casearch:$values selected|__Value__}}|selected}} }} |}}
+  |name=Pagetitle format |required=required |class=form-control |id=pagetitle_format-field |placeholder=select a value 
+}}
+}}
+{{Sidebar item
+|Label=Allowed namespaces
+|Value={{#cadefine:$value settings | {{Wiki:Setting/Available namespaces}} }}
+{{#cadefine:$values selected |{{#caprint:$class[Class definition properties][Allowed namespaces]}} }}
+{{#camerge:$value options |$value settings |$values selected }}
+{{#caunique:$value options}}
+{{#tag:wstoken
+  |{{#camap:$value options |__Value__|{{#tag:wsfield|__Value__|type=option|value=__Value__|selected={{#if:{{#casearch:$values selected|__Value__}}|selected}} }} |}}
+  |name=Allowed namespaces[] |required=required 
+  |class=form-control 
+  |id=allowed_namespaces-field |placeholder=select a value
+  |multiple=multiple
+}}
+}}{{Sidebar item
+|Label=Layout
+|Value=
+{{{!}}
+{{!}}-
+{{!}} Areas
+{{!}} <wsfield type="text" name="Layout areas" required="required" class="form-control" value="{{#if: {{#caprint:$class[Class definition properties][Layout areas]}} | {{#caprint:$class[Class definition properties][Layout areas]}} | {{Wiki:Setting/Default layout areas}} }}" />
+{{!}}-
+{{!}} Columns
+{{!}} {{#tag:wsfield ||type=text |name=Layout columns |required=required |class=form-control |value={{#if: {{#caprint:$class[Class definition properties][Layout columns]}} | {{#caprint:$class[Class definition properties][Layout columns]}} | {{Wiki:Setting/Default layout columns}} }} }}
+{{!}}-
+{{!}} Rows
+{{!}} {{#tag:wsfield ||type=text |name=Layout rows |required=required |class=form-control |value={{#if: {{#caprint:$class[Class definition properties][Layout rows]}} | {{#caprint:$class[Class definition properties][Layout rows]}} | {{Wiki:Setting/Default layout rows}} }} }}
+{{!}}}
+}}{{Sidebar item
+|Label=Templates
+|Value=
+{{{!}}
+{{!}}-
+{{!}} Page properties
+{{!}} {{#tag:wsfield ||type=text |name=Page properties template |class=form-control |value={{#caprint:$class[Class definition properties][Page properties template]}} }}
+{{!}}-
+{{!}} Sidebar
+{{!}} {{#tag:wsfield ||type=text |name=Sidebar template |class=form-control |value={{#caprint:$class[Class definition properties][Sidebar template]}} }}
+{{!}}-
+{{!}} Subheader
+{{!}} {{#tag:wsfield ||type=text |name=Sub header template |class=form-control |value={{#caprint:$class[Class definition properties][Sub header template]}} }}
+{{!}}}
+}}
+<div class="text-right">
+{{#tag:wslabel|Close|for=sidebar-view|class=btn btn-secondary mb-0}}
+<wsfield type="submit" value="Save" class="btn btn-primary" />
+</div>
+</div><!-- end of .card-body -->
+</wsform>
+</div><!-- end of .card -->
+|}}<!-- end of #ifeq @allow sidebar edit == yes -->
+</div><!-- end of .tab-content 
+
+--></includeonly>

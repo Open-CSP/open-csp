@@ -1,0 +1,13 @@
+<noinclude>
+
+This is the '''Setting properties''' template. It should be called in the following format:
+
+<pre>
+{{Setting properties
+|Description= (text) 
+}}
+</pre>
+
+</noinclude><includeonly>{{#set:
+|Description={{{Description|}}}
+}}</includeonly>
