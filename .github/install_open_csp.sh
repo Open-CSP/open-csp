@@ -141,6 +141,10 @@ setup_localsettings()
     # If LocalSettings.php does not include 'require_once(settings/CSPSettings.php)', add such a line.
     grep '^require_once(.\./settings/CSPSettings.php.);$' LocalSettings.php ||
         echo "\n#Settings for the Open CSP framework\nrequire_once('./settings/CSPSettings.php');\n" >> LocalSettings.php
+
+    # Also create the `images/temp` folder if it does not exist yet.
+    mkdir -p images/temp
+    chmod a+rwx images/temp
 }
 
 do_composer()
@@ -170,7 +174,7 @@ run_pagesync_scripts()
 
     #8. Install some extra pages to welcome the new users.
     echo "Installing the Open CSP main page."
-    $PHP extensions/PageSync/maintenance/Wsps.maintenance.php --silent --user 'Open CSP installation script' --install-shared-file $BOILERPLATE_URL || exit_with_message
+    $PHP extensions/PageSync/maintenance/WSps.maintenance.php --silent --user 'Open CSP installation script' --install-shared-file $BOILERPLATE_URL || exit_with_message
 }
 
 run_rebuild_data()
