@@ -7,12 +7,8 @@
             </cell>
         </row>
         <row class="ws-page-tools">
-            <component type="PageTools" class="noprint">
-                <modification type="ShowOnlyFor" group="sysop"/>
-            </component>
-            <component type="PersonalTools" class="noprint">
-                <modification type="ShowOnlyFor" group="sysop"/>
-            </component>
+            <component type="PageTools" class="noprint" />
+            <component type="PersonalTools" class="noprint" />
         </row>
         <row class="ws-grid">
             <component type="WSSubHeader" class="cp-sub-header"/>
