@@ -1,6 +1,6 @@
 # The Open CSP framework
 
-The perfect Mediawiki framework for corporate use.
+The perfect open source Mediawiki framework for corporate use.
 
 ## Table of Contents
 
@@ -12,9 +12,9 @@ The perfect Mediawiki framework for corporate use.
 
 ## Requirements
 
-To install the Open CSP framework, the following need to be installed:
-- php version >=7.4 <8
-- composer version >=2
+To install the Open CSP framework, the following needs to be installed:
+- PHP version >=7.4 <8
+- Composer version >=2
 - Mediawiki version 1.35
 - ElasticSearch version 6.8
 
@@ -23,15 +23,15 @@ To install the Open CSP framework, the following need to be installed:
 Follow these steps to set up your Open CSP wiki:
 
 0. [Install](https://www.mediawiki.org/wiki/Manual:Installing_MediaWiki) and [configure](https://www.mediawiki.org/wiki/Manual:Config_script) Mediawiki version 1.35 and make sure you can connect to an ElasticSearch instance.
-1. Copy the instal script from [this github repo](https://raw.githubusercontent.com/Open-CSP/open-csp/main/.github/install_open_csp.sh) to your mediawiki server.
-2. Run the install script
+1. Copy the installation script from [this GitHub repo](https://raw.githubusercontent.com/Open-CSP/open-csp/main/.github/install_open_csp.sh) to your mediawiki server.
+2. Run the installation script
 ```sh
     ./install_csp.sh <mediawiki directory>
 ```
 
 ## Usage
 
-If installation went succesful, the wiki should show some pages with basic usage instructions. More information can be found on [our website](https://open-csp.org).
+If the installation was successful, the wiki should show some pages with basic usage instructions. More information can be found on [our website](https://open-csp.org).
 
 ## Support
 
@@ -40,4 +40,4 @@ If you want more support, [contact us](https://wikibase-solutions.com/contact) f
 
 ## Contributing
 
-Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/Open-CSP/open-csp/compare/).
+Please contribute using [GitHub Flow](https://guides.github.com/introduction/flow/). Fork this repository, create or edit a branch, add commits, and [open a pull request](https://github.com/Open-CSP/open-csp/compare/).
