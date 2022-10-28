@@ -29,8 +29,17 @@
   },
   "repositories": {
     "adminlinks": {
-      "url": "https://github.com/wikimedia/mediawiki-extensions-AdminLinks.git",
-      "type": "vcs"
+      "package": {
+        "name": "mediawiki/admin-links",
+        "type": "mediawiki-extension",
+        "version": "dev-REL1_35",
+        "source": {
+          "reference": "REL1_35",
+          "type": "git",
+          "url": "https://github.com/wikimedia/mediawiki-extensions-AdminLinks.git"
+        }
+      },
+      "type": "package"
     },
     "displaytitle": {
       "package": {
