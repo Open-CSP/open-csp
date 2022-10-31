@@ -36,7 +36,7 @@ If the installation was successful, the wiki should show some pages with basic u
 ## Support
 
 Please [open an issue](https://github.com/Open-CSP/open-csp/issues/new) for support.
-If you want more support, [contact us](https://wikibase-solutions.com/contact) for possibilities of continuous support.
+If you want more support, [contact a professional party](https://www.open-csp.org/Professional-services-for-open-csp) for possibilities of continuous support.
 
 ## Contributing
 

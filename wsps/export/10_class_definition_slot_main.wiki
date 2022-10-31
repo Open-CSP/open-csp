@@ -43,8 +43,7 @@ Pagetitle formats:
 Different Chameleon components can be ordered for different page classes
 
 * Base csp components are: sidebar, sub-header, main
-* They are defined in the Chameleon skin XML and the default values are set in [https://bitbucket.org/wikibasesolutions/cspmodules/src/master/modules/css/layout.css 
-layout.css]
+* They are defined in the Chameleon skin XML and the default values are set in [https://gitlab.wikibase.nl/community/cspresources/-/blob/master/resources/css/layout.css layout.css]
 * You can define different layouts on the Areas parameter, see [https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas grid-template-areas] for syntax 
 * You can define sizes for the columns and rows for this layout, see [https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns grid-template-columns] and 
 [https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns grid-template-rows] for syntax 

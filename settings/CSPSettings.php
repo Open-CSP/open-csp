@@ -114,7 +114,9 @@ require_once $IP . '/extensions/RegexFun/RegexFun.php';
 wfLoadExtension( 'ReplaceText' );
 
 ##### SemanticMediaWiki
-enableSemantics( 'wikibase.nl' );
+// Take url from $wgServer by chomping all up to the `://` token.
+enableSemantics( substr($wgServer, strpos($wgServer,'://')+strlen('://')) );
+
 $smwgConfigFileDir = $IP . '/cache';
 # Default disabled (CSP Basis#13)
 $smwgCheckForConstraintErrors = SMW_CONSTRAINT_ERR_CHECK_NONE;
@@ -218,18 +220,8 @@ $egChameleonLayoutFile = "$IP/skin/wikibaseLayout.xml";
 $egChameleonExternalStyleModules = glob( $IP . '/skin/scss/[^_]*.scss' );
 $wgAllowSiteCSSOnRestrictedPages = true;
 
-// Replace "Powered by SMW" by "Powered by Wikibase"
-$wgFooterIcons = [ "copyright" => [ "copyright" => [], ],
-	"poweredby" => [ "wikibase" => [ "src" => "/skin/PoweredByWikibase.png",
-		"url" => "https://www.wikibase-solutions.com/",
-		"alt" => "Powered by Wikibase", ], ], ];
-$wgRightsIcon = null;
-
 // Logo and favicon
 $wgFavicon = "/skin/favicon.png";
-
-// Common message files
-$wgMessagesDirs['WikibaseSolutions'] = __DIR__ . '/../skin/i18n';
 
 // Style settings
 $egChameleonExternalStyleVariables = [ 'primary' => '#0576a8' ];
