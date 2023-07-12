@@ -107,9 +107,6 @@ wfLoadExtension( 'ParserFunctions' );
 $wgPFEnableStringFunctions = true;
 $wgPFStringLengthLimit = 80000;
 
-##### RegexFun
-require_once $IP . '/extensions/RegexFun/RegexFun.php';
-
 ##### ReplaceText
 wfLoadExtension( 'ReplaceText' );
 
@@ -122,6 +119,10 @@ $smwgConfigFileDir = $IP . '/cache';
 $smwgCheckForConstraintErrors = SMW_CONSTRAINT_ERR_CHECK_NONE;
 const NS_WIDGET = 274;
 const NS_WIDGET_TALK = 275;
+const SMW_NS_CONCEPT = 108;
+const SMW_NS_CONCEPT_TALK = 109;
+const SMW_NS_PROPERTY = 102;
+const SMW_NS_PROPERTY_TALK = 103;
 $smwgNamespacesWithSemanticLinks[NS_TEMPLATE] = true;
 $smwgNamespacesWithSemanticLinks[SMW_NS_PROPERTY] = true;
 $smwgNamespacesWithSemanticLinks[SMW_NS_CONCEPT] = true;
@@ -152,18 +153,16 @@ wfLoadExtension( 'SyntaxHighlight_GeSHi' );
 wfLoadExtension( 'TemplateData' );
 
 ##### UrlGetParameters
-require_once $IP . '/extensions/UrlGetParameters/UrlGetParameters.php';
+wfLoadExtension( 'UrlGetParameters' );
 
 ##### UserFunctions
+wfLoadExtension( 'UserFunctions' );
 $wgUFAllowedNamespaces = array_fill( 0,
 	4000,
 	true );
 $wgUFAllowedNamespaces += array_fill( 50000,
 	5000,
 	true );
-
-##### Variables
-wfLoadExtension( 'Variables' );
 
 ##### VisualEditor
 wfLoadExtension( 'VisualEditor' );
@@ -225,3 +224,6 @@ $wgFavicon = "/skin/favicon.png";
 
 // Style settings
 $egChameleonExternalStyleVariables = [ 'primary' => '#0576a8' ];
+
+//Scribunto
+wfLoadExtension('Scribunto');

@@ -2,7 +2,7 @@
   "require": {
     "mediawiki/admin-Links": "dev-REL1_39",
     "mediawiki/bootstrap": "4.5.0",
-    "mediawiki/chameleon-skin": "3.4.3",
+    "mediawiki/chameleon-skin": "^4.2",
     "mediawiki/data-transfer": "dev-REL1_39",
     "mediawiki/display-title": "dev-REL1_39",
     "mediawiki/lockdown": "dev-REL1_39",
@@ -20,8 +20,9 @@
     "open-csp/wiki-search": "v7.0.0",
     "wikibase-solutions/flex-form": "dev-REL1_39",
     "wikibase-solutions/c-s-p-resources": "v1.7.9",
-    "wikibase-solutions/page-sync": "^2.1",
+    "wikibase-solutions/page-sync": "dev-REL1_39",
     "wikibase-solutions/wiki-search-front": "v2.0.4",
+    "wikibase-solutions/w-s-semantic-parsed-text": "dev-master",
     "wikibase-solutions/w-s-arrays": "v5.5.3"
   },
   "repositories": {
