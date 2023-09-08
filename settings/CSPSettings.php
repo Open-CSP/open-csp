@@ -3,6 +3,9 @@
 $wgSitename = "CSP Wiki";
 
 // Elasticsearch
+wfLoadExtension( 'SemanticMediaWiki' );
+// Take url from $wgServer by chomping all up to the `://` token.
+enableSemantics( substr($wgServer, strpos($wgServer,'://')+strlen('://')) );
 $GLOBALS['smwgElasticsearchEndpoints'] =
 	[ 'localhost:9200', ];
 $GLOBALS['smwgElasticsearchConfig']['settings']['data'] =
@@ -77,16 +80,12 @@ $wgFlexFormConfig['auto_save_after_change'] = 3000;
 $wgFlexFormConfig['FlexFormDefaultTheme'] = "plain";
 $wgFlexFormConfig['rc_site_key'] = "";
 $wgFlexFormConfig['rc_secret_key'] = "";
+$wgFlexFormConfig['userscaneditallpages'] = true;
+$wgFlexFormConfig['hideEdit'] = false;
+$wgFlexFormConfig['renderonlyapprovedforms'] = false;
 
 ### Set this to true to use the debug mode of FlexForm
 #$wgFlexFormConfig['debug'] = true;
-
-##### Lockdown
-wfLoadExtension( 'Lockdown' );
-
-##### WSArrays
-wfLoadExtension( 'WSArrays' );
-$wfEnableResultPrinter = true;
 
 ##### MultimediaViewer
 wfLoadExtension( 'MultimediaViewer' );
@@ -94,9 +93,6 @@ $wgMediaViewerIsInBeta = true;
 
 ##### MyVariables
 wfLoadExtension( 'MyVariables' );
-
-##### NumberFormat
-require_once "$IP/extensions/NumberFormat/NumberFormat.php";
 
 ##### PageSync
 wfLoadExtension( 'PageSync' );
@@ -111,10 +107,8 @@ $wgPFStringLengthLimit = 80000;
 wfLoadExtension( 'ReplaceText' );
 
 ##### SemanticMediaWiki
-// Take url from $wgServer by chomping all up to the `://` token.
-enableSemantics( substr($wgServer, strpos($wgServer,'://')+strlen('://')) );
-
 $smwgConfigFileDir = $IP . '/cache';
+
 # Default disabled (CSP Basis#13)
 $smwgCheckForConstraintErrors = SMW_CONSTRAINT_ERR_CHECK_NONE;
 const NS_WIDGET = 274;
@@ -183,17 +177,17 @@ wfLoadExtension( 'Widgets' );
 wfLoadExtension( 'WikiSearch' );
 wfLoadExtension( 'WikiSearchFront' );
 
-##### WSSemanticParsedText
-wfLoadExtension( 'WSSemanticParsedText' );
-$smwgElasticsearchConfig["indexer"]["raw.text"] = true;
-
 ##### WSSlots
 wfLoadExtension( 'WSSlots' );
 $wgWSSlotsDefaultSlotRoleLayout = [ "display" => "none",
 	"region" => "center",
 	"placement" => "append", ];
 $wgWSSlotsDefaultContentModel = "wikitext";
-$wgWSSlotsDefinedSlots = [ "ws-base-props", "ws-class-props" ];
+$wgWSSlotsDefinedSlots = [
+	"ws-base-props",
+	"ws-class-props",
+	"ws-data" => [ "content_model" => "json" ]
+	];
 $wgWSSlotsSemanticSlots = [ "ws-base-props", "ws-class-props" ];
 $wgWSSlotsDoPurge = true;
 
@@ -225,5 +219,9 @@ $wgFavicon = "/skin/favicon.png";
 // Style settings
 $egChameleonExternalStyleVariables = [ 'primary' => '#0576a8' ];
 
-//Scribunto
+// Scribunto
 wfLoadExtension('Scribunto');
+// Semantic Scribunto
+wfLoadExtension( 'SemanticScribunto' );
+// Array Functions
+wfLoadExtension( 'ArrayFunctions' );
