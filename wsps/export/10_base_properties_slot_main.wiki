@@ -1,12 +1,11 @@
 <noinclude>
-{{CSP alert}}
-
 <pre>
 {{Base properties
-|Class= <text>
-|Title= <text>
-|Is tag= <optional: true>
-|Tags= <optional: comma-separated pages> for example "Tag/1, Tag/2, Tag/3" 
+|Class= (text)
+|Title= (text)
+|Is tag= (optional: true)
+|Tags= (optional: comma-separated pages) for example "Tag/1, Tag/2, Tag/3"
+|Version history= (multiple instance templates) {{Version history item |Version number=.. |Version description=.. |Version date=..}}
 }}
 </pre>
 
@@ -15,4 +14,16 @@
 |Title={{{Title|}}}
 |Is tag={{#ifeq:{{{Is tag|}}} |true |true}} 
 |Tags={{{Tags|}}} |+sep=,
-}}{{DISPLAYTITLE:{{{Title|}}}|noerror}}</includeonly>
+}}<!--
+
+// switch to prevent setting displaytitle on property pages, as this can cause unexpected behavior when using format=tree 
+-->{{#switch:{{NAMESPACENUMBER}} |102=|#default={{DISPLAYTITLE:{{{Title|}}}|noerror}} }}<!--
+
+// version history properties
+-->{{#af_foreach:{{#invoke:VersionHistoryItems|get}} ||$data|{{#set:
+|Has version history={{#if:{{#af_get:{{{$data}}}|Current version number}} |true}}
+|Version number={{#af_get:{{{$data}}}|Current version number}}
+|Version description={{#af_get:{{{$data}}}|Current version description}}
+|Version date={{#af_get:{{{$data}}}|Current version date}}
+}}
+}}</includeonly>

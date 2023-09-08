@@ -1,0 +1,23 @@
+<noinclude>
+
+This is the '''Csp parameter display/datetime''' template. It should be called in the following format:
+
+<pre>
+{{Csp parameter display/datetime
+|value= (date-time with format yyyy-mm-ddThh:mm) e.g. "2022-03-01T10:00"
+}}
+</pre>
+
+== Example ==
+{{Csp parameter display/datetime
+|value=2022-03-01T10:35
+}}
+
+Related templates:
+{{#ask:[[~*Csp parameter display/*]] 
+|mainlabel=Page
+|format=table 
+|sort=Title
+}}
+
+</noinclude><includeonly>{{#if:{{{value|}}} |{{#time: j M Y H:i |{{{value|}}} }} }}</includeonly>

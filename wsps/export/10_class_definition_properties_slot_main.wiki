@@ -4,27 +4,70 @@ This is the '''Class definition properties''' template. It should be called in t
 
 <pre>
 {{Class definition properties
-|Allowed namespaces= (text) value options: ISMS,DevOps,CRM,Run,Commerce
-|Defines class= (text) 
-|Layout areas= (text) 
-|Layout columns= (text) 
-|Layout rows= (text) 
-|Page properties template= (optional: text) 
-|Pagetitle format= (text) value options: next_available,title
-|Sidebar template= (optional: text) 
-|Sub header template= (optional: text) 
+|Defines class= (text) value that is used for Class property in content pages of this type
+|Pagetitle format= (value options: title, next_available) the wscreate in "Template:Create page form" will be based on this option, default "next_available"
+|Allowed namespaces= (optional: comma-separted namespaces) namespaces in which pages of this class are allowed to be created, e.g. "(Main), Project, Article"
+|Short description= (optional: text)
+|Has version history= (optional: true) if true, then {{Show version history}} will be added to generated sidebar template code
+
+layout settings (used to order chameleon components)
+|Areas= (components) for example 'sidebar main'. Base csp components are: sidebar, sub-header, main
+|Columns= (size attribute of components) for example: 15em 2fr
+|Rows=
+
+storage templates
+|Base properties template= (optional: page) default "Template:Base properties"
+|Page properties template (optional: page) default "Template:Csp class properties"
+
+component templates
+|Footer template= (optional: page) no default
+|Sidebar template= (optional: page) default "Template:Csp default sidebar"
+|Sub header template= (optional: page) default "Template:Csp default subheader"
 }}
 </pre>
 
-</noinclude><includeonly>{{#set:
-|Allowed namespaces={{{Allowed namespaces|}}}|+sep=,
-|Defines class={{{Defines class|}}}
+Pagetitle formats:
+* '''title''' will result in a pagetitle with format <code>Class/title-entered-by-user</code> such as <code>Organization/wikibase-solutions</code>
+* '''next_available''' will result in a pagetitle with format <code>Class/incremental_number</code> such as <code>Organization/1</code> <code>Organization/2</code> <code>Organization/3</code> etc.
+
+Different Chameleon components can be ordered for different page classes
+
+* Base csp components are: sidebar, sub-header, main
+* They are defined in the Chameleon skin XML and the default values are set in [https://bitbucket.org/wikibasesolutions/cspmodules/src/master/modules/css/layout.css layout.css]
+* You can define different layouts on the Areas parameter, see [https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas grid-template-areas] for syntax 
+* You can define sizes for the columns and rows for this layout, see [https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns grid-template-columns] and [https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns grid-template-rows] for syntax 
+
+==Example== 
+The example below creates to rows on all pages with the Article class
+  
+The first row holds the Sidebar and the Sub-header components the Sidebar is set to be 15em wide and the Sub-header is set to 1 fraction, the hieght of this row is set to Auto
+  
+The second row holds the Main content component it spans over two columns the height of this row is set to 1 fraction
+<pre>
+{{Class definition properties
+|Defines class=Article
+
+|Areas='sidebar sub-header' 'main main'
+|Columns=15em 2fr
+|Rows=auto 1fr
+}}
+</pre>
+
+</noinclude><includeonly>{{#af_foreach:{{#invoke:ClassDefinitionData|afExport}}||$data|{{#set:Defines class={{{Defines class|}}} 
+|Short description={{{Short description|}}} 
+|Pagetitle format={{{Pagetitle format|}}}
+|Allowed namespaces={{{Allowed namespaces|}}} |+sep=,
+
 |Layout areas={{{Layout areas|}}}
 |Layout columns={{{Layout columns|}}}
 |Layout rows={{{Layout rows|}}}
-|Base properties template=Template:Base properties
-|Page properties template={{#if: {{{Page properties template|}}} | {{{Page properties template|}}} | Template:{{{Defines class|}}} properties}}
-|Pagetitle format={{{Pagetitle format|}}}
-|Sidebar template={{#if: {{{Sidebar template|}}} | {{{Sidebar template|}}} | Template:{{{Defines class|}}} sidebar}}
-|Sub header template={{#if: {{{Sub header template|}}} | {{{Sub header template|}}} }}
-}}{{DISPLAYTITLE:{{{Defines class|}}} class definition}}{{{Parameters|}}}</includeonly>
+
+|Base properties template={{#af_get:{{{$data|}}}|var|basePropsTemplate}}
+|Page properties template={{#af_get:{{{$data|}}}|var|classPropsTemplate}}
+
+|Footer template={{#af_get:{{{$data|}}}|var|footerTemplate}}
+|Sidebar template={{#af_get:{{{$data|}}}|var|sidebarTemplate}}
+|Sub header template={{#af_get:{{{$data|}}}|var|subheaderTemplate}}
+}}<!-- end of #set -->
+}}<!-- end of #af_foreach 
+-->{{DISPLAYTITLE:{{{Defines class|}}} }}</includeonly>

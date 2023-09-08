@@ -1,0 +1,23 @@
+<noinclude>
+This is the '''Csp sidebar item''' template. It should be called in the following format:
+
+<pre>
+{{Csp sidebar item
+|Label= (text)
+|Value= (text)
+}}
+</pre>
+
+== Test ==
+{{Csp sidebar item
+|Label=Test label
+|Value=Test value
+}}
+
+  
+</noinclude><includeonly><div class="sidebar-item"><!--
+-->{{#if:{{{Label|}}}|<div class="sidebar-item-label">
+{{{Label|}}}</div>}}<!-- Parameter intentionally starts on a new line, div closes without new line to prevent getting unnecessary <p> tags
+-->{{#if:{{{Value|}}}|<div class="sidebar-item-value">
+{{{Value|}}}</div>}}<!-- Parameter intentionally starts on a new line, div closes without new line to prevent getting unnecessary <p> tags
+--></div></includeonly>

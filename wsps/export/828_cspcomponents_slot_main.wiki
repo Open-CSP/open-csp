@@ -1,0 +1,87 @@
+local CspFunctions = require('Module:CspFunctions')
+local ClassDefinitionData = require('Module:ClassDefinitionData')
+
+local p = {}
+
+--[[
+function p.parseComponentIfApplicable(frame)
+
+Parse component for given page. Parse the component template specified by the class definition data, or fall back to default if class definition does not have "Class" in the ws-base-props slot.
+
+Frame arguments used:
+- component : (sidebar / subheader / footer)
+- page : (pagename) page for which the component should be parsed, defaults to current page
+- defaultForClassDefinitionWithoutSlots : (wikitext) this will be parsed instead of a component template, when the class definition does not have "Class" in the ws-base-props slot (as it's then assumed to be an older class definition, from before CSP 1.8.0)
+
+debug console test:
+=p.parseComponentIfApplicable(mw.getCurrentFrame():newChild{title="whatever",args={[1]="sidebar",["page"]="Template:Sidebar item",["defaultForClassDefinitionWithoutSlots"]="{{#time:r|now}}"}})
+=p.parseComponentIfApplicable(mw.getCurrentFrame():newChild{title="whatever",args={[1]="sidebar",["page"]="Persoon test/Tester",["defaultForClassDefinitionWithoutSlots"]="{{#time:r|now}}"}})
+--]]
+function p.parseComponentIfApplicable(frame)
+  local component = frame.args[1]
+  -- return if component is not one of the allowed values
+  if component ~= "sidebar" and component ~= "subheader" and component ~= "footer" then
+    return
+  end
+  -- get page from frame args or default to current page
+  local page = frame.args["page"]
+  if page == nil or page == '' then
+    page = mw.title.getCurrentTitle().fullText
+  end
+  
+  -- get pageData (i.e. slotdata from page)
+  local pageData = {}
+  pageData["ws-base-props"] = mw.slots.slotData("ws-base-props",page)
+  pageData["ws-class-props"] = mw.slots.slotData("ws-class-props",page)
+  pageData["ws-data"] = mw.slots.slotData("ws-data",page)
+  -- get class from pageData
+  local class = ""
+  if pageData and pageData["ws-base-props"] and pageData["ws-base-props"]["Base properties"] and pageData["ws-base-props"]["Base properties"][1]["Class"] then
+    class = pageData["ws-base-props"]["Base properties"][1]["Class"]["_text"]
+  else
+    return
+  end
+  
+  -- get classData (i.e. slotdata and Class definition specific data from class definition page)
+  local classDefinitionPage = CspFunctions.ClassToClassDefinitionPage{["args"]={class}}
+  local classData = ClassDefinitionData.get(classDefinitionPage,pageData)
+  
+  -- if classData contains a Class value in ws-base-props, get template from classData and parse it. Else fall back to default.
+  local result=""
+  if classData and classData["ws-base-props"] and classData["ws-base-props"]["Base properties"] and classData["ws-base-props"]["Base properties"][1]["Class"] then
+    -- check if the component should be parsed, else return
+    local hasComponent
+    if component == "sidebar" then 
+      hasComponent = classData["var"]["hasSidebar"]
+    elseif component == "subheader" then 
+      hasComponent = classData["var"]["hasSubheader"]
+    elseif component == "footer" then
+      hasComponent = classData["var"]["hasFooter"]
+    end
+    if hasComponent ~= "true" then
+      return
+    end
+    -- parse the component
+    local componentTemplate = classData["var"][component .. "TemplateName"]
+    mw.log("parse component template from classData = " .. tostring(componentTemplate) )
+    result = frame:expandTemplate {
+	  title = componentTemplate,
+      args = {
+        ["$pageData"] = mw.af.export(pageData),
+        ["$classData"] = mw.af.export(classData)  
+      }
+	}
+  else
+    -- parse default
+    if frame.args["defaultForClassDefinitionWithoutSlots"] then
+      mw.log("parsing " .. frame.args["defaultForClassDefinitionWithoutSlots"])
+      result = frame:preprocess(frame.args["defaultForClassDefinitionWithoutSlots"] )
+    end
+  end
+  
+  --mw.logObject(classData)
+  --mw.logObject(pageData)
+  return result
+end
+
+return p

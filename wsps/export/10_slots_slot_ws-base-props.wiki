@@ -1,0 +1,13 @@
+{{Base properties
+|Class=Application page
+|Title=Template:Slots
+|Version history={{Version history item 
+|Version number=1.1
+|Version description=get slot content through Lua function to prevent parsing
+|Version date=2023-2-24 13:07:36
+}}{{Version history item 
+|Version number=1.0
+|Version description=Initial version
+|Version date=2022-12-02 09:24:21
+}}
+}}

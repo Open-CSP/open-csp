@@ -1,63 +1,83 @@
 <noinclude>
-{{CSP alert}}
-
 This is the "Create page form" template.
 It should be called in the following format:
 <pre>
 {{Create page form
 |Class options= <text, can be multiple with sep ","> classes that can be selected in the form. If only 1 class is entered, then no select field is shown. Example: "Article, Organization"
-|Page= <optional: pagename>
 }}
 </pre>
 
 {{Create page form
-|Class options=Organization, Tag
 }}
 
-</noinclude><includeonly>{{#if: {{{Class options|}}}|{{#vardefine: @Class options |{{{Class options|}}} }} |{{#vardefine: @Class options |{{#ask: [[Defines class::+]] |mainlabel=- |headers=hide |?Defines class }} }} }}<!--
--->{{#vardefine:@multiple class options check |{{#if:{{#pos:{{#var: @Class options}}|,}} |yes}} }}<!--
+</noinclude><includeonly>{{#af_foreach:{{#invoke:CspCreatePageForm|afExport|Class options={{{Class options|}}} }} ||$data|<!--
 
--->{{#tag:_form |
-<wsfield name="Title" type="text" placeholder="Title" type="text" value="{{{Title|}}}" class="form-control mb-3" required="required" /><!--
+-->{{#ifeq:{{#af_get:{{{$data}}}|Class options count}} |0 |<span style="color:red">No class definitions for class options found</span>|<!--
+--><_form action="addToWiki" show-on-select="{{#ifeq:{{#af_get:{{{$data}}}|Multiple class options check}} |true |show-on-select}}" >
+<ul class="list-group list-group-flush">
+<li class="list-group-item">{{Csp sidebar item 
+  |Label=Title
+  |Value=<input name="Title" type="text" placeholder="Title" type="text" value="{{{Title|}}}" class="form-control mb-3" required="required" />
+}}<!--
 
 // Class field: select when multiple, hidden when not multiple
--->{{#ifeq: {{#var: @multiple class options check}} |yes
-|<wsselect name="Class" placeholder="Select page type" class="form-control mb-3" required="required">
-{{#caamap:{{#var: @Class options}}|,|__Optie__|{{#tag:wsfield|__Optie__|type=option|show-on-select=__Optie__-fields|value=__Optie__|}} }} 
-</wsselect>
-|{{#tag:wsfield||type=hidden|name=Class|value={{#var:@Class options}}|show-on-select={{#var:@Class options}}-fields}}
-}}<!--
+-->{{#ifeq:{{#af_get:{{{$data}}}|Multiple class options check}} |true 
+|{{Csp sidebar item
+  |Label=Class
+  |Value=<select name="Class" placeholder="Select page type" class="form-control mb-3" required="required">
+      {{#af_foreach:{{#af_get:{{{$data}}}|Class options}}||$class<!--
+        -->|<input type="option" value="{{#af_get:{{{$class}}}|Class}}" show-on-select="{{#af_get:{{{$class}}}|Class}}-fields">{{#af_get:{{{$class}}}|Class}}</input>
+      }}
+      </select>
+  }}
+|<input type="hidden" name="Class" value="{{#af_get:{{{$data}}}|Class options|1|Class}}" show-on-select="{{#af_get:{{{$class}}}|Class}}-fields" />
+}}
+</li><!--
 
+--><li class="list-group-item">{{#af_foreach:{{#af_get:{{{$data}}}|Class options}}||$class|<!--
 
--->{{#caamap:{{#var: @Class options}}|,|__Class__|{{#vardefine:@pagetitle format |{{#ask:[[Defines class::__Class__]] |?Pagetitle format= |mainlabel=-}} }}<!-- 
- -->{{#vardefine:@allowed namespaces setting |{{#ask:[[Defines class::__Class__]] |?Allowed namespaces= |mainlabel=-}} }}<!--
- // if no namespaces setting, then allow the main namespace and all namespaces defined through WSSpaces
- -->{{#vardefine:@allowed namespaces |{{#if:{{#var:@allowed namespaces setting}} |{{#var:@allowed namespaces setting}} |(Main){{#if:{{#spaces:}}|,{{#spaces:}} }} }} }}<!--
- -->{{#vardefine:@mwwrite |{{#switch:{{#var:@pagetitle format}} 
-  |title=[Namespace]:__Class__/[Title]
-  |plain_title=[Namespace]:[Title]
-  |#default=[Namespace]:__Class__/
-}}<!-- end of #switch -->}}<!-- end of #vardefine @mwwrite
- -->{{#vardefine:@mwoption |{{#switch:{{#var:@pagetitle format}} 
-  |next_available=next_available
-  |#default=
-}}<!-- end of #switch -->}}<!-- end of #vardefine @mwoption
-
---><div show-on-select-trigger="__Class__-fields">{{#if: {{#pos: {{#var:@allowed namespaces}}|,|}}|
-<wsselect name="Namespace" class="form-control mb-3" >
-{{#if:{{#pos:{{#var:@allowed namespaces|(Main) }}|(Main)|}}|{{#tag:wsfield|(none)|type=option|value=}} }}
-{{#caamap:{{#var:@allowed namespaces}} |,|__Namespace__|{{#switch:__Namespace__||(Main)=|#default={{#tag:wsfield|__Namespace__|type=option|value=__Namespace__}} }} |}}
-</wsselect>
-|{{#switch:{{#var:@allowed namespaces}}||(Main)=|#default={{#tag:wsfield||type=hidden|name=Namespace|value={{#var:@allowed namespaces}}}} }}
+--><div show-on-select-trigger="{{#af_get:{{{$class}}}|Class}}-fields">{{#if: {{#pos: {{#af_get:{{{$class}}}|Namespace options}}|,|}}
+  |{{Csp sidebar item 
+    |Label=Namespace 
+    |Value=<select name="Namespace" class="form-control mb-3" >
+      {{#if:{{#pos:{{#af_get:{{{$class}}}|Namespace options}}|(Main)|}}|<input type="option" value="">(none)</input>}}
+      {{#af_foreach:{{#af_get:{{{$class}}}|Namespace options array}}||$namespace|<!--
+        -->{{#switch:{{{$namespace}}}||(Main)=|#default=<input type="option" value="{{{$namespace}}}">{{{$namespace}}}</input>}}
+      }}
+      </select>
+    }}
+  |{{#switch:{{#af_get:{{{$class}}}|Namespace options}}||(Main)=|#default=<input type="hidden" name="Namespace" value="{{#af_get:{{{$class}}}|Namespace options}}" />}}
 }}
 
-<wscreate mwwrite="{{#var:@mwwrite}}" mwoption="{{#var:@mwoption}}" mwtemplate="Base properties" mwslot="ws-base-props" mwfollow mwfields="Title,Class" />
-</div>
-|}}<!-- einde #caamap -->
+<_create id="{{#af_get:{{{$class}}}|Class}}-create" mwwrite="{{#af_get:{{{$class}}}|mwwrite}}" mwoption="{{#af_get:{{{$class}}}|mwoption}}" mwtemplate="Base properties" mwslot="ws-base-props" mwfollow mwfields="Title,Class" /><!--
+// additional create and fields for "new style" (from CSP 1.8.0) class definition with slots
+  -->{{#if:{{#af_get:{{{$class}}}|CspParameterDefinitions}} |<!--
+    // loop through parameters for create
+    --><_create mwwrite="::id::{{#af_get:{{{$class}}}|Class}}-create" mwtemplate="Csp class properties" mwslot="ws-class-props" 
+        mwfields="{{#af_foreach:{{#af_get:{{{$class}}}|CspParameterDefinitions}} ||$parameter|{{#ifeq:{{#af_get:{{{$parameter}}}|slot}}|ws-class-props|{{#ifeq:{{#af_get:{{{$parameter}}}|showOnCreate}}|true|{{#af_get:{{{$parameter}}}|name}},}} }} }}_additionalNonexistingField" 
+       /><!-- note: "_additionalNonexistingField" was added because else the _create won't work in cases where mwfields ends up being empty
+    // loop through parameters for form fields (only for slot csp-class-props)
+    -->{{#af_foreach:{{#af_get:{{{$class}}}|CspParameterDefinitions}}||$parameter|<!--
+    -->{{#ifeq:{{#af_get:{{{$parameter}}}|slot}}|ws-class-props|{{#ifeq:{{#af_get:{{{$parameter}}}|showOnCreate}}|true|{{#switch:{{#af_get:{{{$parameter}}}|formfieldTemplate}}
+        |(none)=
+        |={{Csp sidebar item 
+          |Label={{#af_get:{{{$parameter}}}|name}}
+          |Value={{#af_template:Csp formfield/text |{{{$parameter}}} }}
+          }}
+        |#default={{Csp sidebar item 
+          |Label={{#af_get:{{{$parameter}}}|name}}
+          |Value={{#af_template:{{#af_get:{{{$parameter}}}|formfieldTemplate}} |{{{$parameter}}} }}
+          }}
+        }}<!-- end of #switch -->}}<!-- end of #ifeq check for showOnCeate -->}}<!-- end of #ifeq check for ws-class-props slot -->
+    }}<!-- end of #af_foreach to generate formfields
+   
+-->}}<!-- end of #if check for CspParameterDefinitions
 
-<div class="text-right"><wsfield type="submit" class="btn btn-primary" value="Submit" /></div>
-|action=addToWiki
-|show-on-select={{#ifeq:{{#var: @multiple class options check}} |yes |show-on-select}}
-}}<!--
-
---></includeonly>
+--></div><!-- end of show-on-select-trigger div 
+-->}}<!-- end of #af_foreach $class -->
+<div class="text-right"><input type="submit" class="btn btn-primary" value="Submit" /></div>
+</li>
+</ul>
+</_form><!--
+-->}}<!-- einde #ifeq Class options count 0
+-->}}<!-- end of #af_foreach --></includeonly>

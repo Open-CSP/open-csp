@@ -1,5 +1,4 @@
 <noinclude>
-{{CSP alert}}
 How to use:
 <pre>
 {{#widget:Searchbar
@@ -23,7 +22,7 @@ Example output (Default but placeholder):
 {{#widget:Searchbar|placeholder=Zoeken...}}
 
 </noinclude><includeonly><!--
- --><form action="/index.php/<!--{$page|default:'Special:Search'}-->" id="searchform"><!--
+ --><form action="/<!--{$page|default:'Special:Search'}-->" id="searchform"><!--
   --><div class="input-group md-form form-sm form-2 pl-0"><!--
     --><input class="form-control my-0 py-1 red-border" name="<!--{$altsearch|default: 'search'}-->" placeholder="<!--{$placeholder|default:'Search...'}-->" title="Search [Alt+Shift+f]" accesskey="f" id="<!--{$id|default: 'searchInput'}-->" tabindex="1" autocomplete="off"  type="search" aria-label="Search"><!--
     --><div class="input-group-append"><!--

@@ -1,0 +1,119 @@
+local ClassDefinitionData = require('Module:ClassDefinitionData')
+local CspFunctions = require('Module:CspFunctions')
+
+local p = {}
+
+--[[
+Defines table with the following data:
+["Class options"] 	(table) contains classes that can be selected in the form
+  ["Class"]					(string)
+  ["Page"]					(string) contains pagename of class definition page
+  ["Namespace options"] 	(string) contains comma-separated namespaces
+  ["CspParameterDefinitions"] 	(table)
+  ["hasParameterDefinitions"]	(string) "yes" or "no"
+  ["Pagetitle format"]		(string)
+  ["mwwrite"]				(string)
+  ["mwoption"]				(string)
+["Class options count"] (string) contains a numerical value in a string
+["Multiple class options check"] (string) "true" or "false" if class options count > 1
+
+debug console tests:
+=p.data("")
+=p.data("Persoon")
+=p.data("Persoon test,Article")
+--]]
+function p.data(classes,frame)
+  local classes = classes
+  local frame = frame
+  if frame == nil then frame = mw.getCurrentFrame() end
+  local classesCount = 0
+  local classOptions = {}
+  local results = {}
+  -- start by filling a table with class options (class and class definition page)
+  -- if class variable is not used, find all defined classes through query
+  if classes == nil or classes == "" then
+    local classesQuery = mw.smw.ask {
+      "[[Defines class::+]]",
+      "?#-=Page",
+      "?Defines class=Class",
+      "sort=Defines class",
+      "limit=999"
+    }
+    if classesQuery ~= nil then
+      classesCount = #classesQuery
+      classOptions = classesQuery
+    end
+  -- else loop through class variable to find class definition pages
+  else
+    for class in string.gmatch(classes,"([^,]+)") do
+      local page = CspFunctions.ClassToClassDefinitionPage{args={"class"}}
+      local classData = {["Class"] = class,["Page"] = page}
+      classOptions[#classOptions + 1] = classData
+      classesCount = classesCount + 1
+    end
+  end
+  
+  -- if no valid class options were found, return
+  results["Class options count"] = tostring(classesCount)
+  if classesCount == 0 then 
+    results["Class options"] = {}
+    return results
+  elseif  classesCount > 1 then
+    results["Multiple class options check"] = "true"
+  else
+    results["Multiple class options check"] = "false"
+  end
+  
+  -- loop through class options to add additional data from class definition pages
+  for i, class in ipairs(classOptions) do
+    local data = ClassDefinitionData.get(class.Page)
+    if data and data["ws-data"]["CspParameterDefinitions"] then
+      class["CspParameterDefinitions"] = data["ws-data"]["CspParameterDefinitions"]
+      class["hasParameterDefinitions"] = data["var"]["hasParameterDefinitions"]
+    end
+    if data and data["ws-class-props"] and data["ws-class-props"]["Csp class properties"] and data["ws-class-props"]["Csp class properties"][1]["Allowed namespaces"] 
+      and data["ws-class-props"]["Csp class properties"][1]["Allowed namespaces"]["_text"] ~= "" then
+      class["Namespace options"] = data["ws-class-props"]["Csp class properties"][1]["Allowed namespaces"]["_text"]
+    else 
+      class["Namespace options"] = frame:preprocess("(Main){{#if:{{#spaces:}}|,{{#spaces:}} }}")
+    end
+    class["Namespace options array"] = mw.text.split(class["Namespace options"],",",true)
+    local pagetitleFormat, mwwrite, mwoption
+    if data then
+      pagetitleFormat = data["var"]["pagetitleFormat"]
+      class["Pagetitle format"] = pagetitleFormat
+    end
+    if pagetitleFormat == "title" then
+      mwwrite = "[Namespace]:" .. class.Class .. "/[Title]"
+      mwoption = ""
+    else
+      mwwrite = "[Namespace]:" .. class.Class .. "/"
+      mwoption = "next_available"
+    end
+    class["mwwrite"] = mwwrite
+    class["mwoption"] = mwoption
+  end
+  
+  results["Class options"] = classOptions
+  mw.logObject(results)
+  return results
+end
+
+--[[
+function p.afExport(frame)
+
+frame args:
+Class options	(string) comma-separated list of classes
+
+{{#invoke:CspCreatePageForm|afExport}}
+{{#invoke:CspCreatePageForm|afExport|Class options=Article,Persoon}}
+
+debug console tests:
+=p.afExport(mw.getCurrentFrame():newChild{title="whatever",args={["Class options"]="Article,Persoon"}}) 
+--]]
+function p.afExport(frame)
+  local data = p.data(frame.args["Class options"])
+  return mw.af.export{data}
+end
+
+return p

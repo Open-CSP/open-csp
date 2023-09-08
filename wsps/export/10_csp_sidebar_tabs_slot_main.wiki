@@ -1,0 +1,64 @@
+<noinclude>
+
+This is the '''Csp card tabs''' template. It should be called in the following format:
+
+<pre>
+{{Csp sidebar tabs
+|id= (html id) used for the edit button and toggling edit/view tabs
+|canEdit= (any value) if filled, edit button and tab are included
+|closeButton= (optional: none) to not get button at the bottom edit tab
+|title= (text)
+|subTitle= (text)
+|view= (wikitext) content for view tab
+|edit= (wikitext) content for edit tab (optional)
+}}
+</pre>
+
+{{Csp sidebar tabs
+|id=example-tabs
+|canEdit=yes
+|title=Example title
+|subTitle=Example subtitle
+|view=<div class="card-body">Example view tab</div>
+|edit=<div class="card-body">Example edit tab</div>
+}}
+
+
+</noinclude><includeonly><!--
+
+--><div class="tab-content"><!-- Show title, edit button and current contents
+--><input type="radio" id="sidebar-view-{{{id|}}}" name="toggle-sidebar-{{{id|}}}" checked="checked" class="d-none sidebar-view" /><!--
+   --><div class="card sidebar-view-tab"><!-- 
+     --><div class="card-header"><!-- 
+       -->{{#if:{{{canEdit|}}}|<!-- 
+           --><span style="float:right"><!-- 
+              --><label for="sidebar-edit-{{{id|}}}" class="btn btn-secondary">{{int:csp-label-edit}}</label><!-- 
+           --></span><!-- 
+       -->}}<!-- 
+       --><b class="d-block">{{{title|}}}</b><!-- 
+       -->{{{subTitle|}}}<!--
+     --></div>
+{{{view|}}}<!-- start on new line in case this is required for wikitext formatting
+ --></div><!-- end of .card
+ -->{{#if:{{{canEdit|}}}|<!-- Edit form
+       --><input type="radio" id="sidebar-edit-{{{id|}}}" name="toggle-sidebar-{{{id|}}}" class="d-none sidebar-edit" /><!--
+         --><div class="card sidebar-edit-tab"><!--
+           --><div class="card-header"><!-- 
+                  --><span style="float:right"><!-- 
+                    --><label for="sidebar-view-{{{id|}}}" class="btn btn-secondary">{{int:csp-label-close}}</label><!-- 
+                  --></span><!-- 
+                  --><b class="d-block">{{{title|}}}</b><!-- 
+                  -->{{{subTitle|}}}<!-- 
+              --></div>
+{{{edit|}}}<!-- start on new line in case this is required for wikitext formatting
+// show close button if applicable
+-->{{#switch:{{{closeButton|}}} |none=|#default=<!--
+      --><div class="card-body"><!-- 
+      --><label for="sidebar-view-{{{id|}}}" class="btn btn-secondary" >{{int:csp-label-close}}</label><!--
+      --></div><!--
+-->}}<!-- end of closeButton switch
+--></div><!-- end of .card
+-->|}}<!-- 
+--></div><!-- end of .tab-content
+
+--></includeonly>

@@ -1,0 +1,65 @@
+<noinclude>
+
+This is the '''Csp default sidebar''' template. It should be called in the following format:
+
+<pre>
+{{Csp default sidebar 
+|$pageData (arrayfunctions export) data from slots of a content page
+|$classData (arrayfunctions export) data from Module:ClassDefinitionData, derived from a Class definition page
+}}
+</pre>
+
+</noinclude><includeonly>{{Csp sidebar tabs
+|id=default-sidebar
+|canEdit={{#ifingroup:user |Yes}}
+|closeButton=none
+|title={{#af_get:{{{$pageData}}}|ws-base-props|Base properties|1|Class|_text}}
+|subTitle={{#af_get:{{{$pageData}}}|ws-base-props|Base properties|1|Title|_text}}
+|view=<!--
+
+// loop through parameters for sidebar view card
+--><ul class="list-group list-group-flush">{{#af_foreach:{{#af_get:{{{$classData|}}}|ws-data|CspParameterDefinitions}}||$parameter|<!--
+-->{{#switch:{{#af_get:{{{$parameter}}}|displayTemplate}}
+    |(none)=
+    |=<li class="list-group-item">{{Csp sidebar item 
+      |Label={{#af_get:{{{$parameter}}}|name}}
+      |Value={{#af_get:{{{$parameter}}}|value}}
+      }}</li>
+    |#default=<li class="list-group-item">{{Csp sidebar item 
+      |Label={{#af_get:{{{$parameter}}}|name}}
+      |Value={{#af_template:{{#af_get:{{{$parameter}}}|displayTemplate}} |{{{$parameter}}} }}
+      }}</li>
+    }}<!-- end of #switch -->
+}}<!-- end of #af_foreach sidebar view parameters --></ul>
+
+
+|edit=<form><!--
+// _edits: no edit when formfieldTemplate is set to "(none)"
+-->{{#af_foreach:{{#af_get:{{{$classData|}}}|ws-data|CspParameterDefinitions}}||$parameter
+  |{{#switch:{{#af_get:{{{$parameter}}}|formfieldTemplate}} |(none) |#default=<_edit target="{{PAGEID}}" template="{{#af_get:{{{$parameter}}}|slotTemplate}}" formfield="{{#af_get:{{{$parameter}}}|name}}" mwslot="{{#af_get:{{{$parameter}}}|slot}}" />
+}}<!-- end of #switch -->
+}}<!-- end of _edits
+// form fields
+--><ul class="list-group list-group-flush">{{#af_foreach:{{#af_get:{{{$classData|}}}|ws-data|CspParameterDefinitions}}||$parameter|<!--
+-->{{#switch:{{#af_get:{{{$parameter}}}|formfieldTemplate}}
+    |(none)=
+    |=<li class="list-group-item">{{Csp sidebar item 
+      |Label={{#af_get:{{{$parameter}}}|name}}
+      |Value={{#af_template:Csp formfield/text |{{{$parameter}}} }}
+      }}</li>
+    |#default=<li class="list-group-item">{{Csp sidebar item 
+      |Label={{#af_get:{{{$parameter}}}|name}}
+      |Value={{#af_template:{{#af_get:{{{$parameter}}}|formfieldTemplate}} |{{{$parameter}}} }}
+      }}</li>
+    }}<!-- end of #switch -->
+}}<!-- end of #af_foreach to generate formfields --></ul><!-- 
+--><div class="text-right">
+<label for="sidebar-view-default-sidebar" class="btn btn-secondary" >{{int:csp-label-close}}</label>
+<input type="submit" value="{{int:csp-label-save}}" class="btn btn-primary" />
+</div>
+</form><!--
+-->}}<!-- end of Csp sidebar tabs
+
+// Show version history if applicable
+-->{{#ifeq:{{#af_get:{{{$classData}}}|ws-class-props|Csp class properties|1|Has version history|_text}} |true |{{Show version history}} }}<!--
+--></includeonly>

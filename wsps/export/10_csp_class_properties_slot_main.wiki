@@ -1,0 +1,9 @@
+<noinclude>
+
+This is the '''Csp class properties''' template. It should be called in the following format:
+
+<pre>
+{{Csp class properties }}
+</pre>
+
+</noinclude><includeonly>{{#invoke:ClassDefinitionData|set}}</includeonly>

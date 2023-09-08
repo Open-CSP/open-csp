@@ -1,0 +1,30 @@
+<noinclude>
+
+This is the '''Csp formfield/text''' template. It should be called in the following format:
+
+<pre>
+{{Csp formfield/text
+|name= (text) 
+|required= (optional: "required")
+|value= (text)
+}}
+</pre>
+
+== Example ==
+{{Csp formfield/text
+|name=Title
+|value=Test abc 123
+}}
+
+Related templates:
+{{#ask:[[~*Csp formfield/*]] 
+|mainlabel=Page
+|format=table 
+|sort=Title
+}}
+
+</noinclude><includeonly><input type="text" 
+name="{{{name|}}}" 
+class="form-control" 
+required="{{{required|}}}"
+value="{{{value|}}}" /></includeonly>

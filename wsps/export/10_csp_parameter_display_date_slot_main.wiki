@@ -1,0 +1,23 @@
+<noinclude>
+
+This is the '''Csp parameter display/date''' template. It should be called in the following format:
+
+<pre>
+{{Csp parameter display/date
+|value= (date with format yyyy-mm-dd) e.g. "2023-04-15"
+}}
+</pre>
+
+== Example ==
+{{Csp parameter display/date
+|value=2023-04-15
+}}
+
+Related templates:
+{{#ask:[[~*Csp parameter display/*]] 
+|mainlabel=Page
+|format=table 
+|sort=Title
+}}
+
+</noinclude><includeonly>{{#if:{{{value|}}} |{{#time: j M Y |{{{value|}}} }} }}</includeonly>

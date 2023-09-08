@@ -1,5 +1,4 @@
 <noinclude>
-{{CSP alert}}
 This is the "Layout" template. It should be called in the following format:
 
 
@@ -7,33 +6,18 @@ This is the "Layout" template. It should be called in the following format:
 {{Layout}}
 </pre>
 
-It genarates CSS for grid layout based on the class of the current page  
 
-</noinclude><includeonly><!-- 
- -->{{#vardefine:@class|{{#show:{{FULLPAGENAME}}|?Class|link=none}} }}<!-- get the class of current page
- -->{{#if:{{#var:@class}}|<!-- 
-        -->{{#ask:[[Defines class::{{#var:@class}}]]
-			|?Layout areas=Areas
-			|?Layout columns=Columns
-			|?Layout rows=Rows
-			|format=complexarray
-			|name=@layout
-		   }}<!-- get layout settings for the class
-        -->{{#cadefine:@areas|<!-- create array for areas to enable
-          -->{{#replace:<!--  remove '
-             -->{{#replace:<!-- remove main
-                -->{{#replace:<!-- replace spaces with ,
-                  -->{{#caprint:@layout[0][Areas]}}<!-- 
-                -->|'| }}<!-- 
-             -->|main| }}<!-- 
-           -->|<nowiki> </nowiki>|,}}<!-- 
-        -->|,}}<!-- 
-      -->{{#caunique:@areas}}<!-- remove doubles from array
-      -->{{#widget:layout <!-- widget creates the css -->
-          |rows={{#caprint:@layout[0][Rows]}}
-          |columns={{#caprint:@layout[0][Columns]}}
-          |areas={{#caprint:@layout[0][Areas]}}
-          |display={{#camap:@areas|@@@|.cp-@@@{display:block;}| }} <!-- set display block for component classes-->
-         }}<!-- 
- -->}}
-</includeonly>
+</noinclude><includeonly>{{#af_foreach:{{#invoke:CspFunctions|afExportSlots|slots=ws-base-props}}||$base |<!-- 
+-->{{#af_foreach:{{#invoke:CspFunctions|afExportSlots|slots=ws-base-props,ws-class-props|page={{#invoke:CspFunctions|ClassToClassDefinitionPage|{{#af_get:{{{$base}}}|ws-base-props|Base properties|1|Class|_text}} }} }} ||$classData |<!--
+-->{{#if:{{#af_get:{{{$classData}}}|ws-base-props|Base properties|1|Class|_text}}<!-- 
+
+-->|{{#widget:Layout <!-- widget creates the css -->
+	|rows={{#af_get:{{{$classData}}}|ws-class-props|Csp class properties|1|Layout rows|_text}}
+	|columns={{#af_get:{{{$classData}}}|ws-class-props|Csp class properties|1|Layout columns|_text}}
+	|areas={{#af_get:{{{$classData}}}|ws-class-props|Csp class properties|1|Layout areas|_text}}
+	|display={{#af_join:{{#af_map:{{#af_unique:{{#af_split:{{#invoke:CspFunctions|gmatch|{{#af_get:{{{$classData}}}|ws-class-props|Csp class properties|1|Layout areas|_text}}|([^ \'"]+)|_@_}}|_@_}} }}|$item|{{#ifeq:{{{$item}}}|main||.cp-{{{$item}}}{display:block;} }} }}|\n}}<!--
+  -->}}<!-- end of widget:Layout
+
+-->}}<!-- end of #if (check for class in $classData
+-->}}<!-- end of #af_foreach $classData
+-->}}<!-- end of #af_foreach $base --></includeonly>

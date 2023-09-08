@@ -1,0 +1,77 @@
+local p = {}
+
+local curTitle = mw.title.getCurrentTitle()
+
+function p.innerMenu(frame)
+  local theInput = frame:preprocess(frame.args['input'])
+  local result = ''
+  for MenuItem in mw.text.gsplit(theInput, "\n\n") do
+    local MenuParts = mw.text.split(MenuItem, "\n")
+    if #MenuParts == 1 then -- A simple link
+      result = result .. p.makeNavLink(MenuParts[1], 'nav-link', 'color:#fff', 'nav-item', frame)
+    else -- A dropdown menu
+      local dropdownHeader = frame:callParserFunction(
+        '#widget',
+        {
+          'Link',
+          type='a',
+          href='#',
+          class='nav-link dropdown-toggle',
+          datatoggle='dropdown',
+          style='color:#fff',
+          text=MenuParts[1] .. '<b class="caret"></b>'
+        }
+      )
+      local dropdownContent = ''
+      for i=2,#MenuParts do
+        if MenuParts[i] == '-' then
+          dropdownContent = dropdownContent .. '<li class="divider"></li>'
+        else
+          dropdownContent = dropdownContent .. p.makeNavLink(
+            MenuParts[i],
+            'dropdown-item',
+            '',
+            '',
+            frame
+          )
+        end
+      end
+      result = result .. '<li class="nav-item dropdown">' .. dropdownHeader .. '<ul class="dropdown-menu" role="menu">' .. dropdownContent .. '</ul></li>'
+    end
+  end
+  return result
+end
+
+function p.makeNavLink(inputString, class, style, liClass, frame)
+  local MenuParts = mw.text.split(inputString, "*")
+  local linkPart = MenuParts[1]
+  local textPart = MenuParts[2]
+  local linkType = MenuParts[3]
+  if not textPart then
+    textPart = linkPart
+  end
+  if not linkType or linkType == Page then
+    if not mw.title.new( linkPart ) then
+      do return "Unknown link: " .. mw.text.jsonEncode(inputString) end
+    end
+    linkPart = mw.title.new( linkPart )
+    if mw.title.compare( curTitle, linkPart) == 0 then
+      liClass = liClass .. ' navbar-presentpage'
+    end
+    linkPart = linkPart:fullUrl({}, 'https')
+  end
+  local navLink = frame:callParserFunction(
+    '#widget',
+    {
+      'Link',
+      type = 'a',
+      href = linkPart,
+      class= class,
+      text = textPart,
+      style= style
+    }
+  )
+  return '<li class="'..liClass..'">' .. navLink .. '</li>'
+end
+
+return p

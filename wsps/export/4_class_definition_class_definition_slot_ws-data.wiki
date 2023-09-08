@@ -1,0 +1,136 @@
+{
+    "CspParameterDefinitions": [
+        {
+            "name": "Pagetitle format",
+            "propertyName": "",
+            "slot": "ws-class-props",
+            "formfieldType": "select",
+            "formfieldTemplate": "",
+            "allowedValues": "next_available,title",
+            "required": "true",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Allowed namespaces",
+            "propertyName": "",
+            "slot": "ws-class-props",
+            "formfieldType": "token",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Short description",
+            "propertyName": "",
+            "slot": "ws-class-props",
+            "formfieldType": "textarea",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Has version history",
+            "propertyName": "",
+            "slot": "ws-class-props",
+            "formfieldType": "checkbox",
+            "formfieldTemplate": "",
+            "allowedValues": "true",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Layout areas",
+            "propertyName": "Layout areas",
+            "slot": "ws-class-props",
+            "formfieldType": "",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Layout columns",
+            "propertyName": "Layout columns",
+            "slot": "ws-class-props",
+            "formfieldType": "",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Layout rows",
+            "propertyName": "Layout rows",
+            "slot": "",
+            "formfieldType": "",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Page properties template",
+            "propertyName": "",
+            "slot": "",
+            "formfieldType": "",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Footer template",
+            "propertyName": "",
+            "slot": "",
+            "formfieldType": "",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Sidebar template",
+            "propertyName": "",
+            "slot": "",
+            "formfieldType": "",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Sub header template",
+            "propertyName": "",
+            "slot": "",
+            "formfieldType": "",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        }
+    ]
+}

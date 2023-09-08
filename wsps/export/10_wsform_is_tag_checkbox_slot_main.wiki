@@ -1,5 +1,4 @@
 <noinclude>
-{{CSP alert}}
 This is the '''Wsform is tag checkbox''' template. It should be called in the following format:
 
 <pre>

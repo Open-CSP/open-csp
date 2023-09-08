@@ -1,0 +1,9 @@
+{{Base properties
+|Class=Application page
+|Title=Module:VersionHistoryItems
+|Version history={{Version history item 
+|Version number=1.0
+|Version description=added function p.processDescriptionInput to replace use of #regex in Template:Add version history item
+|Version date=2023-8-18 11:47:32
+}}
+}}

@@ -1,2 +1,0 @@
-<noinclude>{{CSP alert}}</noinclude>
-[[Has type::Number]]

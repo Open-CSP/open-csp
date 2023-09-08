@@ -1,0 +1,17 @@
+{{Base properties
+|Class=Application page
+|Title=Template:Layout
+|Version history={{Version history item 
+|Version number=1.2
+|Version description=Replaced #regexall with Lua function
+|Version date=2023-8-18 12:39:26
+}}{{Version history item 
+|Version number=1.1
+|Version description=Updated to use slotdata instead of SMW properties
+|Version date=2023-6-02 12:15:15
+}}{{Version history item 
+|Version number=1.0
+|Version description=Initial version
+|Version date=2022-12-02 07:55:53
+}}
+}}

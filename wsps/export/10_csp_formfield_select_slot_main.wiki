@@ -1,0 +1,35 @@
+<noinclude>
+
+This is the '''Csp formfield/select''' template. It should be called in the following format:
+
+<pre>
+{{Csp formfield/select
+|name= (text) 
+|required= (optional: "required")
+|value= (value from "allowedValues" list)
+|allowedValues= (comma-separated values)
+}}
+</pre>
+
+== Example ==
+{{Csp formfield/select
+|name=Broodje
+|value=kroket
+|allowedValues=braadworst,gezond,kroket
+|required=required
+}}
+
+Related templates:
+{{#ask:[[~*Csp formfield/*]] 
+|mainlabel=Page
+|format=table 
+|sort=Title
+}}
+
+</noinclude><includeonly><select 
+name="{{{name|}}}"
+class="form-control"
+required="{{{required|}}}"
+selected="{{{value|}}}" 
+options="{{#invoke:CspFunctions|preprocess|_content={{{allowedValues|}}} }}"
+/></includeonly>

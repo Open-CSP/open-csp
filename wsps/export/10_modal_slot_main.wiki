@@ -1,5 +1,4 @@
 <noinclude>
-{{CSP alert}}
 ==Parameters==
 <pre>
 {{Modal

@@ -1,10 +1,12 @@
-__NOTOC__{{#ifsysop: {{CSP alert}}}}{{#WikiSearchConfig:
-|base query=[[Class::!Wiki]]
+__NOTOC__{{#ifsysop: {{CSP alert}} }}{{#WikiSearchConfig:
+|base query=[[Class::!Wiki]] [[Class::!Application page]]
 |post filter properties=Class, Tags
 |aggregation size=50
 |Class
 |Title
 |Tag
+|?Class
+|?Tag
 }}
 <div class="main-search">
 {{#WikiSearchFrontend:size=10

@@ -1,0 +1,13 @@
+{{Base properties
+|Class=Application page
+|Title=Template:WSNavMenu
+|Version history={{Version history item 
+|Version number=2.0
+|Version description=A Lua module is used to generate the inner menu, due to deprecation of Variables and WSArrays extensions
+|Version date=2023-6-22 09:50:58
+}}{{Version history item 
+|Version number=1.0
+|Version description=Initial version
+|Version date=2022-12-02 09:14:43
+}}
+}}
