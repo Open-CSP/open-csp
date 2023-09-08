@@ -1,1 +1,1 @@
-{"filename":"10_csp_formfield_token","pagetitle":"10_Csp formfield\/token","ns":10,"username":"Admin","changed":"06-09-2023 12:30:45","pageid":118,"slots":"main,ws-base-props,ws-class-props","models":"wikitext,wikitext,wikitext","isFile":false,"description":"","tags":""}
+{"filename":"10_csp_formfield_token","pagetitle":"10_Csp formfield\/token","ns":10,"username":"Admin","changed":"06-09-2023 12:30:45","pageid":118,"slots":"main,csp-base-props,csp-class-props","models":"wikitext,wikitext,wikitext","isFile":false,"description":"","tags":""}

@@ -10,12 +10,12 @@ This is the '''Class definition form''' template. It should be called in the fol
   
 </noinclude><includeonly><form action="addToWiki" show-on-select="show-on-select">
 
-<_create mwwrite="Wiki:Class definition/[Defines class]" noseo mwtemplate="Base properties" mwslot="ws-base-props" mwfollow mwfields="Class" />
-<_create mwwrite="Wiki:Class definition/[Defines class]" noseo mwtemplate="Csp class properties" mwslot="ws-class-props" mwfields="Defines class, Pagetitle format, Allowed namespaces, Short description, Layout areas, Layout columns, Layout rows, Page properties template, Sidebar template"  />
-<_create mwwrite="Wiki:Class definition/[Defines class]" noseo mwtemplate="wsnone" mwslot="ws-data" mwfollow mwfields="ws-data content" />
+<_create mwwrite="Wiki:Class definition/[Defines class]" noseo mwtemplate="Base properties" mwslot="csp-base-props" mwfollow mwfields="Class" />
+<_create mwwrite="Wiki:Class definition/[Defines class]" noseo mwtemplate="Csp class properties" mwslot="csp-class-props" mwfields="Defines class, Pagetitle format, Allowed namespaces, Short description, Layout areas, Layout columns, Layout rows, Page properties template, Sidebar template"  />
+<_create mwwrite="Wiki:Class definition/[Defines class]" noseo mwtemplate="wsnone" mwslot="csp-data" mwfollow mwfields="csp-data content" />
 
 <input type="hidden" name="Class" value="Class definition" />
-<input type="hidden" name="ws-data content" value="{
+<input type="hidden" name="csp-data content" value="{
 }" /><!-- empty json for _edit to work when editing parameter definitions after creating a class definition -->
 
 <b>Class <span style="color:red">*</span></b>

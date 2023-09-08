@@ -1,1 +1,1 @@
-{"filename":"10_csp_default_sidebar","pagetitle":"10_Csp default sidebar","ns":10,"username":"Admin","changed":"06-09-2023 12:30:13","pageid":108,"slots":"main,ws-base-props,ws-class-props","models":"wikitext,wikitext,wikitext","isFile":false,"description":"","tags":""}
+{"filename":"10_csp_default_sidebar","pagetitle":"10_Csp default sidebar","ns":10,"username":"Admin","changed":"06-09-2023 12:30:13","pageid":108,"slots":"main,csp-base-props,csp-class-props","models":"wikitext,wikitext,wikitext","isFile":false,"description":"","tags":""}

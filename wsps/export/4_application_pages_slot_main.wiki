@@ -5,8 +5,8 @@
 
 <form action="addToWiki" show-on-select="show-on-select">
 
-<_create id="new-application-page-create" mwwrite="{{#urldecode:{{#urlget:newpagetitle}} }}" mwtemplate="Base properties" mwslot="ws-base-props" mwfields="Title,Class" mwfollow />
-<_create mwwrite="::id::new-application-page-create" mwtemplate="Csp class properties" mwslot="ws-class-props" mwfields="Type,Origin" />
+<_create id="new-application-page-create" mwwrite="{{#urldecode:{{#urlget:newpagetitle}} }}" mwtemplate="Base properties" mwslot="csp-base-props" mwfields="Title,Class" mwfollow />
+<_create mwwrite="::id::new-application-page-create" mwtemplate="Csp class properties" mwslot="csp-class-props" mwfields="Type,Origin" />
 
 <input type="hidden" name="Class" value="Application page" />
 {{Sidebar item

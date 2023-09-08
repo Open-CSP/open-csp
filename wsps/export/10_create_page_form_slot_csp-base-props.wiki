@@ -3,7 +3,7 @@
 |Title=Template:Create page form
 |Version history={{Version history item 
 |Version number=1.1
-|Version description=Added an additional fieldname (without input field) to ws-class-props _create because FlexForm does not allow it to be empty
+|Version description=Added an additional fieldname (without input field) to csp-class-props _create because FlexForm does not allow it to be empty
 |Version date=2023-7-21 09:29:23
 }}{{Version history item 
 |Version number=1.0

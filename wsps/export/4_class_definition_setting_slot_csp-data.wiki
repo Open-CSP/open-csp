@@ -3,7 +3,7 @@
         {
             "name": "Title",
             "propertyName": "",
-            "slot": "ws-base-props",
+            "slot": "csp-base-props",
             "allowedValues": "",
             "required": "required",
             "multiple": "",
@@ -14,7 +14,7 @@
         {
             "name": "Description",
             "propertyName": "",
-            "slot": "ws-class-props",
+            "slot": "csp-class-props",
             "allowedValues": "",
             "required": "",
             "multiple": "",

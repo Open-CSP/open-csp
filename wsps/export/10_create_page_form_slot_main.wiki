@@ -49,16 +49,16 @@ It should be called in the following format:
   |{{#switch:{{#af_get:{{{$class}}}|Namespace options}}||(Main)=|#default=<input type="hidden" name="Namespace" value="{{#af_get:{{{$class}}}|Namespace options}}" />}}
 }}
 
-<_create id="{{#af_get:{{{$class}}}|Class}}-create" mwwrite="{{#af_get:{{{$class}}}|mwwrite}}" mwoption="{{#af_get:{{{$class}}}|mwoption}}" mwtemplate="Base properties" mwslot="ws-base-props" mwfollow mwfields="Title,Class" /><!--
+<_create id="{{#af_get:{{{$class}}}|Class}}-create" mwwrite="{{#af_get:{{{$class}}}|mwwrite}}" mwoption="{{#af_get:{{{$class}}}|mwoption}}" mwtemplate="Base properties" mwslot="csp-base-props" mwfollow mwfields="Title,Class" /><!--
 // additional create and fields for "new style" (from CSP 1.8.0) class definition with slots
   -->{{#if:{{#af_get:{{{$class}}}|CspParameterDefinitions}} |<!--
     // loop through parameters for create
-    --><_create mwwrite="::id::{{#af_get:{{{$class}}}|Class}}-create" mwtemplate="Csp class properties" mwslot="ws-class-props" 
-        mwfields="{{#af_foreach:{{#af_get:{{{$class}}}|CspParameterDefinitions}} ||$parameter|{{#ifeq:{{#af_get:{{{$parameter}}}|slot}}|ws-class-props|{{#ifeq:{{#af_get:{{{$parameter}}}|showOnCreate}}|true|{{#af_get:{{{$parameter}}}|name}},}} }} }}_additionalNonexistingField" 
+    --><_create mwwrite="::id::{{#af_get:{{{$class}}}|Class}}-create" mwtemplate="Csp class properties" mwslot="csp-class-props" 
+        mwfields="{{#af_foreach:{{#af_get:{{{$class}}}|CspParameterDefinitions}} ||$parameter|{{#ifeq:{{#af_get:{{{$parameter}}}|slot}}|csp-class-props|{{#ifeq:{{#af_get:{{{$parameter}}}|showOnCreate}}|true|{{#af_get:{{{$parameter}}}|name}},}} }} }}_additionalNonexistingField" 
        /><!-- note: "_additionalNonexistingField" was added because else the _create won't work in cases where mwfields ends up being empty
     // loop through parameters for form fields (only for slot csp-class-props)
     -->{{#af_foreach:{{#af_get:{{{$class}}}|CspParameterDefinitions}}||$parameter|<!--
-    -->{{#ifeq:{{#af_get:{{{$parameter}}}|slot}}|ws-class-props|{{#ifeq:{{#af_get:{{{$parameter}}}|showOnCreate}}|true|{{#switch:{{#af_get:{{{$parameter}}}|formfieldTemplate}}
+    -->{{#ifeq:{{#af_get:{{{$parameter}}}|slot}}|csp-class-props|{{#ifeq:{{#af_get:{{{$parameter}}}|showOnCreate}}|true|{{#switch:{{#af_get:{{{$parameter}}}|formfieldTemplate}}
         |(none)=
         |={{Csp sidebar item 
           |Label={{#af_get:{{{$parameter}}}|name}}
@@ -68,7 +68,7 @@ It should be called in the following format:
           |Label={{#af_get:{{{$parameter}}}|name}}
           |Value={{#af_template:{{#af_get:{{{$parameter}}}|formfieldTemplate}} |{{{$parameter}}} }}
           }}
-        }}<!-- end of #switch -->}}<!-- end of #ifeq check for showOnCeate -->}}<!-- end of #ifeq check for ws-class-props slot -->
+        }}<!-- end of #switch -->}}<!-- end of #ifeq check for showOnCeate -->}}<!-- end of #ifeq check for csp-class-props slot -->
     }}<!-- end of #af_foreach to generate formfields
    
 -->}}<!-- end of #if check for CspParameterDefinitions

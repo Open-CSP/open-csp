@@ -184,11 +184,11 @@ $wgWSSlotsDefaultSlotRoleLayout = [ "display" => "none",
 	"placement" => "append", ];
 $wgWSSlotsDefaultContentModel = "wikitext";
 $wgWSSlotsDefinedSlots = [
-	"ws-base-props",
-	"ws-class-props",
-	"ws-data" => [ "content_model" => "json" ]
+	"csp-base-props",
+	"csp-class-props",
+	"csp-data" => [ "content_model" => "json" ]
 	];
-$wgWSSlotsSemanticSlots = [ "ws-base-props", "ws-class-props" ];
+$wgWSSlotsSemanticSlots = [ "csp-base-props", "csp-class-props" ];
 $wgWSSlotsDoPurge = true;
 
 ##### WSSpaces

@@ -3,7 +3,7 @@
         {
             "name": "Pagetitle format",
             "propertyName": "",
-            "slot": "ws-class-props",
+            "slot": "csp-class-props",
             "formfieldType": "select",
             "formfieldTemplate": "",
             "allowedValues": "next_available,title",
@@ -15,7 +15,7 @@
         {
             "name": "Allowed namespaces",
             "propertyName": "",
-            "slot": "ws-class-props",
+            "slot": "csp-class-props",
             "formfieldType": "token",
             "formfieldTemplate": "",
             "allowedValues": "",
@@ -27,7 +27,7 @@
         {
             "name": "Short description",
             "propertyName": "",
-            "slot": "ws-class-props",
+            "slot": "csp-class-props",
             "formfieldType": "textarea",
             "formfieldTemplate": "",
             "allowedValues": "",
@@ -39,7 +39,7 @@
         {
             "name": "Has version history",
             "propertyName": "",
-            "slot": "ws-class-props",
+            "slot": "csp-class-props",
             "formfieldType": "checkbox",
             "formfieldTemplate": "",
             "allowedValues": "true",
@@ -51,7 +51,7 @@
         {
             "name": "Layout areas",
             "propertyName": "Layout areas",
-            "slot": "ws-class-props",
+            "slot": "csp-class-props",
             "formfieldType": "",
             "formfieldTemplate": "",
             "allowedValues": "",
@@ -63,7 +63,7 @@
         {
             "name": "Layout columns",
             "propertyName": "Layout columns",
-            "slot": "ws-class-props",
+            "slot": "csp-class-props",
             "formfieldType": "",
             "formfieldTemplate": "",
             "allowedValues": "",

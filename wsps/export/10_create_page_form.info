@@ -1,1 +1,1 @@
-{"filename":"10_create_page_form","pagetitle":"10_Create page form","ns":10,"username":"Admin","changed":"09-03-2022 09:52:36","pageid":47,"slots":"main,ws-base-props,ws-class-props","models":"wikitext,wikitext,wikitext","isFile":false,"description":"","tags":"Open CSP"}
+{"filename":"10_create_page_form","pagetitle":"10_Create page form","ns":10,"username":"Admin","changed":"09-03-2022 09:52:36","pageid":47,"slots":"main,csp-base-props,csp-class-props","models":"wikitext,wikitext,wikitext","isFile":false,"description":"","tags":"Open CSP"}

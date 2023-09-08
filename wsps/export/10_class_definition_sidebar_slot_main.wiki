@@ -12,43 +12,43 @@ This is the '''Class definition sidebar''' template. It should be called in the 
 --><input type="radio" id="sidebar-view" name="toggle-sidebar" checked="checked" class="d-none sidebar-view" /><!--
 --><div class="card sidebar-view-tab">
 <div class="card-header">{{#ifeq:{{#ifingroup:user |{{#if:{{#urlget:veaction}}{{#urlget:action}}||yes}} }}|yes |<span style="float:right"><label for="sidebar-edit" class="btn btn-secondary">Edit</label></span>}}
-<b class="d-block">{{#af_get:{{{$pageData}}}|ws-base-props|Base properties|1|Class|_text}}</b>
-{{#af_get:{{{$pageData}}}|ws-base-props|Base properties|1|Title|_text}}
+<b class="d-block">{{#af_get:{{{$pageData}}}|csp-base-props|Base properties|1|Class|_text}}</b>
+{{#af_get:{{{$pageData}}}|csp-base-props|Base properties|1|Title|_text}}
 </div><!-- end of .card-header -->
 <div class="card-body">
 {{Csp sidebar item
 |Label=Pagetitle format
-|Value={{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Pagetitle format |_text}}
+|Value={{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Pagetitle format |_text}}
 }}{{Csp sidebar item
 |Label=Allowed namespaces
-|Value={{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Allowed namespaces |_text}}
+|Value={{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Allowed namespaces |_text}}
 }}{{Csp sidebar item
 |Label=Short description
-|Value={{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Short description |_text}}
+|Value={{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Short description |_text}}
 }}{{Csp sidebar item
 |Label=Has version history
-|Value={{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Has version history |_text}}
+|Value={{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Has version history |_text}}
 }}{{Csp sidebar item
 |Label=Layout areas
-|Value={{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Layout areas |_text}}
+|Value={{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Layout areas |_text}}
 }}{{Csp sidebar item
 |Label=Layout columns
-|Value={{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Layout columns |_text}}
+|Value={{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Layout columns |_text}}
 }}{{Csp sidebar item
 |Label=Layout rows
-|Value={{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Layout rows |_text}}
+|Value={{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Layout rows |_text}}
 }}{{Csp sidebar item
 |Label=Class properties template
-|Value={{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Page properties template |_text}}
+|Value={{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Page properties template |_text}}
 }}{{Csp sidebar item
 |Label=Footer template
-|Value={{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Footer template |_text}}
+|Value={{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Footer template |_text}}
 }}{{Csp sidebar item
 |Label=Sidebar template
-|Value={{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Sidebar template |_text}}
+|Value={{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Sidebar template |_text}}
 }}{{Csp sidebar item
 |Label=Sub header template
-|Value={{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Sub header template |_text}}
+|Value={{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Sub header template |_text}}
 }}<!--
 
 --></div><!-- end of .card-body -->
@@ -58,71 +58,71 @@ This is the '''Class definition sidebar''' template. It should be called in the 
 --><input type="radio" id="sidebar-edit" name="toggle-sidebar" class="d-none sidebar-edit" /><!--
 --><div class="card sidebar-edit-tab"><!--
 --><div class="card-header"><span style="float:right"><label for="sidebar-view" class="btn btn-secondary" >Close</label></span>
-<b class="d-block">{{#af_get:{{{$pageData}}}|ws-base-props|Base properties|1|Class|_text}}</b>
-{{#af_get:{{{$pageData}}}|ws-base-props|Base properties|1|Title|_text}}
+<b class="d-block">{{#af_get:{{{$pageData}}}|csp-base-props|Base properties|1|Class|_text}}</b>
+{{#af_get:{{{$pageData}}}|csp-base-props|Base properties|1|Title|_text}}
 </div><!-- end of .card-header -->
 <div class="card-body">
 <form action="addToWiki"><!--
 
 // _edits
---><_edit target="{{PAGEID}}" template="Csp class properties" formfield="Pagetitle format" mwslot="ws-class-props" />
-<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Allowed namespaces" mwslot="ws-class-props" />
-<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Short description" mwslot="ws-class-props" />
-<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Has version history" mwslot="ws-class-props" />
-<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Layout areas" mwslot="ws-class-props" />
-<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Layout columns" mwslot="ws-class-props" />
-<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Layout rows" mwslot="ws-class-props" />
-<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Page properties template" mwslot="ws-class-props" />
-<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Footer template" mwslot="ws-class-props" />
-<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Sidebar template" mwslot="ws-class-props" />
-<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Sub header template" mwslot="ws-class-props" />
+--><_edit target="{{PAGEID}}" template="Csp class properties" formfield="Pagetitle format" mwslot="csp-class-props" />
+<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Allowed namespaces" mwslot="csp-class-props" />
+<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Short description" mwslot="csp-class-props" />
+<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Has version history" mwslot="csp-class-props" />
+<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Layout areas" mwslot="csp-class-props" />
+<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Layout columns" mwslot="csp-class-props" />
+<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Layout rows" mwslot="csp-class-props" />
+<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Page properties template" mwslot="csp-class-props" />
+<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Footer template" mwslot="csp-class-props" />
+<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Sidebar template" mwslot="csp-class-props" />
+<_edit target="{{PAGEID}}" template="Csp class properties" formfield="Sub header template" mwslot="csp-class-props" />
 <!-- end of _edits
 
 // form fields
 -->{{Csp sidebar item
 |Label=Pagetitle format
-|Value=<select name="Pagetitle format" class="form-control" required="required" allowclear selected="{{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Pagetitle format|_text}}" options="next_available,title" />
+|Value=<select name="Pagetitle format" class="form-control" required="required" allowclear selected="{{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Pagetitle format|_text}}" options="next_available,title" />
 }}
 {{Csp sidebar item
 |Label=Allowed namespaces
-|Value=<_token id="token-{{lc:{{anchorencode:Allowed namespaces}} }}" name="Allowed namespaces[]" multiple="multiple" class="form-control" allowtags="allowtags" allowclear selected="{{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Allowed namespaces|_text}}" options="{{#af_join:{{#af_sort:{{#af_unique:{{#af_split:{{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Allowed namespaces|_text}},(Main),{{#spaces:}} }} }} }}|,}}" />
+|Value=<_token id="token-{{lc:{{anchorencode:Allowed namespaces}} }}" name="Allowed namespaces[]" multiple="multiple" class="form-control" allowtags="allowtags" allowclear selected="{{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Allowed namespaces|_text}}" options="{{#af_join:{{#af_sort:{{#af_unique:{{#af_split:{{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Allowed namespaces|_text}},(Main),{{#spaces:}} }} }} }}|,}}" />
 }}
 {{Csp sidebar item
 |Label=Short description
-|Value=<input type="textarea" name="Short description" class="form-control" >{{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Short description|_text}}</input>
+|Value=<input type="textarea" name="Short description" class="form-control" >{{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Short description|_text}}</input>
 }}
 {{Csp sidebar item
 |Label=<label for="checkbox-{{lc:{{anchorencode:Has version history}} }}" >Has version history</label>
 |Value=<input type="hidden" name="Has version history" value="" />
-<input type="checkbox" id="checkbox-{{lc:{{anchorencode:Has version history}} }}" name="Has version history" class="form-control" value="true" checked="{{#ifeq:{{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Has version history|_text}} |true|checked}}" />
+<input type="checkbox" id="checkbox-{{lc:{{anchorencode:Has version history}} }}" name="Has version history" class="form-control" value="true" checked="{{#ifeq:{{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Has version history|_text}} |true|checked}}" />
 }}
 {{Csp sidebar item
 |Label=Layout areas
-|Value=<input type="text" name="Layout areas" class="form-control" value="{{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Layout areas|_text}}" />
+|Value=<input type="text" name="Layout areas" class="form-control" value="{{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Layout areas|_text}}" />
 }}
 {{Csp sidebar item
 |Label=Layout columns
-|Value=<input type="text" name="Layout columns" class="form-control" value="{{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Layout columns|_text}}" />
+|Value=<input type="text" name="Layout columns" class="form-control" value="{{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Layout columns|_text}}" />
 }}
 {{Csp sidebar item
 |Label=Layout rows
-|Value=<input type="text" name="Layout rows" class="form-control" value="{{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Layout rows|_text}}" />
+|Value=<input type="text" name="Layout rows" class="form-control" value="{{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Layout rows|_text}}" />
 }}
 {{Csp sidebar item
 |Label=Class properties template
-|Value=<input type="text" name="Page properties template" class="form-control" value="{{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Page properties template|_text}}" placeholder="Template:Csp class properties" />
+|Value=<input type="text" name="Page properties template" class="form-control" value="{{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Page properties template|_text}}" placeholder="Template:Csp class properties" />
 }}
 {{Csp sidebar item
 |Label=Footer template
-|Value=<input type="text" name="Footer template" class="form-control" value="{{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Footer template|_text}}" />
+|Value=<input type="text" name="Footer template" class="form-control" value="{{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Footer template|_text}}" />
 }}
 {{Csp sidebar item
 |Label=Sidebar template
-|Value=<input type="text" name="Sidebar template" class="form-control" value="{{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Sidebar template|_text}}" placeholder="Template:Csp default sidebar" />
+|Value=<input type="text" name="Sidebar template" class="form-control" value="{{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Sidebar template|_text}}" placeholder="Template:Csp default sidebar" />
 }}
 {{Csp sidebar item
 |Label=Sub header template
-|Value=<input type="text" name="Sub header template" class="form-control" value="{{#af_get:{{{$pageData}}}|ws-class-props|Csp class properties|1|Sub header template|_text}}" placeholder="Template:Csp default subheader" />
+|Value=<input type="text" name="Sub header template" class="form-control" value="{{#af_get:{{{$pageData}}}|csp-class-props|Csp class properties|1|Sub header template|_text}}" placeholder="Template:Csp default subheader" />
 }}
 <!-- 
 

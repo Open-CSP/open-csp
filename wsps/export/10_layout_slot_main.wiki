@@ -7,15 +7,15 @@ This is the "Layout" template. It should be called in the following format:
 </pre>
 
 
-</noinclude><includeonly>{{#af_foreach:{{#invoke:CspFunctions|afExportSlots|slots=ws-base-props}}||$base |<!-- 
--->{{#af_foreach:{{#invoke:CspFunctions|afExportSlots|slots=ws-base-props,ws-class-props|page={{#invoke:CspFunctions|ClassToClassDefinitionPage|{{#af_get:{{{$base}}}|ws-base-props|Base properties|1|Class|_text}} }} }} ||$classData |<!--
--->{{#if:{{#af_get:{{{$classData}}}|ws-base-props|Base properties|1|Class|_text}}<!-- 
+</noinclude><includeonly>{{#af_foreach:{{#invoke:CspFunctions|afExportSlots|slots=csp-base-props}}||$base |<!-- 
+-->{{#af_foreach:{{#invoke:CspFunctions|afExportSlots|slots=csp-base-props,csp-class-props|page={{#invoke:CspFunctions|ClassToClassDefinitionPage|{{#af_get:{{{$base}}}|csp-base-props|Base properties|1|Class|_text}} }} }} ||$classData |<!--
+-->{{#if:{{#af_get:{{{$classData}}}|csp-base-props|Base properties|1|Class|_text}}<!-- 
 
 -->|{{#widget:Layout <!-- widget creates the css -->
-	|rows={{#af_get:{{{$classData}}}|ws-class-props|Csp class properties|1|Layout rows|_text}}
-	|columns={{#af_get:{{{$classData}}}|ws-class-props|Csp class properties|1|Layout columns|_text}}
-	|areas={{#af_get:{{{$classData}}}|ws-class-props|Csp class properties|1|Layout areas|_text}}
-	|display={{#af_join:{{#af_map:{{#af_unique:{{#af_split:{{#invoke:CspFunctions|gmatch|{{#af_get:{{{$classData}}}|ws-class-props|Csp class properties|1|Layout areas|_text}}|([^ \'"]+)|_@_}}|_@_}} }}|$item|{{#ifeq:{{{$item}}}|main||.cp-{{{$item}}}{display:block;} }} }}|\n}}<!--
+	|rows={{#af_get:{{{$classData}}}|csp-class-props|Csp class properties|1|Layout rows|_text}}
+	|columns={{#af_get:{{{$classData}}}|csp-class-props|Csp class properties|1|Layout columns|_text}}
+	|areas={{#af_get:{{{$classData}}}|csp-class-props|Csp class properties|1|Layout areas|_text}}
+	|display={{#af_join:{{#af_map:{{#af_unique:{{#af_split:{{#invoke:CspFunctions|gmatch|{{#af_get:{{{$classData}}}|csp-class-props|Csp class properties|1|Layout areas|_text}}|([^ \'"]+)|_@_}}|_@_}} }}|$item|{{#ifeq:{{{$item}}}|main||.cp-{{{$item}}}{display:block;} }} }}|\n}}<!--
   -->}}<!-- end of widget:Layout
 
 -->}}<!-- end of #if (check for class in $classData

@@ -67,13 +67,13 @@ function p.data(classes,frame)
   -- loop through class options to add additional data from class definition pages
   for i, class in ipairs(classOptions) do
     local data = ClassDefinitionData.get(class.Page)
-    if data and data["ws-data"]["CspParameterDefinitions"] then
-      class["CspParameterDefinitions"] = data["ws-data"]["CspParameterDefinitions"]
+    if data and data["csp-data"]["CspParameterDefinitions"] then
+      class["CspParameterDefinitions"] = data["csp-data"]["CspParameterDefinitions"]
       class["hasParameterDefinitions"] = data["var"]["hasParameterDefinitions"]
     end
-    if data and data["ws-class-props"] and data["ws-class-props"]["Csp class properties"] and data["ws-class-props"]["Csp class properties"][1]["Allowed namespaces"] 
-      and data["ws-class-props"]["Csp class properties"][1]["Allowed namespaces"]["_text"] ~= "" then
-      class["Namespace options"] = data["ws-class-props"]["Csp class properties"][1]["Allowed namespaces"]["_text"]
+    if data and data["csp-class-props"] and data["csp-class-props"]["Csp class properties"] and data["csp-class-props"]["Csp class properties"][1]["Allowed namespaces"] 
+      and data["csp-class-props"]["Csp class properties"][1]["Allowed namespaces"]["_text"] ~= "" then
+      class["Namespace options"] = data["csp-class-props"]["Csp class properties"][1]["Allowed namespaces"]["_text"]
     else 
       class["Namespace options"] = frame:preprocess("(Main){{#if:{{#spaces:}}|,{{#spaces:}} }}")
     end

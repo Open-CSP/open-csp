@@ -14,10 +14,10 @@ example
 p.get("Wiki:Class definition/Application page")
 
 defines data table with subtables:
-data["ws-base-props"] 		slotdata
-data["ws-class-props"]		slotdata
-data["ws-data"]				slotdata
-  ["CspParameterDefinitions"]  default and additional values are added to the values from the ws-data slot
+data["csp-base-props"] 		slotdata
+data["csp-class-props"]		slotdata
+data["csp-data"]				slotdata
+  ["CspParameterDefinitions"]  default and additional values are added to the values from the csp-data slot
     ["name"]
     ["propertyName"]
     ["required"]
@@ -40,7 +40,7 @@ data["var"] 					variables defined through this module
   ["subheaderTemplate"]			full pagename of subheader template, defaults to "Template:Csp default subheader"
   ["subheaderTemplateName"]		pagename of subheader template, for example "Csp default subheader" or "Csp custom subheader/Person"
   ["pagetitleFormat"]			"title" if set to "title", else default to "next_available"
-  ["hasParameterDefinitions"]	"yes" or "no" depending on whether data["ws-data"]["CspParameterDefinitions"] exists
+  ["hasParameterDefinitions"]	"yes" or "no" depending on whether data["csp-data"]["CspParameterDefinitions"] exists
   ["hasFooter"]					"true" or "false", true if "footer" is found in the "Layout areas" parameter and footer template is not empty.
   ["hasSidebar"]				"true" or "false", true if "sidebar" is found in the "Layout areas" parameter
   ["hasSubheader"]				"true" or "false", true if "sub-header" is found in the "Layout areas" parameter
@@ -57,15 +57,15 @@ function p.get(page,contentPageData)
   
   -- get slot data for each slot and add to data table
   local data = {}
-  for slot in string.gmatch("ws-base-props,ws-class-props,ws-data", '([^,]+)') do
+  for slot in string.gmatch("csp-base-props,csp-class-props,csp-data", '([^,]+)') do
       local slotData = CspFunctions.getSlotData(page,slot)
       if slotData == nil then slotData = "" end 
       data[slot] = slotData
   end
   
   -- return if class is not "Class definition"
-  if data["ws-base-props"]["Base properties"] == nil then return end
-  if data["ws-base-props"]["Base properties"][1]["Class"]["_text"] ~= "Class definition" then return end
+  if data["csp-base-props"]["Base properties"] == nil then return end
+  if data["csp-base-props"]["Base properties"][1]["Class"]["_text"] ~= "Class definition" then return end
 
   local variables = {}
   
@@ -76,48 +76,48 @@ function p.get(page,contentPageData)
 
   local basePropsTemplate, classPropsTemplate, footerTemplate, sidebarTemplate, subheaderTemplate
   -- get basePropsTemplate or set default
-  if data["ws-class-props"]["Csp class properties"][1]["Base properties template"] then
-    basePropsTemplate = data["ws-class-props"]["Csp class properties"][1]["Base properties template"]["_text"]
+  if data["csp-class-props"]["Csp class properties"][1]["Base properties template"] then
+    basePropsTemplate = data["csp-class-props"]["Csp class properties"][1]["Base properties template"]["_text"]
   end
   if basePropsTemplate == nil or basePropsTemplate == "" then basePropsTemplate = "Template:Base properties" end
   -- get classPropsTemplate or set default
-  if data["ws-class-props"]["Csp class properties"][1]["Page properties template"] then
-    classPropsTemplate = data["ws-class-props"]["Csp class properties"][1]["Page properties template"]["_text"]
+  if data["csp-class-props"]["Csp class properties"][1]["Page properties template"] then
+    classPropsTemplate = data["csp-class-props"]["Csp class properties"][1]["Page properties template"]["_text"]
   end
   if classPropsTemplate == nil or classPropsTemplate == "" then 
     classPropsTemplate = "Template:Csp class properties" 
   end
   -- get footerTemplate or set default
-  if data["ws-class-props"]["Csp class properties"][1]["Footer template"] then
-    footerTemplate = data["ws-class-props"]["Csp class properties"][1]["Footer template"]["_text"]
+  if data["csp-class-props"]["Csp class properties"][1]["Footer template"] then
+    footerTemplate = data["csp-class-props"]["Csp class properties"][1]["Footer template"]["_text"]
   end
   if footerTemplate == nil or footerTemplate == "" then 
     footerTemplate = ""
   end
   -- get sidebarTemplate or set default
-  if data["ws-class-props"]["Csp class properties"][1]["Sidebar template"] then
-    sidebarTemplate = data["ws-class-props"]["Csp class properties"][1]["Sidebar template"]["_text"]
+  if data["csp-class-props"]["Csp class properties"][1]["Sidebar template"] then
+    sidebarTemplate = data["csp-class-props"]["Csp class properties"][1]["Sidebar template"]["_text"]
   end
   if sidebarTemplate == nil or sidebarTemplate == "" then 
     sidebarTemplate = "Template:Csp default sidebar"
   end
   -- get subheaderTemplate or set default
-  if data["ws-class-props"]["Csp class properties"][1]["Sub header template"] then
-    subheaderTemplate = data["ws-class-props"]["Csp class properties"][1]["Sub header template"]["_text"]
+  if data["csp-class-props"]["Csp class properties"][1]["Sub header template"] then
+    subheaderTemplate = data["csp-class-props"]["Csp class properties"][1]["Sub header template"]["_text"]
   end
   if subheaderTemplate == nil or subheaderTemplate == "" then 
     subheaderTemplate = "Template:Csp default subheader"
   end
   
-  local pagetitleFormat = data["ws-class-props"]["Csp class properties"][1]["Pagetitle format"]["_text"]
+  local pagetitleFormat = data["csp-class-props"]["Csp class properties"][1]["Pagetitle format"]["_text"]
   if pagetitleFormat ~= "title" then pagetitleFormat = "next_available" end
   
   local layoutAreas = ""
   local hasFooter = "false"
   local hasSidebar = "false"
   local hasSubheader = "false"
-  if data["ws-class-props"]["Csp class properties"][1]["Layout areas"] then
-    layoutAreas = data["ws-class-props"]["Csp class properties"][1]["Layout areas"]["_text"]
+  if data["csp-class-props"]["Csp class properties"][1]["Layout areas"] then
+    layoutAreas = data["csp-class-props"]["Csp class properties"][1]["Layout areas"]["_text"]
     for component in string.gmatch(layoutAreas, '([^ \'"]+)') do
       if component == "sidebar" then
         hasSidebar = "true"
@@ -144,13 +144,13 @@ function p.get(page,contentPageData)
   variables["hasSidebar"] = hasSidebar
   variables["hasSubheader"] = hasSubheader
   
-  -- loop through ws-data CspParameterDefinitions to add default values
+  -- loop through csp-data CspParameterDefinitions to add default values
   -- also check for custom fields
   variables["hasParameterDefinitions"] = "no"
   local customFields = {}
-  if data["ws-data"]["CspParameterDefinitions"] ~= nil then
+  if data["csp-data"]["CspParameterDefinitions"] ~= nil then
     variables["hasParameterDefinitions"] = "yes"
-    for i, v in ipairs (data["ws-data"]["CspParameterDefinitions"]) do
+    for i, v in ipairs (data["csp-data"]["CspParameterDefinitions"]) do
       -- loop through fields to check for custom ones
       local defaultFields = {["name"]=true,["propertyName"]=true,["allowedVelues"]=true}
       
@@ -171,36 +171,36 @@ function p.get(page,contentPageData)
         end
       end
       
-      local name = data["ws-data"]["CspParameterDefinitions"][i]["name"]
-      local propertyName = data["ws-data"]["CspParameterDefinitions"][i]["propertyName"]
-      local slot = data["ws-data"]["CspParameterDefinitions"][i]["slot"]
-      local value = data["ws-data"]["CspParameterDefinitions"][i]["value"]
+      local name = data["csp-data"]["CspParameterDefinitions"][i]["name"]
+      local propertyName = data["csp-data"]["CspParameterDefinitions"][i]["propertyName"]
+      local slot = data["csp-data"]["CspParameterDefinitions"][i]["slot"]
+      local value = data["csp-data"]["CspParameterDefinitions"][i]["value"]
       
       -- set default values when necessary
       if propertyName == nil or propertyName == "" then
         propertyName = name
-        data["ws-data"]["CspParameterDefinitions"][i]["propertyName"] = propertyName
+        data["csp-data"]["CspParameterDefinitions"][i]["propertyName"] = propertyName
       end
 
       if slot == nil or slot == "" then
-        slot = "ws-class-props"
-        data["ws-data"]["CspParameterDefinitions"][i]["slot"] = slot
+        slot = "csp-class-props"
+        data["csp-data"]["CspParameterDefinitions"][i]["slot"] = slot
       end
       
       -- add slotTemplate, so this can be used more easily in for example _edit in a form
       local slotTemplate = ""
-      if slot == "ws-base-props" then
+      if slot == "csp-base-props" then
         slotTemplate =  "Base properties"
       else
         slotTemplate =  "Csp class properties"
       end
-      data["ws-data"]["CspParameterDefinitions"][i]["slotTemplate"] = slotTemplate
+      data["csp-data"]["CspParameterDefinitions"][i]["slotTemplate"] = slotTemplate
       
       -- add value from contentPageData if possible
       if type(contentPageData) == "table" then
         if contentPageData[slot] and contentPageData[slot][slotTemplate] and contentPageData[slot][slotTemplate][1][name] then
           local value = contentPageData[slot][slotTemplate][1][name]["_text"]
-          data["ws-data"]["CspParameterDefinitions"][i]["value"] = value
+          data["csp-data"]["CspParameterDefinitions"][i]["value"] = value
         end
       end
   
@@ -259,12 +259,12 @@ function p.set(frame)
   
   -- get pageData (i.e. slotdata from page)
   local pageData = {}
-  pageData["ws-base-props"] = mw.slots.slotData("ws-base-props",page)
-  pageData["ws-class-props"] = mw.slots.slotData("ws-class-props",page)
+  pageData["csp-base-props"] = mw.slots.slotData("csp-base-props",page)
+  pageData["csp-class-props"] = mw.slots.slotData("csp-class-props",page)
   -- get class from pageData
   local class = ""
-  if pageData and pageData["ws-base-props"] and pageData["ws-base-props"]["Base properties"] and pageData["ws-base-props"]["Base properties"][1]["Class"] then
-    class = pageData["ws-base-props"]["Base properties"][1]["Class"]["_text"]
+  if pageData and pageData["csp-base-props"] and pageData["csp-base-props"]["Base properties"] and pageData["csp-base-props"]["Base properties"][1]["Class"] then
+    class = pageData["csp-base-props"]["Base properties"][1]["Class"]["_text"]
   else
     return
   end
@@ -296,15 +296,15 @@ function p.set(frame)
     return result
   else
     -- else set default properties based on a loop through CspParameterDefinitions in classData
-    if classData["ws-data"]["CspParameterDefinitions"] == nil then return end
+    if classData["csp-data"]["CspParameterDefinitions"] == nil then return end
     local properties = {}
     -- properties table will be filled through a loop with the following structure:
     -- single value properties: properties["propertyName"] = "propertyValue"
     -- multiple value properties: properties["propertyName"] = {"propertyValue1","propertyValue2","propertyValue3"}
-    -- only parameters for the ws-class-props slot are added to properties
-    for i, parameter in ipairs (classData["ws-data"]["CspParameterDefinitions"]) do    
-      -- check if the value exists in pageData and if slot equals ws-class-props and propertyName does not equal "(none)"
-      if parameter["slot"] == "ws-class-props" and pageData[parameter["slot"]] and pageData[parameter["slot"]][parameter["slotTemplate"]]
+    -- only parameters for the csp-class-props slot are added to properties
+    for i, parameter in ipairs (classData["csp-data"]["CspParameterDefinitions"]) do    
+      -- check if the value exists in pageData and if slot equals csp-class-props and propertyName does not equal "(none)"
+      if parameter["slot"] == "csp-class-props" and pageData[parameter["slot"]] and pageData[parameter["slot"]][parameter["slotTemplate"]]
         and parameter["propertyName"] ~= "(none)" and pageData[parameter["slot"]][parameter["slotTemplate"]][1][parameter["name"]]  then
         -- proceed to add the value to the properties table
         local propertyValue = pageData[parameter["slot"]][parameter["slotTemplate"]][1][parameter["name"]]["_text"]

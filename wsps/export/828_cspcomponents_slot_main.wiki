@@ -6,12 +6,12 @@ local p = {}
 --[[
 function p.parseComponentIfApplicable(frame)
 
-Parse component for given page. Parse the component template specified by the class definition data, or fall back to default if class definition does not have "Class" in the ws-base-props slot.
+Parse component for given page. Parse the component template specified by the class definition data, or fall back to default if class definition does not have "Class" in the csp-base-props slot.
 
 Frame arguments used:
 - component : (sidebar / subheader / footer)
 - page : (pagename) page for which the component should be parsed, defaults to current page
-- defaultForClassDefinitionWithoutSlots : (wikitext) this will be parsed instead of a component template, when the class definition does not have "Class" in the ws-base-props slot (as it's then assumed to be an older class definition, from before CSP 1.8.0)
+- defaultForClassDefinitionWithoutSlots : (wikitext) this will be parsed instead of a component template, when the class definition does not have "Class" in the csp-base-props slot (as it's then assumed to be an older class definition, from before CSP 1.8.0)
 
 debug console test:
 =p.parseComponentIfApplicable(mw.getCurrentFrame():newChild{title="whatever",args={[1]="sidebar",["page"]="Template:Sidebar item",["defaultForClassDefinitionWithoutSlots"]="{{#time:r|now}}"}})
@@ -31,13 +31,13 @@ function p.parseComponentIfApplicable(frame)
   
   -- get pageData (i.e. slotdata from page)
   local pageData = {}
-  pageData["ws-base-props"] = mw.slots.slotData("ws-base-props",page)
-  pageData["ws-class-props"] = mw.slots.slotData("ws-class-props",page)
-  pageData["ws-data"] = mw.slots.slotData("ws-data",page)
+  pageData["csp-base-props"] = mw.slots.slotData("csp-base-props",page)
+  pageData["csp-class-props"] = mw.slots.slotData("csp-class-props",page)
+  pageData["csp-data"] = mw.slots.slotData("csp-data",page)
   -- get class from pageData
   local class = ""
-  if pageData and pageData["ws-base-props"] and pageData["ws-base-props"]["Base properties"] and pageData["ws-base-props"]["Base properties"][1]["Class"] then
-    class = pageData["ws-base-props"]["Base properties"][1]["Class"]["_text"]
+  if pageData and pageData["csp-base-props"] and pageData["csp-base-props"]["Base properties"] and pageData["csp-base-props"]["Base properties"][1]["Class"] then
+    class = pageData["csp-base-props"]["Base properties"][1]["Class"]["_text"]
   else
     return
   end
@@ -46,9 +46,9 @@ function p.parseComponentIfApplicable(frame)
   local classDefinitionPage = CspFunctions.ClassToClassDefinitionPage{["args"]={class}}
   local classData = ClassDefinitionData.get(classDefinitionPage,pageData)
   
-  -- if classData contains a Class value in ws-base-props, get template from classData and parse it. Else fall back to default.
+  -- if classData contains a Class value in csp-base-props, get template from classData and parse it. Else fall back to default.
   local result=""
-  if classData and classData["ws-base-props"] and classData["ws-base-props"]["Base properties"] and classData["ws-base-props"]["Base properties"][1]["Class"] then
+  if classData and classData["csp-base-props"] and classData["csp-base-props"]["Base properties"] and classData["csp-base-props"]["Base properties"][1]["Class"] then
     -- check if the component should be parsed, else return
     local hasComponent
     if component == "sidebar" then 

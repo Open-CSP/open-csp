@@ -32,8 +32,8 @@ function p.get( frame )
   end 
   mw.log('page = ' .. page)
   
-  -- get version history instances from ws-base-props slot
-  local baseProps = mw.slots.slotTemplates( 'ws-base-props', page )
+  -- get version history instances from csp-base-props slot
+  local baseProps = mw.slots.slotTemplates( 'csp-base-props', page )
   if baseProps == nil then return mw.af.export(result) end
   local versionHistory = baseProps['Base properties'][1]['Version history']
   if versionHistory == nil then return mw.af.export(result) end

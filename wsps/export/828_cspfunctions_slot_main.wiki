@@ -11,8 +11,8 @@ function arguments:
 
 debug console tests:
 p.getSlotData() 
-p.getSlotData('Wiki:Testpagina sidebar code','ws-data') 
-p.getSlotData('Template:Sidebar item','ws-class-props') 
+p.getSlotData('Wiki:Testpagina sidebar code','csp-data') 
+p.getSlotData('Template:Sidebar item','csp-class-props') 
 --]]
 function p.getSlotData(page,slot)
   	-- get page from function arguments or default to current page
@@ -37,21 +37,21 @@ end
 function p.afExportSlots(frame)
 
 frame args:
-slots 	(text)	comma-separated list of slots, defaults to "ws-class-props,ws-base-props,ws-data"
+slots 	(text)	comma-separated list of slots, defaults to "csp-class-props,csp-base-props,csp-data"
 page 	(text)	defaults to current page
 
 {{#invoke:CspFunctions|afExportSlots}}
-{{#invoke:CspFunctions|afExportSlots|page=Template:Sidebar item|slots=ws-base-props,ws-class-props}}
+{{#invoke:CspFunctions|afExportSlots|page=Template:Sidebar item|slots=csp-base-props,csp-class-props}}
 
 debug console tests:
-=p.afExportSlots(mw.getCurrentFrame():newChild{title="whatever",args={["page"]="Template:Sidebar item",["slots"]="ws-base-props,ws-class-props"}}) 
+=p.afExportSlots(mw.getCurrentFrame():newChild{title="whatever",args={["page"]="Template:Sidebar item",["slots"]="csp-base-props,csp-class-props"}}) 
 =p.afExportSlots(mw.getCurrentFrame():newChild{title="whatever",args={["addClassDefinition"]=""}}) 
 --]]
 function p.afExportSlots(frame)
 
 -- get slots and page from frame args or set default value
 local slots = frame.args["slots"]
-if slots == nil or slots == "" then slots = "ws-class-props,ws-base-props,ws-data" end
+if slots == nil or slots == "" then slots = "csp-class-props,csp-base-props,csp-data" end
 local page = frame.args["page"]
 if page == nil or page == "" then page = mw.title.getCurrentTitle().fullText end
   
@@ -71,8 +71,8 @@ end
 --[[
 function p.getSlotContent(frame)
 
-{{#invoke:CspFunctions|getSlotContent|page=Template:Sidebar item|slot=ws-class-props}}
-{{#invoke:CspFunctions|getSlotContent|page=Template:Sidebar item|slot=ws-class-props|nowiki}}
+{{#invoke:CspFunctions|getSlotContent|page=Template:Sidebar item|slot=csp-class-props}}
+{{#invoke:CspFunctions|getSlotContent|page=Template:Sidebar item|slot=csp-class-props|nowiki}}
 
 This function returns a string with the exact content of a slot.
 
@@ -83,8 +83,8 @@ frame arguments:
 
 debug console tests:
 p.getSlotContent() 
-p.getSlotContent{args={['page']='Wiki:Testpagina sidebar code',['slot']='ws-data'}}
-p.getSlotContent{args={['page']='Template:Sidebar item',['slot']='ws-class-props'}}
+p.getSlotContent{args={['page']='Wiki:Testpagina sidebar code',['slot']='csp-data'}}
+p.getSlotContent{args={['page']='Template:Sidebar item',['slot']='csp-class-props'}}
 --]]
 function p.getSlotContent(frame)
   	-- get page from frame arguments or default to current page

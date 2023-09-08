@@ -11,17 +11,17 @@ This is the '''Class definition subheader''' template. It should be called in th
 -->{{#af_foreach:{{#invoke:ClassDefinitionData|afExport}}||$data|<!--
 
 --><h2>Class</h2>
-<p>'''{{#af_get:{{{$data}}}|ws-class-props|Csp class properties|1|Defines class|_text}}''' with pagetitle format {{#af_get:{{{$data}}}|var|pagetitleFormat}}</p><!--
--->{{#if:{{#af_get:{{{$data}}}|ws-class-props|Csp class properties|1|Allowed namespaces|_text}} |<p>Allowed namespaces:</p>
-<ul>{{#af_join:{{#af_map:{{#af_split:{{#af_get:{{{$data}}}|ws-class-props|Csp class properties|1|Allowed namespaces|_text}}|,}}|@@|<li>{{{@@}}}</li>}}|\n}}</ul>
+<p>'''{{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Defines class|_text}}''' with pagetitle format {{#af_get:{{{$data}}}|var|pagetitleFormat}}</p><!--
+-->{{#if:{{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Allowed namespaces|_text}} |<p>Allowed namespaces:</p>
+<ul>{{#af_join:{{#af_map:{{#af_split:{{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Allowed namespaces|_text}}|,}}|@@|<li>{{{@@}}}</li>}}|\n}}</ul>
 }}<!--
--->{{#if:{{#af_get:{{{$data}}}|ws-class-props|Csp class properties|1|Short description|_text}}|<p>{{#af_get:{{{$data}}}|ws-class-props|Csp class properties|1|Short description|_text}}</p> }}<!--
---><p>Has version history: {{#ifeq:{{#af_get:{{{$data}}}|ws-class-props|Csp class properties|1|Has version history|_text}}|true |'''true''' |false}}</p>
+-->{{#if:{{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Short description|_text}}|<p>{{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Short description|_text}}</p> }}<!--
+--><p>Has version history: {{#ifeq:{{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Has version history|_text}}|true |'''true''' |false}}</p>
 
 <h2>Layout</h2>
-* Areas : {{#af_get:{{{$data}}}|ws-class-props|Csp class properties|1|Layout areas|_text}}
-* Columns : {{#af_get:{{{$data}}}|ws-class-props|Csp class properties|1|Layout columns|_text}}
-* Rows : {{#af_get:{{{$data}}}|ws-class-props|Csp class properties|1|Layout rows|_text}}
+* Areas : {{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Layout areas|_text}}
+* Columns : {{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Layout columns|_text}}
+* Rows : {{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Layout rows|_text}}
 
 <h2>Storage templates</h2>
 * Base properties: [[{{#af_get:{{{$data}}}|var|basePropsTemplate}}]]
@@ -47,7 +47,7 @@ This is the '''Class definition subheader''' template. It should be called in th
 ! Allowed values
 ! Required
 ! Multiple
-{{#af_foreach:{{#af_get:{{{$data}}}|ws-data|CspParameterDefinitions}}||$parameter|<tr>
+{{#af_foreach:{{#af_get:{{{$data}}}|csp-data|CspParameterDefinitions}}||$parameter|<tr>
 <td>{{#af_get:{{{$parameter}}}|name}}</td>
 <td>{{#switch:{{#af_get:{{{$parameter}}}|propertyName}} 
   |(none)=(none)
@@ -80,14 +80,14 @@ This is the '''Class definition subheader''' template. It should be called in th
 * '''multiple''' is only used by [[Template:Csp formfield/token]] and [[Template:Csp formfield/ask token]]
 </div>
 <form class="csp-parameter-definitions">
-<_edit target="{{FULLPAGENAME}}" mwslot="ws-data" format="json" template="jsonk|CspParameterDefinitions" formfield="CspParameterInstances" />
-<_instance name="CspParameterInstances" format="json" default-content="{{#slotdata:ws-data|{{FULLPAGENAME}}|CspParameterDefinitions}}" ><!--
+<_edit target="{{FULLPAGENAME}}" mwslot="csp-data" format="json" template="jsonk|CspParameterDefinitions" formfield="CspParameterInstances" />
+<_instance name="CspParameterInstances" format="json" default-content="{{#slotdata:csp-data|{{FULLPAGENAME}}|CspParameterDefinitions}}" ><!--
   --><div><!--
   --><input type="text" name="name" placeholder="parameter name" title="Name" /><!--
   --><input type="text" name="propertyName" placeholder="property name" title="Property name" /><!--
   --><select name="slot" placeholder="choose a slot" title="Slotname"><!--
-    --><option value="ws-class-props">ws-class-props</option><!--
-    --><option value="ws-base-props">ws-base-props</option><!--
+    --><option value="csp-class-props">csp-class-props</option><!--
+    --><option value="csp-base-props">csp-base-props</option><!--
   --></select><!--
   --><input type="text" name="allowedValues" placeholder="Allowed values" title="Allowed values" /><!--
   --><select name="required" placeholder="required?" title="Required" ><!--

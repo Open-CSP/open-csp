@@ -27,7 +27,7 @@ This is the '''Show version history''' template. It should be called in the foll
 |ModalHeading=New version
 |BodyText=<form action="addToWiki">
 
-<_edit target="{{#if:{{{Page|}}} |{{{Page|}}} |{{PAGEID}} }}" template="Base properties" formfield="Version history" mwslot="ws-base-props" />
+<_edit target="{{#if:{{{Page|}}} |{{{Page|}}} |{{PAGEID}} }}" template="Base properties" formfield="Version history" mwslot="csp-base-props" />
 
 <label for="new-version-minor"><input type="radio" id="new-version-minor" name="Version history[]" required="required" value="{{subst:Add version history item|Type=minor|Description=" checked="checked" /> Minor version update</label><br>
 <label for="new-version-major"><input type="radio" id="new-version-major" name="Version history[]" required="required" value="{{subst:Add version history item|Type=major|Description=" /> Major version update</label>
