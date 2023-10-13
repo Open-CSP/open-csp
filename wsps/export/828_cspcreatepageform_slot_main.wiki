@@ -46,7 +46,7 @@ function p.data(classes,frame)
   -- else loop through class variable to find class definition pages
   else
     for class in string.gmatch(classes,"([^,]+)") do
-      local page = CspFunctions.ClassToClassDefinitionPage{args={"class"}}
+      local page = CspFunctions.ClassToClassDefinitionPage{args={class}}
       local classData = {["Class"] = class,["Page"] = page}
       classOptions[#classOptions + 1] = classData
       classesCount = classesCount + 1
