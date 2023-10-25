@@ -21,7 +21,7 @@
     "open-csp/w-s-spaces": "^2.2",
     "open-csp/wiki-search": "dev-REL1_39",
     "wikibase-solutions/array-functions": "v1.4.2",
-    "wikibase-solutions/c-s-p-resources": "dev-open-csp-2-0",
+    "wikibase-solutions/c-s-p-resources": "v2.0.0",
     "wikibase-solutions/wiki-search-front": "v2.0.4"
   },
   "repositories": {
