@@ -15,13 +15,13 @@
     "mediawiki/user-functions": "dev-REL1_39",
     "mediawiki/widgets": "dev-REL1_39",
     "elasticsearch/elasticsearch": "^6.8",
+    "open-csp/flex-form": "dev-REL1_39",
+    "open-csp/page-sync": "dev-REL1_39",
     "open-csp/w-s-slots": "^4.0",
     "open-csp/w-s-spaces": "^2.2",
     "open-csp/wiki-search": "dev-REL1_39",
     "wikibase-solutions/array-functions": "v1.4.2",
-    "wikibase-solutions/flex-form": "dev-REL1_39",
     "wikibase-solutions/c-s-p-resources": "dev-open-csp-2-0",
-    "wikibase-solutions/page-sync": "dev-REL1_39",
     "wikibase-solutions/wiki-search-front": "v2.0.4"
   },
   "repositories": {
