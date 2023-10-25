@@ -1,0 +1,14 @@
+{{Csp class properties
+|Defines class=Class definition
+|Pagetitle format=title
+|Allowed namespaces=Wiki
+|Layout areas='sub-header sidebar' 'main sidebar'
+|Layout columns=3fr 1fr
+|Layout rows=auto 1fr
+|Page properties template=Template:Class definition properties
+|Sub header template=Template:Class definition subheader
+|Sidebar template=Template:Class definition sidebar
+|Short description=
+|Has version history=
+|Footer template=
+}}

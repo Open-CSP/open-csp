@@ -1,0 +1,4 @@
+{{Base properties
+|Title=Class definition
+|Class=Class definition
+}}

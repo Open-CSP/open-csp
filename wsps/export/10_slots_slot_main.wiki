@@ -1,28 +1,50 @@
-<noinclude>{{CSP alert}}</noinclude><includeonly>{{#vardefine:@page |{{#urldecode:{{#urlget:page}} }} }}<!--
--->{{#if:{{#var:@page}} |Slots of [[{{#var:@page}}]]
+<noinclude>
+<pre>
+{{Slots}}
+</pre>
 
-ws-base-props
-{{#tag:pre |{{#slot:ws-base-props |{{#var:@page}} }} }}
+uses url parameters:
+* page (contains the pagename for which slots should be shown)
 
-<wsform action="addToWiki">
-<wscreate mwwrite="{{#var:@page}}" mwtemplate="wsnone" mwslot="ws-base-props" formfield="Content" />
+</noinclude><includeonly>{{#af_foreach:{{#af_list:{{#af_object:page={{#urldecode:{{#urlget:page}} }} }} }}||$var|<!--
 
-<wsfield type="textarea" rows="10" name="Content">{{#slot:ws-base-props |{{#var:@page}} }}</wsfield>
+-->{{#if:{{#af_get:{{{$var}}}|page}} |Slots of [[{{#af_get:{{{$var}}}|page}}]]
 
-<wsfield type="submit" value="Save" />
-</wsform>
+csp-base-props
+{{#tag:pre |{{#slot:csp-base-props |{{#af_get:{{{$var}}}|page}} }} }}
 
-ws-class-props
-{{#tag:pre |{{#slot:ws-class-props |{{#var:@page}} }} }}
+<_form action="addToWiki" mwreturn="{{fullurl:{{FULLPAGENAME}}|page={{urlencode:{{#af_get:{{{$var}}}|page}} }} }}" >
+<_create mwwrite="{{#af_get:{{{$var}}}|page}}" mwtemplate="wsnone" mwslot="csp-base-props" formfield="Content" />
 
-<wsform action="addToWiki">
-<wscreate mwwrite="{{#var:@page}}" mwtemplate="wsnone" mwslot="ws-class-props" formfield="Content" />
+<_input type="textarea" rows="10" name="Content">{{#invoke:CspFunctions|getSlotContent|page={{#af_get:{{{$var}}}|page}}|slot=csp-base-props|nowiki}}</_input>
 
-<wsfield type="textarea" rows="10" name="Content">{{#slot:ws-class-props |{{#var:@page}} }}</wsfield>
+<_input type="submit" value="Save" />
+</_form>
 
-<wsfield type="submit" value="Save" />
-</wsform>
+csp-class-props
+{{#tag:pre |{{#slot:csp-class-props |{{#af_get:{{{$var}}}|page}} }} }}
+
+<_form action="addToWiki" mwreturn="{{fullurl:{{FULLPAGENAME}}|page={{urlencode:{{#af_get:{{{$var}}}|page}} }} }}" >
+<_create mwwrite="{{#af_get:{{{$var}}}|page}}" mwtemplate="wsnone" mwslot="csp-class-props" formfield="Content" />
+
+<_input type="textarea" rows="10" name="Content">{{#invoke:CspFunctions|getSlotContent|page={{#af_get:{{{$var}}}|page}}|slot=csp-class-props|nowiki}}</_input>
+
+<_input type="submit" value="Save" />
+</_form>
+
+csp-data
+{{#tag:pre |{{#slot:csp-data |{{#af_get:{{{$var}}}|page}} }} }}
+
+<_form action="addToWiki" mwreturn="{{fullurl:{{FULLPAGENAME}}|page={{urlencode:{{#af_get:{{{$var}}}|page}} }} }}" >
+<_create mwwrite="{{#af_get:{{{$var}}}|page}}" mwtemplate="wsnone" mwslot="csp-data" formfield="Content" />
+
+<_input type="textarea" rows="10" name="Content">{{#invoke:CspFunctions|getSlotContent|page={{#af_get:{{{$var}}}|page}}|slot=csp-data|nowiki}}</_input>
+
+<_input type="submit" value="Save" />
+</_form>
 |Please pass a url parameter 'page' to this page to display the slots for that page.
 
-eg. <code>/Wiki:Slots?page=Main Page</code>}}
-</includeonly>
+eg. <code>/Wiki:Slots?page=Main Page</code><!--
+
+-->}}<!-- end of #if
+-->}}<!-- end of #af_foreach --></includeonly>

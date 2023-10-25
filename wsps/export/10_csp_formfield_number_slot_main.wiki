@@ -1,0 +1,43 @@
+<noinclude>
+
+This is the '''Csp formfield/number''' template. It should be called in the following format:
+
+<pre>
+{{Csp formfield/number 
+|name= (text) 
+|required= (optional: "required")
+|value= (number) e.g. "7"
+|min= (optional: number) minimum value e.g. "0"
+|max= (optional: number) maximum value e.g. "10"
+|step= (optional: number) step bewteen value options e.g. "0.01" 
+}}
+</pre>
+
+== Example ==
+{{Csp formfield/number
+|name=Age
+|value=31
+}}
+{{Csp formfield/number
+|name=Age
+|value=7
+|min=18
+|step=0.5
+}}
+
+Related templates:
+{{#ask:[[~*Csp formfield/*]] 
+|mainlabel=Page
+|format=table 
+|sort=Title
+}}
+
+</noinclude><includeonly><input type="number" 
+name="{{{name|}}}"
+class="form-control" 
+required="{{{required|}}}"
+value="{{{value|}}}"
+min="{{{min|}}}"
+max="{{{max|}}}"
+step="{{{step|}}}"
+/></includeonly>

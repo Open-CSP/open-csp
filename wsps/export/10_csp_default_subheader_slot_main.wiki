@@ -1,0 +1,21 @@
+<noinclude>
+
+This is the '''Csp default subheader''' template. It should be called in the following format:
+
+<pre>
+{{Csp default subheader
+|$pageData= (Arrayfunctions export) slotdata of current page
+|$classData= (Arrayfunctions export) class definition data (if current page and related class definition have a class in csp-base-props)
+}}
+</pre>
+
+</noinclude><includeonly><!--
+
+--><div>{{#ifingroup:user |<span class="hide-when-ve-active" style="float:right">{{#widget:Button link |type=a |href={{fullurl:{{FULLPAGENAME}} |veaction=edit}} |buttontext={{int:csp-label-edit}} |class=btn btn-secondary}}</span> }}<!--
+--><h1>{{#if:{{#af_get:{{{$pageData}}}|csp-base-props|Base properties|1|Title|_text}}
+|{{#af_get:{{{$pageData}}}|csp-base-props|Base properties|1|Title|_text}}
+|{{#getdisplaytitle:{{FULLPAGENAME}} }} 
+}}</h1><!--
+--></div><!--
+
+--></includeonly>

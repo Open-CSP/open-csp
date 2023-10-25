@@ -1,0 +1,18 @@
+{{Base properties
+|Class=Application page
+|Title=Template:Add version history item
+|Version history={{Version history item 
+|Version number=1.2
+|Version description=replaced use of WSArrays with Lua function
+|Version date=2023-8-18 12:45:56
+}}{{Version history item 
+|Version number=1.1
+|Version description=replaced #regex with lua function
+|Version date=2023-8-18 12:05:12
+}}{{Version history item 
+|Version number=1.0
+|Version description=Initial version
+|Version date=2022-12-02 09:54:52
+}}
+}}
+}}

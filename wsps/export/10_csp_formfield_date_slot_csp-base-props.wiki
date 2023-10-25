@@ -1,0 +1,4 @@
+{{Base properties
+|Class=Application page
+|Title=Template:Csp formfield/date
+}}

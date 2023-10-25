@@ -1,0 +1,330 @@
+local CspFunctions = require('Module:CspFunctions')
+
+local p = {}
+
+--[[
+function p.get(page,contentPageData)
+
+arguments:
+- page = (string) class definition page, e.g. "Wiki:Class definition/Application page"
+- contentPageData = (optional: table) slotdata of a content page, with the same class that is defined by the class definition page, e.g. "Template:Csp sidebar tabs" 
+	if this is used, then values from contentPageData will be added to CspParameterDefinitions when possible.
+
+example
+p.get("Wiki:Class definition/Application page")
+
+defines data table with subtables:
+data["csp-base-props"] 		slotdata
+data["csp-class-props"]		slotdata
+data["csp-data"]				slotdata
+  ["CspParameterDefinitions"]  default and additional values are added to the values from the csp-data slot
+    ["name"]
+    ["propertyName"]
+    ["required"]
+    ["multiple"]
+    ["formfieldTemplate"]
+    ["allowedValues"]
+    ["slot"]
+    ["slotTemplate"]
+    ["displayTemplate"]
+    ["value"]
+data["var"] 					variables defined through this module
+  ["basePropsTemplate"]			full pagename of base properties template, defaults to "Template:Base properties"
+  ["basePropsTemplateName"]		pagename of base properties template, for example "Base properties"
+  ["classPropsTemplate"]		full pagename of class properties template, defaults to "Template:Csp class properties", for example "Template:Person properties"
+  ["classPropsTemplateName"]	pagename of class properties template, for example "Person properties"
+  ["footerTemplate"]			full pagename of footer template, for example "Template:Csp custom footer/Person". Defaults to "".
+  ["sidebarTemplateName"]		pagename of footer template, for example Csp custom footer/Person". Defaults to "".
+  ["sidebarTemplate"]			full pagename of sidebar template, defaults to "Template:Csp default sidebar"
+  ["sidebarTemplateName"]		pagename of sidebar template, for example "Csp default sidebar" or "Csp custom sidebar/Person"
+  ["subheaderTemplate"]			full pagename of subheader template, defaults to "Template:Csp default subheader"
+  ["subheaderTemplateName"]		pagename of subheader template, for example "Csp default subheader" or "Csp custom subheader/Person"
+  ["pagetitleFormat"]			"title" if set to "title", else default to "next_available"
+  ["hasParameterDefinitions"]	"yes" or "no" depending on whether data["csp-data"]["CspParameterDefinitions"] exists
+  ["hasFooter"]					"true" or "false", true if "footer" is found in the "Layout areas" parameter and footer template is not empty.
+  ["hasSidebar"]				"true" or "false", true if "sidebar" is found in the "Layout areas" parameter
+  ["hasSubheader"]				"true" or "false", true if "sub-header" is found in the "Layout areas" parameter
+  ["customParameterDefinitionFields"] contains subtable with custom fields as keys
+
+debug console tests:
+p.get("Wiki:Class definition/Class definition")
+--]]
+function p.get(page,contentPageData)
+  -- get page from frame args or default to current page
+  if page == nil or page == '' then
+    page = mw.title.getCurrentTitle().fullText
+  end
+  
+  -- get slot data for each slot and add to data table
+  local data = {}
+  for slot in string.gmatch("csp-base-props,csp-class-props,csp-data", '([^,]+)') do
+      local slotData = CspFunctions.getSlotData(page,slot)
+      if slotData == nil then slotData = "" end 
+      data[slot] = slotData
+  end
+  
+  -- return if class is not "Class definition"
+  if data["csp-base-props"]["Base properties"] == nil then return end
+  if data["csp-base-props"]["Base properties"][1]["Class"]["_text"] ~= "Class definition" then return end
+
+  local variables = {}
+  
+  -- function to get pagename from full pagename (removes namespace by removing everything up to and including the first ":")
+  local function pagename(fullpagename)
+    return fullpagename:gsub("[^:]*:","",1)
+  end
+
+  local basePropsTemplate, classPropsTemplate, footerTemplate, sidebarTemplate, subheaderTemplate
+  -- get basePropsTemplate or set default
+  if data["csp-class-props"]["Csp class properties"][1]["Base properties template"] then
+    basePropsTemplate = data["csp-class-props"]["Csp class properties"][1]["Base properties template"]["_text"]
+  end
+  if basePropsTemplate == nil or basePropsTemplate == "" then basePropsTemplate = "Template:Base properties" end
+  -- get classPropsTemplate or set default
+  if data["csp-class-props"]["Csp class properties"][1]["Page properties template"] then
+    classPropsTemplate = data["csp-class-props"]["Csp class properties"][1]["Page properties template"]["_text"]
+  end
+  if classPropsTemplate == nil or classPropsTemplate == "" then 
+    classPropsTemplate = "Template:Csp class properties" 
+  end
+  -- get footerTemplate or set default
+  if data["csp-class-props"]["Csp class properties"][1]["Footer template"] then
+    footerTemplate = data["csp-class-props"]["Csp class properties"][1]["Footer template"]["_text"]
+  end
+  if footerTemplate == nil or footerTemplate == "" then 
+    footerTemplate = ""
+  end
+  -- get sidebarTemplate or set default
+  if data["csp-class-props"]["Csp class properties"][1]["Sidebar template"] then
+    sidebarTemplate = data["csp-class-props"]["Csp class properties"][1]["Sidebar template"]["_text"]
+  end
+  if sidebarTemplate == nil or sidebarTemplate == "" then 
+    sidebarTemplate = "Template:Csp default sidebar"
+  end
+  -- get subheaderTemplate or set default
+  if data["csp-class-props"]["Csp class properties"][1]["Sub header template"] then
+    subheaderTemplate = data["csp-class-props"]["Csp class properties"][1]["Sub header template"]["_text"]
+  end
+  if subheaderTemplate == nil or subheaderTemplate == "" then 
+    subheaderTemplate = "Template:Csp default subheader"
+  end
+  
+  local pagetitleFormat = data["csp-class-props"]["Csp class properties"][1]["Pagetitle format"]["_text"]
+  if pagetitleFormat ~= "title" then pagetitleFormat = "next_available" end
+  
+  local layoutAreas = ""
+  local hasFooter = "false"
+  local hasSidebar = "false"
+  local hasSubheader = "false"
+  if data["csp-class-props"]["Csp class properties"][1]["Layout areas"] then
+    layoutAreas = data["csp-class-props"]["Csp class properties"][1]["Layout areas"]["_text"]
+    for component in string.gmatch(layoutAreas, '([^ \'"]+)') do
+      if component == "sidebar" then
+        hasSidebar = "true"
+      elseif component == "sub-header" then
+        hasSubheader = "true"
+      elseif component == "footer" then
+        hasFooter = "true"
+      end
+    end
+  end  
+  
+  variables["basePropsTemplate"] = basePropsTemplate
+  variables["basePropsTemplateName"] = pagename(basePropsTemplate)
+  variables["classPropsTemplate"] = classPropsTemplate
+  variables["classPropsTemplateName"] = pagename(classPropsTemplate)
+  variables["footerTemplate"] = footerTemplate
+  variables["footerTemplateName"] = pagename(footerTemplate)
+  variables["sidebarTemplate"] = sidebarTemplate
+  variables["sidebarTemplateName"] = pagename(sidebarTemplate)
+  variables["subheaderTemplate"] = subheaderTemplate
+  variables["subheaderTemplateName"] = pagename(subheaderTemplate)
+  variables["pagetitleFormat"] = pagetitleFormat
+  variables["hasFooter"] = hasFooter
+  variables["hasSidebar"] = hasSidebar
+  variables["hasSubheader"] = hasSubheader
+  
+  -- loop through csp-data CspParameterDefinitions to add default values
+  -- also check for custom fields
+  variables["hasParameterDefinitions"] = "no"
+  local customFields = {}
+  if data["csp-data"]["CspParameterDefinitions"] ~= nil then
+    variables["hasParameterDefinitions"] = "yes"
+    for i, v in ipairs (data["csp-data"]["CspParameterDefinitions"]) do
+      -- loop through fields to check for custom ones
+      local defaultFields = {["name"]=true,["propertyName"]=true,["allowedVelues"]=true}
+      
+      local defaultFields = {["name"] = true,
+    	["propertyName"] = true,
+    	["required"] = true,
+    	["multiple"] = true,
+   	 	["formfieldTemplate"] = true,
+    	["allowedValues"] = true,
+    	["slot"] = true,
+        ["showOnCreate"] = true,
+    	["displayTemplate"] = true,
+    	["value"] = true
+      }
+      for field,value in pairs(v) do
+        if defaultFields[field] ~= true then
+          customFields[field] = true
+        end
+      end
+      
+      local name = data["csp-data"]["CspParameterDefinitions"][i]["name"]
+      local propertyName = data["csp-data"]["CspParameterDefinitions"][i]["propertyName"]
+      local slot = data["csp-data"]["CspParameterDefinitions"][i]["slot"]
+      local value = data["csp-data"]["CspParameterDefinitions"][i]["value"]
+      
+      -- set default values when necessary
+      if propertyName == nil or propertyName == "" then
+        propertyName = name
+        data["csp-data"]["CspParameterDefinitions"][i]["propertyName"] = propertyName
+      end
+
+      if slot == nil or slot == "" then
+        slot = "csp-class-props"
+        data["csp-data"]["CspParameterDefinitions"][i]["slot"] = slot
+      end
+      
+      -- add slotTemplate, so this can be used more easily in for example _edit in a form
+      local slotTemplate = ""
+      if slot == "csp-base-props" then
+        slotTemplate =  "Base properties"
+      else
+        slotTemplate =  "Csp class properties"
+      end
+      data["csp-data"]["CspParameterDefinitions"][i]["slotTemplate"] = slotTemplate
+      
+      -- add value from contentPageData if possible
+      if type(contentPageData) == "table" then
+        if contentPageData[slot] and contentPageData[slot][slotTemplate] and contentPageData[slot][slotTemplate][1][name] then
+          local value = contentPageData[slot][slotTemplate][1][name]["_text"]
+          data["csp-data"]["CspParameterDefinitions"][i]["value"] = value
+        end
+      end
+  
+    end
+  end
+  
+  -- add extra subtable for "variables" derived from slotdata
+  variables["customParameterDefinitionFields"] = customFields
+  data["var"] = variables
+  
+  --mw.logObject(data)
+  return data
+end
+
+--[[
+function p.afExport(frame)
+
+frame args:
+page 	(text)	defaults to current page
+
+{{#invoke:ClassDefinitionData|afExport}}
+{{#invoke:ClassDefinitionData|afExport|page=Wiki:Class definition/Application page}}
+
+debug console tests:
+=p.afExport(mw.getCurrentFrame():newChild{title="whatever",args={["page"]="Wiki:Class definition/Application page"}})
+=p.afExport(mw.getCurrentFrame():newChild{title="whatever",args={}}) 
+--]]
+function p.afExport(frame)
+
+-- get slot data for each slot and add to data table
+local data = {}
+data[1] = p.get(frame.args["page"])
+  
+--mw.logObject(data) 
+return mw.af.export(data)
+end
+  
+--[[
+function p.set(frame)
+
+{{#invoke:ClassDefinitionData|set}}
+
+This function sets properties based on Class definition data, or alternatively parsed a properties template, when this function is called from a different template than the one specified in the class definition data. This function is used by the default "Csp class properties" template, but can also be used in custom property templates, which can be useful when you want default properties as well as add additional custom properties.
+
+debug console tests:
+=p.set(mw.getCurrentFrame():newChild{title="whatever",args={["page"]="Persoon_test/Tester"}})
+=p.set(mw.getCurrentFrame():newChild{title="Template:Csp class properties",args={["TextAreaInput"]="123",["TokenMultipleInput"]="Alpha,Charlie"}}:newChild{title="Module:ClassDefinitionData",args={["page"]="Persoon_test/Tester"}})
+--]]
+function p.set(frame)
+  
+-- get page from frame args or default to current page
+  local page = frame.args["page"]
+  if page == nil or page == '' then
+    page = mw.title.getCurrentTitle().fullText
+  end
+  
+  -- get pageData (i.e. slotdata from page)
+  local pageData = {}
+  pageData["csp-base-props"] = mw.slots.slotData("csp-base-props",page)
+  pageData["csp-class-props"] = mw.slots.slotData("csp-class-props",page)
+  -- get class from pageData
+  local class = ""
+  if pageData and pageData["csp-base-props"] and pageData["csp-base-props"]["Base properties"] and pageData["csp-base-props"]["Base properties"][1]["Class"] then
+    class = pageData["csp-base-props"]["Base properties"][1]["Class"]["_text"]
+  else
+    return
+  end
+  
+  -- get classData (i.e. slotdata and Class definition specific data from class definition page)
+  local classDefinitionPage = CspFunctions.ClassToClassDefinitionPage{["args"]={class}}
+  local classData = p.get(classDefinitionPage)
+  if classData == nil or classData == {}
+    then return "no classData"
+  end
+
+  -- check for custom properties template (i.e. a template that is different than the parent template this function is called from)
+  local parentTitle = frame:getParent():getTitle()
+  local classPropsTemplate = classData["var"]["classPropsTemplate"]
+  if parentTitle ~= classPropsTemplate and classPropsTemplate ~= "Template:Csp class properties" then
+    -- return if classPropsTemplate does not have an appropriate value
+    if classPropsTemplate == nil or classPropsTemplate == "" then return end
+    -- parse classPropsTemplate, pass all frame args as parameters, as well as afExport of pageData
+    -- first construct a new table with parent args, this is done by a loop rather than copying the parent args,
+    -- as copying made it impossible to add new table elements (like $pageData)
+    local propertyTemplateArgs = {}
+    for key,value in pairs(frame:getParent().args) do propertyTemplateArgs[key] = value end
+    propertyTemplateArgs["$pageData"] = mw.af.export(pageData)
+ 
+    local result = frame:expandTemplate {
+	  title = classPropsTemplate,
+      args = propertyTemplateArgs
+	}
+    return result
+  else
+    -- else set default properties based on a loop through CspParameterDefinitions in classData
+    if classData["csp-data"]["CspParameterDefinitions"] == nil then return end
+    local properties = {}
+    -- properties table will be filled through a loop with the following structure:
+    -- single value properties: properties["propertyName"] = "propertyValue"
+    -- multiple value properties: properties["propertyName"] = {"propertyValue1","propertyValue2","propertyValue3"}
+    -- only parameters for the csp-class-props slot are added to properties
+    for i, parameter in ipairs (classData["csp-data"]["CspParameterDefinitions"]) do    
+      -- check if the value exists in pageData and if slot equals csp-class-props and propertyName does not equal "(none)"
+      if parameter["slot"] == "csp-class-props" and pageData[parameter["slot"]] and pageData[parameter["slot"]][parameter["slotTemplate"]]
+        and parameter["propertyName"] ~= "(none)" and pageData[parameter["slot"]][parameter["slotTemplate"]][1][parameter["name"]]  then
+        -- proceed to add the value to the properties table
+        local propertyValue = pageData[parameter["slot"]][parameter["slotTemplate"]][1][parameter["name"]]["_text"]
+        if parameter["multiple"] == "true" then
+          -- split string into a table with separate values, split by commas (one or multiple) and remove potential spaces around the commas
+          propertyValue = mw.text.split(propertyValue,"%s*,+%s*")
+        end
+        -- add property name and value to the properties table
+        properties[parameter["propertyName"]] = propertyValue
+      end
+    end
+    -- set properties
+    mw.logObject(properties)
+    local result = mw.smw.set(properties)
+    -- check for errors
+    if result ~= true then
+      mw.smw.set({["CspError"] = result.error})
+      return "ERROR from Module:ClassDefinitionData, p.set, mw.smw.set = " .. result.error
+    end  
+  end
+end
+    
+return p

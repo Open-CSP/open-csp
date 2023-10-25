@@ -1,1 +1,1 @@
-{"filename":"274_searchbar","pagetitle":"274_Searchbar","ns":274,"username":"Open CSP installation script","changed":"08-04-2022 13:33:33","pageid":38,"slots":"main","isFile":false,"description":"","tags":"Open CSP"}
+{"filename":"274_searchbar","pagetitle":"274_Searchbar","ns":274,"username":"Import script","changed":"08-04-2022 13:33:33","pageid":39,"slots":"main,csp-base-props,csp-class-props","models":"wikitext,wikitext,wikitext","isFile":false,"description":"","tags":"Open CSP"}

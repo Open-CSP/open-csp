@@ -1,0 +1,88 @@
+local p = {} --p stands for package
+
+--[[
+function p.get( frame )
+
+{{#invoke:VersionHistoryItems|get|page=..}}
+* if page is empty, current page is used
+* this function return an array with parameters:
+  * Current version description (text)
+  * Current version number (text)
+  * Current version date (text)
+  * versionHistory (holds subarrays with values from "version History item" multiple instance templates)
+
+Debug console tests:
+
+without page parameter:
+=p.get(mw.getCurrentFrame():newChild{title="test"}) 
+with page parameter (use current page):
+=p.get(mw.getCurrentFrame():newChild{title="test",args={["page"]="Persoon/1"}}) 
+with empty page parameter (use current page):
+=p.get(mw.getCurrentFrame():newChild{title="test",args={["page"]=""}}) 
+
+--]]
+function p.get( frame )
+  local result = { [1] = {} } -- all results are placed inside the [1] subtable to make this work with ArrayFunctions #af_foreach, might be changed later
+  
+  -- get page from frame or default to current page
+  local page = frame.args['page']
+  if page == nil or page =='' then
+    mw.log('page is empty, using current page')
+    page = mw.title.getCurrentTitle().fullText
+  end 
+  mw.log('page = ' .. page)
+  
+  -- get version history instances from csp-base-props slot
+  local baseProps = mw.slots.slotTemplates( 'csp-base-props', page )
+  if baseProps == nil then return mw.af.export(result) end
+  local versionHistory = baseProps['Base properties'][1]['Version history']
+  if versionHistory == nil then return mw.af.export(result) end
+  local versionHistoryItems = versionHistory['Version history item']
+
+  result[1]['Version history'] = versionHistoryItems
+  result[1]['Version history unparsed'] = versionHistory['_text']
+  result[1]['Current version number'] = versionHistoryItems[1]['Version number']['_text']
+  result[1]['Current version description'] = versionHistoryItems[1]['Version description']['_text']
+  result[1]['Current version date'] = versionHistoryItems[1]['Version date']['_text']
+  
+  mw.log('result =')
+  mw.logObject(result)
+  return mw.af.export(result)
+end
+
+--[[
+function p.processDescriptionInput(frame)
+
+frame args used:
+1 	(string) description with comma's around it, like ",example dscription,"
+
+output:
+description without comma's around it, like "example description"
+
+A somewhat complicated subst template is used (Template:Add version history item) to be able to add
+a template instance to the source code without requiring an instances form that shows all of the
+history items. Because of this, the description will get comma's around it that need to be filtered
+out.
+
+example use case:
+{{#invoke:VersionHistoryItems|processDescriptionInput|,example dscription,}}
+
+debug console tests:
+=p.processDescriptionInput(mw.getCurrentFrame():newChild{title="Test",args={",example,,descripti,on,"}}) 
+=p.processDescriptionInput(mw.getCurrentFrame():newChild{title="Test",args={"example description"}}) 
+==]]
+function p.processDescriptionInput(frame)
+  local description = frame.args[1]
+  if description == nil then return "" end
+  
+  -- check the first and last character to see if they are comma's. If so, remove them and then return
+  -- the modified description string
+  if mw.ustring.sub(description,1,1) == "," and mw.ustring.sub(description,-1,-1) == "," then
+    description = mw.ustring.sub(description,2,-2)
+  end
+  
+  return description
+end
+
+
+return p;

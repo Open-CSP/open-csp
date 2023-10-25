@@ -1,1 +1,1 @@
-ws-base-props, ws-class-props, main
+csp-base-props, csp-class-props, main

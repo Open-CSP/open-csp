@@ -1,0 +1,9 @@
+{{Base properties
+|Class=Application page
+|Title=Module:CspFunctions
+|Version history={{Version history item 
+|Version number=1.0
+|Version description=Added function p.gmatch which can be used to replace uses of the #regexall parserfunction
+|Version date=2023-8-18 12:38:53
+}}
+}}

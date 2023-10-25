@@ -1,0 +1,26 @@
+{
+    "CspParameterDefinitions": [
+        {
+            "name": "Title",
+            "propertyName": "",
+            "slot": "csp-base-props",
+            "allowedValues": "",
+            "required": "required",
+            "multiple": "",
+            "showOnCreate": "",
+            "formfieldTemplate": "Csp formfield/text",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Description",
+            "propertyName": "",
+            "slot": "csp-class-props",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "showOnCreate": "",
+            "formfieldTemplate": "Csp formfield/textarea",
+            "displayTemplate": ""
+        }
+    ]
+}

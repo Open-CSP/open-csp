@@ -5,8 +5,8 @@ COMPOSER=composer
 PHP=php
 GIT=git
 
-# The branch/ref from which we want to install the open csp framework
-CSP_BRANCH=main
+#The branch/ref from which we want to install the open csp framework
+CSP_BRANCH=REL1_39
 
 # Invocation command
 CMD="$@"
