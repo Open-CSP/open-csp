@@ -1,4 +1,0 @@
-{{Base properties
-|Title=Setting
-|Class=Class definition
-}}
