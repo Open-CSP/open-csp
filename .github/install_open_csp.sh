@@ -275,6 +275,7 @@ function do_composer()
     $COMPOSER config repositories.38 composer https://gitlab.wikibase.nl/api/v4/group/38/-/packages/composer/ || exit_with_message
     $COMPOSER update --no-dev || exit_with_message
     $COMPOSER update --no-dev || exit_with_message
+    chmod -v +x extensions/Scribunto/includes/engines/LuaStandalone/binaries/lua5_1_5_linux_64_generic/lua
 }
 
 function run_maintenance_scripts()
