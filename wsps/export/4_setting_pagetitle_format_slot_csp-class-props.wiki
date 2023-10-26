@@ -1,3 +1,0 @@
-{{Setting properties
-|Description=Be aware that the options provided here must be supported by forms that create pages.
-}}
