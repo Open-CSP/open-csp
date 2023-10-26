@@ -227,7 +227,7 @@ function copy_files_from_git()
     if [ x$AUTOMATIC == x1 ]; then
         rm -rf open-csp 2>/dev/null # Remove any leftovers from previous runs to prevent... problem... stuff
     else
-        local $prompt="-i"
+        local prompt="-i"
     fi
 
     echo "Cloning files from git."
@@ -275,6 +275,7 @@ function do_composer()
     $COMPOSER config repositories.38 composer https://gitlab.wikibase.nl/api/v4/group/38/-/packages/composer/ || exit_with_message
     $COMPOSER update --no-dev || exit_with_message
     $COMPOSER update --no-dev || exit_with_message
+    chmod -v +x extensions/Scribunto/includes/engines/LuaStandalone/binaries/lua5_1_5_linux_64_generic/lua
 }
 
 function run_maintenance_scripts()
