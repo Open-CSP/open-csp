@@ -227,7 +227,7 @@ function copy_files_from_git()
     if [ x$AUTOMATIC == x1 ]; then
         rm -rf open-csp 2>/dev/null # Remove any leftovers from previous runs to prevent... problem... stuff
     else
-        local $prompt="-i"
+        local prompt="-i"
     fi
 
     echo "Cloning files from git."
