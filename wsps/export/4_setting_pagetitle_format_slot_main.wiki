@@ -1,1 +1,0 @@
-plain_title, title, next_available
