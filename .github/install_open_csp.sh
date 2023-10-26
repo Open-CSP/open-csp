@@ -200,7 +200,6 @@ function exit_with_message()
 
 function validate_mw_path()
 {
-    return 0
     if [ -d "$1" ]; then
         if [ -e "$1/composer.json" ]; then
             # Use php for checking the json.
@@ -209,19 +208,7 @@ function validate_mw_path()
                 if [ -e "$1/LocalSettings.php" ]; then
                     return 0
                 else
-                    local altpath=$(find $1/ -mindepth=1 -maxdepth=4 -type f -name "LocalSettings.php" -exec dirname {} \; -quit 2>/dev/null)
-                    if [ x$altpath == x ]; then
-                        echo "Could not find $1/LocalSettings.php. Please first set up your mediawiki installation."
-                    else
-                        local input
-                        read -p "Could not find $1/LocalSettings.php. Did you mean to point at '$altpath' instead? [y/N] " -n 1 input
-                        if [[ $input =~ ^[Yy]$ ]]; then
-                            MW_PATH=$altpath
-                            return 0
-                        else
-                            echo "Invalid path provided."
-                        fi
-                    fi
+                    echo "Could not find $1/LocalSettings.php. Please first set up your mediawiki installation."
                 fi
             else
                 echo "Not the mediawiki core composer json: $1/composer.json"
