@@ -1,1 +1,0 @@
-text, date, number, checkbox, select, token, ask token
