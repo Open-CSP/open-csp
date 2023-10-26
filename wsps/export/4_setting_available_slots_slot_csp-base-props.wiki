@@ -1,4 +1,0 @@
-{{Base properties
-|Title=Available slots
-|Class=Setting
-}}
