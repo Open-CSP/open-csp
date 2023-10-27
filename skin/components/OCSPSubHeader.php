@@ -17,7 +17,7 @@ class OCSPSubHeader extends Component {
 	public function getHtml() {
 		return $this->indent() . '<!-- OCSPSubHeader -->' . $this->indent() . Html::openElement( 'div',
 				[ 'class' => $this->getClassString(),
-					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Ws-sub-header' )->parse() .
+					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Csp-sub-header' )->parse() .
 			$this->indent( -1 ) . '</div>' . "\n";
 	}
 }

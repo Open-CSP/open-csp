@@ -24,7 +24,7 @@ class OCSPFooter extends Component {
 	public function getHtml() {
 		return $this->indent() . '<!-- OCSPFooter -->' . $this->indent() . Html::openElement( 'div',
 				[ 'class' => $this->getClassString(),
-					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Ws-footer' )->parse() .
+					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Csp-footer' )->parse() .
 			$this->indent( -1 ) . '</div>' . "\n";
 	}
 }

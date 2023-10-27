@@ -17,7 +17,7 @@ class OCSPSubFooter extends Component {
 	public function getHtml() {
 		return $this->indent() . '<!-- OCSPSubFooter -->' . $this->indent() . Html::openElement( 'div',
 				[ 'class' => $this->getClassString(),
-					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Ws-sub-footer' )->parse() .
+					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Csp-sub-footer' )->parse() .
 			$this->indent( -1 ) . '</div>' . "\n";
 	}
 }

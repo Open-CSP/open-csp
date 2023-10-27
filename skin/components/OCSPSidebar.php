@@ -17,7 +17,7 @@ class OCSPSidebar extends Component {
 	public function getHtml() {
 		return $this->indent() . '<!-- OCSPSidebar -->' . $this->indent() . Html::openElement( 'div',
 				[ 'class' => $this->getClassString(),
-					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Ws-sidebar' )->parse() .
+					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Csp-sidebar' )->parse() .
 			$this->indent( -1 ) . '</div>' . "\n";
 	}
 }

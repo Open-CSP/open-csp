@@ -17,7 +17,7 @@ class OCSPNavmenu extends Component {
 	public function getHtml() {
 		return $this->indent() . '<!-- OCSPNavmenu -->' . $this->indent() . Html::openElement( 'div',
 				[ 'class' => $this->getClassString(),
-					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Ws-navmenu' )->parse() .
+					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Csp-navmenu' )->parse() .
 			$this->indent( -1 ) . '</div>' . "\n";
 	}
 }
