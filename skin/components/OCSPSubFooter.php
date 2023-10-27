@@ -5,9 +5,9 @@ namespace Skins\Chameleon\Components;
 use Html;
 
 /**
- * The WSFooter class.
+ * The OCSPSubFooter class.
  */
-class WSSubFooter extends Component {
+class OCSPSubFooter extends Component {
 
 	/**
 	 * Builds the HTML code for this component
@@ -15,7 +15,7 @@ class WSSubFooter extends Component {
 	 * @return string the HTML code
 	 */
 	public function getHtml() {
-		return $this->indent() . '<!-- WSSubFooter -->' . $this->indent() . Html::openElement( 'div',
+		return $this->indent() . '<!-- OCSPSubFooter -->' . $this->indent() . Html::openElement( 'div',
 				[ 'class' => $this->getClassString(),
 					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Ws-sub-footer' )->parse() .
 			$this->indent( -1 ) . '</div>' . "\n";

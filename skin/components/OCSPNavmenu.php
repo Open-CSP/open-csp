@@ -5,9 +5,9 @@ namespace Skins\Chameleon\Components;
 use Html;
 
 /**
- * The WSFooter class.
+ * The OCSPNavmenu class.
  */
-class WSSidebar extends Component {
+class OCSPNavmenu extends Component {
 
 	/**
 	 * Builds the HTML code for this component
@@ -15,9 +15,9 @@ class WSSidebar extends Component {
 	 * @return string the HTML code
 	 */
 	public function getHtml() {
-		return $this->indent() . '<!-- WSSidebar -->' . $this->indent() . Html::openElement( 'div',
+		return $this->indent() . '<!-- OCSPNavmenu -->' . $this->indent() . Html::openElement( 'div',
 				[ 'class' => $this->getClassString(),
-					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Ws-sidebar' )->parse() .
+					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Ws-navmenu' )->parse() .
 			$this->indent( -1 ) . '</div>' . "\n";
 	}
 }

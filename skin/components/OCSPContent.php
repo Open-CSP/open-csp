@@ -6,7 +6,7 @@ use MWException;
 use Sanitizer;
 use Skins\Chameleon\IdRegistry;
 
-class WSContent extends Component {
+class OCSPContent extends Component {
 
 	/**
 	 * Builds the HTML code for this component

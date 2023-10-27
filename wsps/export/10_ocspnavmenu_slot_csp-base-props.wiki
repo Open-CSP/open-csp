@@ -1,6 +1,6 @@
 {{Base properties
 |Class=Application page
-|Title=Template:WSNavMenu
+|Title=Template:OCSPNavMenu
 |Version history={{Version history item 
 |Version number=2.0
 |Version description=A Lua module is used to generate the inner menu, due to deprecation of Variables and WSArrays extensions
