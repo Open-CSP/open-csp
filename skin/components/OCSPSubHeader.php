@@ -5,9 +5,9 @@ namespace Skins\Chameleon\Components;
 use Html;
 
 /**
- * The WSSubHeader class.
+ * The OCSPSubHeader class.
  */
-class WSSubHeader extends Component {
+class OCSPSubHeader extends Component {
 
 	/**
 	 * Builds the HTML code for this component
@@ -15,7 +15,7 @@ class WSSubHeader extends Component {
 	 * @return string the HTML code
 	 */
 	public function getHtml() {
-		return $this->indent() . '<!-- WSSubHeader -->' . $this->indent() . Html::openElement( 'div',
+		return $this->indent() . '<!-- OCSPSubHeader -->' . $this->indent() . Html::openElement( 'div',
 				[ 'class' => $this->getClassString(),
 					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Ws-sub-header' )->parse() .
 			$this->indent( -1 ) . '</div>' . "\n";

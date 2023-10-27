@@ -5,9 +5,9 @@ namespace Skins\Chameleon\Components;
 use Html;
 
 /**
- * The WSHeader class.
+ * The OCSPSidebar class.
  */
-class WSHeader extends Component {
+class OCSPSidebar extends Component {
 
 	/**
 	 * Builds the HTML code for this component
@@ -15,9 +15,9 @@ class WSHeader extends Component {
 	 * @return string the HTML code
 	 */
 	public function getHtml() {
-		return $this->indent() . '<!-- WSHeader -->' . $this->indent() . Html::openElement( 'div',
+		return $this->indent() . '<!-- OCSPSidebar -->' . $this->indent() . Html::openElement( 'div',
 				[ 'class' => $this->getClassString(),
-					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Ws-header' )->parse() .
+					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Ws-sidebar' )->parse() .
 			$this->indent( -1 ) . '</div>' . "\n";
 	}
 }

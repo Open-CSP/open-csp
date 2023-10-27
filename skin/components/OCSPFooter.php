@@ -1,6 +1,6 @@
 <?php
 /**
- * File holding the WSFooter component class
+ * File holding the OCSPFooter component class
  *
  * This file is part of the additions for the wiki of Broad Horizon.
  *
@@ -12,9 +12,9 @@ namespace Skins\Chameleon\Components;
 use Html;
 
 /**
- * The WSFooter class.
+ * The OCSPFooter class.
  */
-class WSFooter extends Component {
+class OCSPFooter extends Component {
 
 	/**
 	 * Builds the HTML code for this component
@@ -22,7 +22,7 @@ class WSFooter extends Component {
 	 * @return string the HTML code
 	 */
 	public function getHtml() {
-		return $this->indent() . '<!-- WSFooter -->' . $this->indent() . Html::openElement( 'div',
+		return $this->indent() . '<!-- OCSPFooter -->' . $this->indent() . Html::openElement( 'div',
 				[ 'class' => $this->getClassString(),
 					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Ws-footer' )->parse() .
 			$this->indent( -1 ) . '</div>' . "\n";

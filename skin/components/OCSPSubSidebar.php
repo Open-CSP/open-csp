@@ -5,9 +5,9 @@ namespace Skins\Chameleon\Components;
 use Html;
 
 /**
- * The WSNavmenu class.
+ * The OCSPSubSidebar class.
  */
-class WSNavmenu extends Component {
+class OCSPSubSidebar extends Component {
 
 	/**
 	 * Builds the HTML code for this component
@@ -15,9 +15,9 @@ class WSNavmenu extends Component {
 	 * @return string the HTML code
 	 */
 	public function getHtml() {
-		return $this->indent() . '<!-- WSNavmenu -->' . $this->indent() . Html::openElement( 'div',
+		return $this->indent() . '<!-- OCSPSubSidebar -->' . $this->indent() . Html::openElement( 'div',
 				[ 'class' => $this->getClassString(),
-					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Ws-navmenu' )->parse() .
+					'role' => 'banner', ] ) . $this->indent( 1 ) . wfMessage( 'Ws-sub-sidebar' )->parse() .
 			$this->indent( -1 ) . '</div>' . "\n";
 	}
 }

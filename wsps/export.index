@@ -34,7 +34,7 @@
     "10_modal": "10_Modal",
     "10_pages_overview": "10_Pages overview",
     "10_slots": "10_Slots",
-    "10_wsnavmenu": "10_WSNavMenu",
+    "10_ocspnavmenu": "10_OCSPNavMenu",
     "274_button_link": "274_Button link",
     "274_layout": "274_Layout",
     "274_link": "274_Link",
@@ -80,5 +80,5 @@
     "828_cspcreatepageform": "828_CspCreatePageForm",
     "828_cspfunctions": "828_CspFunctions",
     "828_versionhistoryitems": "828_VersionHistoryItems",
-    "828_wsnavmenu": "828_WSNavMenu"
+    "828_ocspnavmenu": "828_OCSPNavMenu"
 }
