@@ -9,7 +9,7 @@ GIT=git
 CSP_BRANCH=REL1_39
 
 # Invocation command
-CMD="$@"
+CMD="$0 $@"
 
 # In this file the last completed step will remain stored, at least until a reboot assuming /tmp is mounted as tmpfs.
 TEMPFILE_PROGRESS=/tmp/install-open-csp.save
