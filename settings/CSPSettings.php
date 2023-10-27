@@ -209,7 +209,7 @@ wfLoadSkin( 'chameleon' );
 $wgDefaultSkin = "chameleon";
 
 // Define the location of the css and the layout xml
-$egChameleonLayoutFile = "$IP/skin/wikibaseLayout.xml";
+$egChameleonLayoutFile = "$IP/skin/opencspLayout.xml";
 $egChameleonExternalStyleModules = glob( $IP . '/skin/scss/[^_]*.scss' );
 $wgAllowSiteCSSOnRestrictedPages = true;
 
