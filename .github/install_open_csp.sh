@@ -64,7 +64,7 @@ if [ $# -lt 1 ] || [ ! -d "$1" ]; then usage; fi # No need to go any further if 
 ### Some prep stuff here
 # Process arguments into variables
 # Read MW_PATH from $1 and shift it off the argument list
-MW_PATH=$1
+MW_PATH=${1%/}
 shift
 while [[ $# -gt 0 ]]; do
     case "$1" in
