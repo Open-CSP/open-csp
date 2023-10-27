@@ -1,7 +1,7 @@
 {{Csp class properties
 |Defines class=Page
 |Pagetitle format=title
-|Allowed namespaces=(Main),Wiki,HR
+|Allowed namespaces=(Main),Wiki
 |Layout areas='sub-header sidebar' 'main sidebar'
 |Layout columns=3fr 1fr
 |Layout rows=auto 1fr
