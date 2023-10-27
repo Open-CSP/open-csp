@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <structure>
     <grid class="flex-fill" mode="fluid">
-        <row class="row-WSHeader">
+        <row class="row-CSPHeader">
             <cell span="12">
                 <component type="OCSPHeader" class="noprint"/>
             </cell>
         </row>
-        <row class="ws-page-tools">
+        <row class="csp-page-tools">
             <component type="PageTools" class="noprint" />
             <component type="PersonalTools" class="noprint" />
         </row>
-        <row class="ws-grid">
+        <row class="csp-grid">
             <component type="OCSPSubHeader" class="cp-sub-header"/>
             <component type="OCSPContent" class="cp-main"/>
             <component type="OCSPSidebar" class="cp-sidebar"/>
@@ -26,6 +26,6 @@
                 </component>
             </cell>
         </row>
-        <row class="ws-page-tools"/>
+        <row class="csp-page-tools"/>
     </grid>
 </structure>
