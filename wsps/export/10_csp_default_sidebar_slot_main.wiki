@@ -52,11 +52,13 @@ This is the '''Csp default sidebar''' template. It should be called in the follo
       |Value={{#af_template:{{#af_get:{{{$parameter}}}|formfieldTemplate}} |{{{$parameter}}} }}
       }}</li>
     }}<!-- end of #switch -->
-}}<!-- end of #af_foreach to generate formfields --></ul><!-- 
---><div class="text-right">
-<label for="sidebar-view-default-sidebar" class="btn btn-secondary" >{{int:csp-label-close}}</label>
+}}<!-- end of #af_foreach to generate formfields 
+--><li class="list-group-item text-right">
+<label for="sidebar-view-default-sidebar" class="btn btn-secondary mb-0" >{{int:csp-label-close}}</label>
 <input type="submit" value="{{int:csp-label-save}}" class="btn btn-primary" />
-</div>
+</li><!--
+--></ul>
+
 </form><!--
 -->}}<!-- end of Csp sidebar tabs
 
