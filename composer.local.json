@@ -19,7 +19,7 @@
     "open-csp/page-sync": "dev-REL1_39",
     "open-csp/w-s-slots": "^4.0",
     "open-csp/w-s-spaces": "^2.2",
-    "open-csp/wiki-search": "dev-REL1_39",
+    "open-csp/wiki-search": "v8.0.0",
     "wikibase-solutions/array-functions": "v1.4.2",
     "wikibase-solutions/c-s-p-resources": "v2.0.3",
     "wikibase-solutions/wiki-search-front": "v2.0.4"
@@ -50,19 +50,6 @@
         }
       },
       "type": "package"
-    },
-    "wikisearch": {
-	    "package": {
-		    "name": "open-csp/wiki-search",
-		    "type": "mediawiki-extension",
-		    "version": "dev-REL1_39",
-		    "source": {
-			    "reference": "139-compat",
-			    "type": "git",
-			    "url": "https://github.com/Open-CSP/WikiSearch.git"
-		    }
-	    },
-	    "type": "package"
     },
     "myvariables": {
       "package": {
