@@ -64,7 +64,7 @@ if [ $# -lt 1 ] || [ ! -d "$1" ]; then usage; fi # No need to go any further if 
 ### Some prep stuff here
 # Process arguments into variables
 # Read MW_PATH from $1 and shift it off the argument list
-MW_PATH=$1
+MW_PATH=${1%/}
 shift
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -236,7 +236,22 @@ function copy_files_from_git()
 
     cp $prompt open-csp/composer.local.json $MW_PATH
     cp $prompt -r open-csp/settings $MW_PATH
-    cp $prompt -r open-csp/logo $MW_PATH
+    if [ x$AUTOMATIC == x1 ]; then
+        if [ -d "$MW_PATH/logo" ]; then
+            echo "Skipping copying logo folder."
+        else
+            cp -r open-csp/logo $MW_PATH || exit_with_message
+        fi
+    else
+        # Ask if the user wants to have logo folder overwritten and default to no
+        read -p "Copy the logo folder from the git repository? [y/N] " -n 1 input
+        echo ""
+        if [[ $input =~ ^[Yy]$ ]]; then
+            cp -fr open-csp/logo $MW_PATH # Overwite only if the user chooses to do so
+        else
+            echo "Skipping copying logo folder."
+        fi
+    fi
     cp -r open-csp/skin $MW_PATH || exit_with_message
 
     if [ x$DO_NOT_COPY_WSPS == x1 ]; then
