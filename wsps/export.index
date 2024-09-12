@@ -39,7 +39,6 @@
     "274_layout": "274_Layout",
     "274_link": "274_Link",
     "274_logo": "274_Logo",
-    "274_searchbar": "274_Searchbar",
     "4_class_definition_page": "4_Class definition\/Page",
     "4_slots": "4_Slots",
     "4_wiki_pages": "4_Wiki pages",
@@ -81,5 +80,6 @@
     "828_cspfunctions": "828_CspFunctions",
     "828_versionhistoryitems": "828_VersionHistoryItems",
     "828_ocspnavmenu": "828_OCSPNavMenu",
-    "4_class_definitions": "4_Class-definitions"
+    "4_class_definitions": "4_Class-definitions",
+    "10_csp_searchbar": "10_Csp searchbar"
 }
