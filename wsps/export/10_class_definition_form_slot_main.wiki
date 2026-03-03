@@ -1,5 +1,4 @@
 <noinclude>
-{{CSP alert}}
 This is the '''Class definition form''' template. It should be called in the following format:
 
 <pre>
@@ -9,66 +8,61 @@ This is the '''Class definition form''' template. It should be called in the fol
 ==Test==
 {{Class definition form }}
   
-</noinclude><includeonly><wsform action="addToWiki" show-on-select="show-on-select"><!--
+</noinclude><includeonly><form action="addToWiki" show-on-select="show-on-select">
 
-// Class
+<_create mwwrite="Wiki:Class definition/[Defines class]" noseo mwtemplate="Base properties" mwslot="csp-base-props" mwfollow mwfields="Class" />
+<_create mwwrite="Wiki:Class definition/[Defines class]" noseo mwtemplate="Csp class properties" mwslot="csp-class-props" mwfields="Defines class, Pagetitle format, Allowed namespaces, Short description, Layout areas, Layout columns, Layout rows, Page properties template, Sidebar template"  />
+<_create mwwrite="Wiki:Class definition/[Defines class]" noseo mwtemplate="wsnone" mwslot="csp-data" mwfollow mwfields="csp-data content" />
 
---><wscreate mwwrite="Wiki:[Defines class]-settings" mwtemplate="Class definition" mwfollow />
+<input type="hidden" name="Class" value="Class definition" />
+<input type="hidden" name="csp-data content" value="{
+}" /><!-- empty json for _edit to work when editing parameter definitions after creating a class definition -->
+
 <b>Class <span style="color:red">*</span></b>
-<wsfield name="Defines class" type="text" placeholder="Article, Organization, Person, Project" type="text" pattern="[a-zA-Z0-9-_\s]+" title="allowed characters: alphanumerical, spaces, '-' and '_' " class="form-control mb-3" required="required" /><!--
+<input name="Defines class" type="text" placeholder="Article, Organization, Person, Project" type="text" pattern="[a-zA-Z0-9-_\s]+" title="allowed characters: alphanumerical, spaces, '-' and '_' " class="form-control mb-3" required="required" /><!--
 
 // Pagetitle format
 --><b>Pagetitle format <span style="color:red">*</span></b>
-<wsselect name="Pagetitle format" class="form-control" >
-  <wsfield type="option" value="next_available" >next_available</wsfield>
-  <wsfield type="option" value="title" >title</wsfield>
-</wsselect>
+<select name="Pagetitle format" class="form-control" >
+  <input type="option" value="next_available" >next_available</input>
+  <input type="option" value="title" >title</input>
+</select>
 <!--
 
 // Allowed namespaces
 --><b>Allowed namespaces</b>
-<wstoken id="namespace-tokens" name="Allowed namespaces[]" multiple="multiple" class="form-control">
-  <wsfield type="option" value="(Main)">(none)</wsfield>
-  {{#caamap:{{#spaces:}} |,|__Namespace__|{{#tag:wsfield|__Namespace__|type=option|value=__Namespace__}}|}}
-</wstoken>
+<_token id="namespace-tokens" name="Allowed namespaces[]" multiple="multiple" class="form-control">
+  <input type="option" value="(Main)">(Main)</input>
+  {{#af_join:{{#af_map:{{#af_split:{{#spaces:}} |,}} |ns |<input type="option" value="{{{ns}}}">{{{ns}}}</input>}} }}
+</_token>
 <!--
 
 // Layout fields
 
 --><div class="mb-3">
 <b>Layout <span style="color:red">*</span></b>
-<wsfield name="Layout areas" type="text" class="form-control" placeholder="Areas" required="required" value="'sub-header sidebar' 'main sidebar'" />
+<input name="Layout areas" type="text" class="form-control" placeholder="Areas" required="required" value="'sub-header sidebar' 'main sidebar'" />
 <i class="text-muted">example: 'sub-header sidebar' 'main sidebar' (Will set up: two rows, two columns; top left element will have the sub-header element, bottom left element will have the main element and both right elements will have the sidebar)</i>
-<wsfield name="Layout columns" type="text" class="form-control" placeholder="Columns" required="required" value="3fr 1fr" />
+<input name="Layout columns" type="text" class="form-control" placeholder="Columns" required="required" value="3fr 1fr" />
 <i class="text-muted">example: 3fr 1fr (Will define: two columns, divided 75% for the left element and 25% for the right element)</i>
-<wsfield name="Layout rows" type="text" class="form-control" placeholder="Rows" required="required" value="auto 1fr" />
+<input name="Layout rows" type="text" class="form-control" placeholder="Rows" required="required" value="auto 1fr" />
 <i class="text-muted">example: auto 1fr (Will define: two rows, divided auto for the top element (will only take the space it needs), and 100% (of the rest) for the bottom element)</i><br/>
-<span style="color:red; font-size:smaller">* All fields required</span>
-</div><!--
+<span style="color:red; font-size:smaller">* Required fields</span>
+</div>
 
-// OPTIONAL fields
-// hidden fields with subst that results in empty value: to ensure the parameters are written to the source code of the page, so they can easily be modified later on through source code editing
---><wsfield name="Base properties template" type="hidden" value="{{subst:#if:1|}}" />
-<wsfield name="Page properties template" type="hidden" value="{{subst:#if:1|}}"  />
-<wsfield name="Sidebar template" type="hidden" value="{{subst:#if:1|}}"  />
-<wsfield name="Sidebar form" type="hidden" value="{{subst:#if:1|}}" />
-
-<wslabel><wsfield type="checkbox" show-on-checked="optional-fields" /> Show optional fields</wslabel>
+<label><input type="checkbox" show-on-checked="optional-fields" /> Show optional fields</label>
 
 <div class="hidden" show-on-select-trigger="optional-fields" >
 <b>Short description</b>
-<wsfield name="Short description" type="textarea" class="form-control mb-3" rows="3" ></wsfield>
+<input name="Short description" type="textarea" class="form-control mb-3" rows="3" ></input>
 
-<b>Base properties template</b>
-<wsfield name="Base properties template" type="text" placeholder="defaults to 'Template:Base properties'" type="text" pattern="[a-zA-Z0-9-_\s]+" title="allowed characters: alphanumerical, spaces, '-' and '_' " class="form-control mb-3" />
 <b>Page properties template</b>
-<wsfield name="Page properties template" type="text" placeholder="defaults to 'Template:&lt;Class&gt; properties'" type="text" pattern="[a-zA-Z0-9-_\s]+" title="allowed characters: alphanumerical, spaces, '-' and '_' " class="form-control mb-3" />
+<input name="Page properties template" type="text" placeholder="defaults to 'Template:Csp class properties'" type="text" pattern="[a-zA-Z0-9-_\s]+" title="allowed characters: alphanumerical, spaces, '-' and '_' " class="form-control mb-3" />
 <b>Sidebar template</b>
-<wsfield name="Sidebar template" type="text" placeholder="defaults to 'Template:&lt;Class&gt; sidebar'" type="text" pattern="[a-zA-Z0-9-_\s]+" title="allowed characters: alphanumerical, spaces, '-' and '_' " class="form-control mb-3" />
-<b>Sidebar form</b>
-<wsfield name="Sidebar form" type="text" placeholder="default none" type="text" pattern="[a-zA-Z0-9-_\s]+" title="allowed characters: alphanumerical, spaces, '-' and '_' " class="form-control mb-3" />
+<input name="Sidebar template" type="text" placeholder="defaults to 'Template:Csp default sidebar'" type="text" pattern="[a-zA-Z0-9-_\s]+" title="allowed characters: alphanumerical, spaces, '-' and '_' " class="form-control mb-3" />
+
 </div><!-- end of .collapse -->
 
-<div class="text-right"><wsfield type="submit" class="btn btn-primary" value="Submit" /></div>
+<div class="text-right"><input type="submit" class="btn btn-primary" value="Submit" /></div>
 
-</wsform></includeonly>
+</form></includeonly>

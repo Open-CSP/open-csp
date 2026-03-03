@@ -1,5 +1,4 @@
 <noinclude>
-{{CSP alert}}
 ==Syntax==
 <pre>
 {{#widget: Button link

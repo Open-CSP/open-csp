@@ -1,0 +1,34 @@
+<noinclude>
+
+This is the '''Csp searchbar''' template. It should be called in the following format:
+
+<pre>
+{{Csp searchbar
+|mwreturn=(url) for example pass {{fullurl:Search}} to this parameter, defaults to: '{{fullurl:Special:Search}}'>
+|altsearch=(term/search), default 'search', requires 'term' if using WikiSearch
+|placeholder=(text) to show as placeholder in the searchbar, default: 'Search...'
+|id=(id attribute of input) use different ids when displaying multiple search bars on a page, default: 'searchInput'>
+|formid=(id attribute of form) use different ids when displaying multiple search bars on a page, default: 'searchform'>
+}}
+</pre>
+
+Example output (WikiSearch):
+<pre>{{Csp searchbar|mwreturn={{fullurl:Search}}|altsearch=term|placeholder=This takes you to 'Search'.}}</pre>
+{{Csp searchbar|mwreturn={{fullurl:Search}}|altsearch=term|placeholder=This takes you to 'Search'.}}
+
+Example output (Defaults):
+<pre>{{Csp searchbar}}</pre>
+{{Csp searchbar}}
+
+Example output (Default but placeholder):
+<pre>{{Csp searchbar|placeholder=Zoeken...}}</pre>
+{{Csp searchbar|placeholder=Zoeken...}}
+
+</noinclude><includeonly><form action="get" mwreturn="{{{mwreturn|{{fullurl:Special:Search}} }}}" id="{{{formid|searchform}}}">
+  <div class="input-group md-form form-sm form-2 pl-0">
+    <input type="text" class="form-control my-0 py-1 red-border" name="{{{altsearch|search}}}" placeholder="{{{placeholder|Search...}}}" title="Search [Alt+Shift+f]" accesskey="f" id="{{{id|searchInput}}}" tabindex="1" autocomplete="off"  type="search" aria-label="Search" /> 
+    <div class="input-group-append">
+      <button type="submit" class="btn btn-light text-secondary" ><i class="fas fa-search text-grey" aria-hidden="true"></i></button>
+    </div>
+  </div>
+</form></includeonly>

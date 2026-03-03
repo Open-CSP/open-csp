@@ -1,0 +1,10 @@
+{{Base properties
+|Class=Application page
+|Title=Template:Csp default sidebar
+|Version history={{Version history item 
+|Version number=1.0
+|Version description=Added displaying of version history, when specified in $classData
+|Version date=2023-8-23 09:02:32
+}}
+}}
+}}

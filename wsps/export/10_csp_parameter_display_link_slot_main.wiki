@@ -1,0 +1,23 @@
+<noinclude>
+
+This is the '''Csp parameter display/link''' template. It should be called in the following format:
+
+<pre>
+{{Csp parameter display/link
+|value= (comma-seprated pagenames) selected values, e.g. "Template:Add version history item,Module:VersionHistoryItems"
+}}
+</pre>
+
+== Example ==
+{{Csp parameter display/link
+|value=Template:Add version history item,Module:VersionHistoryItems,Template:Generate page properties template code
+}}
+
+Related templates:
+{{#ask:[[~*Csp parameter display/*]] 
+|mainlabel=Page
+|format=table 
+|sort=Title
+}}
+
+</noinclude><includeonly>{{#af_join:{{#af_map:{{#af_split:{{{value|}}}|,}}|@@|[[{{{@@}}}|{{#show:{{{@@}}}|?Title}}]]}}|<br>}}</includeonly>

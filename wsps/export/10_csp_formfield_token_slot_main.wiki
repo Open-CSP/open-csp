@@ -1,0 +1,49 @@
+<noinclude>
+
+This is the '''Csp formfield/token''' template. It should be called in the following format:
+
+<pre>
+{{Csp formfield/token
+|name= (text) 
+|multiple= (optional: "multiple") to allow selecting multiple values
+|required= (optional: "required")
+|value= (value(s) from "allowedValues" list) selected values, e.g. "A,C"
+|allowedValues= (comma-separated values) value options, e.g. "A,B,C,D,E"
+}}
+</pre>
+
+== Example ==
+{{Csp formfield/token
+|name=Broodje1
+|value=kroket
+|allowedValues=braadworst,gezond,kroket
+}}
+
+{{Csp formfield/token
+|name=Broodje2
+|value=kroket,gezond
+|multiple=multiple
+|allowedValues=braadworst,gezond,kroket
+}}
+
+Related templates:
+{{#ask:[[~*Csp formfield/*]] 
+|mainlabel=Page
+|format=table 
+|sort=Title
+}}
+
+</noinclude><includeonly><!--
+// NOTE: empty placeholder is used because allowclear required a placeholder (else there will be no way to clear filled fields when not using "multiple")
+--><_token 
+id="token-{{lc:{{anchorencode:{{{name|}}} }} }}" 
+name="{{{name|}}}[]" 
+class="form-control" 
+multiple="{{{multiple|}}}"
+required="{{{required|}}}"
+selected="{{{value|}}}"
+options="{{#invoke:CspFunctions|preprocess|_content={{{allowedValues|}}} }}"
+placeholder=""
+allowclear
+allowsort
+/></includeonly>

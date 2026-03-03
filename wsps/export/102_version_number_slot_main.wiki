@@ -1,0 +1,3 @@
+[[Has type::Text]]
+
+Note: this property page is intentionally of type Text and not Number, to allow for version numbers such as 6.2.7 that are not valid values for property type Number.

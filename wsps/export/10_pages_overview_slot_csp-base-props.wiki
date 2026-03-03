@@ -1,0 +1,13 @@
+{{Base properties
+|Class=Application page
+|Title=Template:Pages overview
+|Version history={{Version history item 
+|Version number=1.1
+|Version description=changed body class to "card" to work better with ul class "list-group list-group-flush" that is used for the content 
+|Version date=2023-6-01 12:23:50
+}}{{Version history item 
+|Version number=1.0
+|Version description=Initial version
+|Version date=2022-12-02 08:58:04
+}}
+}}

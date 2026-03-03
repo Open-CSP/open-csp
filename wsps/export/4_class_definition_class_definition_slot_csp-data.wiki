@@ -1,0 +1,136 @@
+{
+    "CspParameterDefinitions": [
+        {
+            "name": "Pagetitle format",
+            "propertyName": "",
+            "slot": "csp-class-props",
+            "formfieldType": "select",
+            "formfieldTemplate": "",
+            "allowedValues": "next_available,title",
+            "required": "true",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Allowed namespaces",
+            "propertyName": "",
+            "slot": "csp-class-props",
+            "formfieldType": "token",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Short description",
+            "propertyName": "",
+            "slot": "csp-class-props",
+            "formfieldType": "textarea",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Has version history",
+            "propertyName": "",
+            "slot": "csp-class-props",
+            "formfieldType": "checkbox",
+            "formfieldTemplate": "",
+            "allowedValues": "true",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Layout areas",
+            "propertyName": "Layout areas",
+            "slot": "csp-class-props",
+            "formfieldType": "",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Layout columns",
+            "propertyName": "Layout columns",
+            "slot": "csp-class-props",
+            "formfieldType": "",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Layout rows",
+            "propertyName": "Layout rows",
+            "slot": "",
+            "formfieldType": "",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Page properties template",
+            "propertyName": "",
+            "slot": "",
+            "formfieldType": "",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Footer template",
+            "propertyName": "",
+            "slot": "",
+            "formfieldType": "",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Sidebar template",
+            "propertyName": "",
+            "slot": "",
+            "formfieldType": "",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        },
+        {
+            "name": "Sub header template",
+            "propertyName": "",
+            "slot": "",
+            "formfieldType": "",
+            "formfieldTemplate": "",
+            "allowedValues": "",
+            "required": "",
+            "multiple": "",
+            "displayType": "",
+            "displayTemplate": ""
+        }
+    ]
+}

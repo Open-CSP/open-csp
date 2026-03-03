@@ -1,0 +1,30 @@
+<noinclude>
+
+This is the '''Csp formfield/datetime-local''' template. It should be called in the following format:
+
+<pre>
+{{Csp formfield/datetime-local
+|name= (text) 
+|required= (optional: "required")
+|value= (date-time with format yyyy-mm-ddThh:mm) e.g. "2022-03-01T10:00"
+}}
+</pre>
+
+== Example ==
+{{Csp formfield/datetime-local
+|name=Meeting time
+|value=2022-03-01T10:00
+}}
+
+Related templates:
+{{#ask:[[~*Csp formfield/*]] 
+|mainlabel=Page
+|format=table 
+|sort=Title
+}}
+
+</noinclude><includeonly><input type="datetime-local" 
+name="{{{name|}}}"
+class="form-control" 
+required="{{{required|}}}"
+value="{{{value|}}}" /></includeonly>

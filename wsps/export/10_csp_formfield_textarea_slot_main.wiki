@@ -1,0 +1,31 @@
+<noinclude>
+
+This is the '''Csp formfield/textarea''' template. It should be called in the following format:
+
+<pre>
+{{Csp formfield/textarea
+|name= (text) 
+|required= (optional: "required")
+|value= (text)
+}}
+</pre>
+
+== Example ==
+{{Csp formfield/textarea
+|name=Comment
+|value=Test abc 123
+new line test
+}}
+
+Related templates:
+{{#ask:[[~*Csp formfield/*]] 
+|mainlabel=Page
+|format=table 
+|sort=Title
+}}
+
+</noinclude><includeonly><input type="textarea" 
+name="{{{name|}}}"
+class="form-control"
+required="{{{required|}}}"
+>{{{value|}}}</input></includeonly>

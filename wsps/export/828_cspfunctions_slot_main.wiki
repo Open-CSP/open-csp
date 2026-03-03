@@ -1,0 +1,253 @@
+local p = {}
+
+--[[
+function p.getSlotData(page,slot)
+
+This function returns a Lua table with structured content of the slot.
+
+function arguments:
+- page (optional): pagename of the page for which you want the slot content, defaults to current page
+- slot (optional): slot of which you want the content, defaults to "main"
+
+debug console tests:
+p.getSlotData() 
+p.getSlotData('Wiki:Testpagina sidebar code','csp-data') 
+p.getSlotData('Template:Sidebar item','csp-class-props') 
+--]]
+function p.getSlotData(page,slot)
+  	-- get page from function arguments or default to current page
+  	if page == nil or page == '' then
+    	page = mw.title.getCurrentTitle().fullText
+    end
+  	-- get slot from function arguments or default to main
+  	if slot == nil or slot == '' then
+    	slot = 'main'
+    end
+  
+    -- get data from the slot (works for both json and wikitext slots)
+    local slotData = {}
+    slotData = mw.slots.slotData(slot,page)
+
+    --mw.log('slotData = .. ')
+   	--mw.logObject(slotData)
+    return slotData
+end
+
+--[[
+function p.afExportSlots(frame)
+
+frame args:
+slots 	(text)	comma-separated list of slots, defaults to "csp-class-props,csp-base-props,csp-data"
+page 	(text)	defaults to current page
+
+{{#invoke:CspFunctions|afExportSlots}}
+{{#invoke:CspFunctions|afExportSlots|page=Template:Sidebar item|slots=csp-base-props,csp-class-props}}
+
+debug console tests:
+=p.afExportSlots(mw.getCurrentFrame():newChild{title="whatever",args={["page"]="Template:Sidebar item",["slots"]="csp-base-props,csp-class-props"}}) 
+=p.afExportSlots(mw.getCurrentFrame():newChild{title="whatever",args={["addClassDefinition"]=""}}) 
+--]]
+function p.afExportSlots(frame)
+
+-- get slots and page from frame args or set default value
+local slots = frame.args["slots"]
+if slots == nil or slots == "" then slots = "csp-class-props,csp-base-props,csp-data" end
+local page = frame.args["page"]
+if page == nil or page == "" then page = mw.title.getCurrentTitle().fullText end
+  
+-- get slot data for each slot and add to data table
+local data = {}
+data[1] = {}
+for slot in string.gmatch(slots, '([^,]+)') do
+    local slotData = p.getSlotData(page,slot)
+    if slotData == nil then slotData = "" end 
+    data[1][slot] = slotData
+end
+  
+--mw.logObject(data) 
+return mw.af.export(data)
+end
+
+--[[
+function p.getSlotContent(frame)
+
+{{#invoke:CspFunctions|getSlotContent|page=Template:Sidebar item|slot=csp-class-props}}
+{{#invoke:CspFunctions|getSlotContent|page=Template:Sidebar item|slot=csp-class-props|nowiki}}
+
+This function returns a string with the exact content of a slot.
+
+frame arguments:
+- page (optional): pagename of the page for which you want the slot content, defaults to current page
+- slot (optional): slot of which you want the content, defaults to "main"
+- 1 (optional: nowiki / preprocess): uses mw.text.nowiki or frame:preprocess on the content before returning it
+
+debug console tests:
+p.getSlotContent() 
+p.getSlotContent{args={['page']='Wiki:Testpagina sidebar code',['slot']='csp-data'}}
+p.getSlotContent{args={['page']='Template:Sidebar item',['slot']='csp-class-props'}}
+--]]
+function p.getSlotContent(frame)
+  	-- get page from frame arguments or default to current page
+    local page = frame.args["page"]
+  	if page == nil or page == '' then
+    	page = mw.title.getCurrentTitle().fullText
+    end
+  	-- get slot from frame arguments or default to main
+    local slot = frame.args["slot"]
+  	if slot == nil or slot == '' then
+    	slot = 'main'
+    end
+  
+    -- get data from the slot
+    local slotContent = mw.slots.slotContent(slot,page)
+    if slotContent == nil then slotContent = "" end
+  
+    local result = slotContent
+    -- apply the nowiki or preprocess options if needed
+    if frame.args[1] == "nowiki" then
+    	result = mw.text.nowiki(slotContent)
+    elseif frame.args[1] == "preprocess" then
+    	result = frame:preprocess(slotContent)
+    end
+      
+    --mw.log('result = .. ')
+    --mw.log(result)
+    return result
+end
+
+--[[
+function p.ClassToClassDefinitionPage(frame)
+
+This function returns the Class definition pagename based on a class input.
+Example:
+
+{{#invoke:CspFunctions|ClassToClassDefinitionPage|Person}}
+returns "Wiki:Class definition/Person"
+
+If you want to call this inside another Lua function, make sure to include the class
+as a frame argument, for example:
+p.ClassToClassDefinitionPage{args={"Person"}}
+returns "Wiki:Class definition/Person"
+
+frame args used:
+1 	(text) class, for example "Person" or "Application page"
+
+=p.ClassToClassDefinitionPage{args={"Person"}}
+--]]
+function p.ClassToClassDefinitionPage(frame)
+  local class = frame.args[1]
+  if class == "" or class == nil then
+    return
+  end
+  local classDefinitionPage = "Wiki:Class definition/" .. class
+  return classDefinitionPage
+end
+
+--[[
+function p.preprocess(frame)
+
+{{#invoke:CspFunctions|preprocess|_content=...}}
+{{#invoke:CspFunctions|preprocess|_content={{#time:r|now}} }}
+{{#invoke:CspFunctions|preprocess|_content={{{Intro|}}} {{#time:r|now}} |_args=parent args}}
+
+frame args used:
+_content	(wikitext) for example "{{#time:r|now}}"
+_args 		(optional: "parent args") use this to add parent args to frame args, so that {{{Example|}}} 
+			parameter calls inside the wikitext will work with parameters from a parent page.
+			Note that parent args do not overwrite frame args if they have the same name.
+
+debug console tests:
+=p.preprocess(mw.getCurrentFrame():newChild{title="test",args={["_content"]="{{#time:r|now}}"}}) 
+=p.preprocess(mw.getCurrentFrame():newChild{args={["Intro"]="The current time is: "}}:newChild{title="test",args={["_content"]="{{{Intro|}}} {{#time:r|now}}",["_args"]="parent args"}}) 
+--]]
+function p.preprocess(frame)
+  local content = frame.args["_content"]
+  if frame.args["_args"] == "parent args" then
+    modifiedArgs = {}
+    for key,value in pairs(frame:getParent().args) do modifiedArgs[key] = value end
+    for key,value in pairs(frame.args) do modifiedArgs[key] = value end
+    modifiedFrame = frame:newChild{args=modifiedArgs}
+    return modifiedFrame:preprocess(content)
+  else
+    return frame:preprocess(content)
+  end
+end
+
+--[[
+function p.getParentArg(frame)
+
+{{#invoke:CspFunctions|getParentArg|$pageData}}
+{{#invoke:CspFunctions|getParentArg|$classData}}
+
+This function loops through  parents using frame:getParent until the specified parameter 
+is found in one of the parent frames or  the maximum number of 10 iterations is reached.
+
+debug console tests
+=p.getParentArg(mw.getCurrentFrame():newChild{title="whatever",args={"a1","a2",["un"]="ua","a3"}}) 
+=p.getParentArg(mw.getCurrentFrame():newChild{title="Template:SHA",args={"sha1","sha2",["ASH"]="SAH"}}:newChild{title="Module:Module",args={"a1","a2",["un"]="ua","a3"}})
+=p.getParentArg(mw.getCurrentFrame():newChild{args={["test"]="123"}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={"test"}})
+=p.getParentArg(mw.getCurrentFrame():newChild{args={["test"]="123"}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={"test"}})
+=p.getParentArg(mw.getCurrentFrame():newChild{args={["test"]="123"}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={}}:newChild{args={"test"}})
+--]]
+function p.getParentArg(frame)
+  local i = 1
+  local result = nil
+  local parent = frame
+  
+  while i <= 10 and result == nil and parent ~= nil do
+    parent = parent:getParent()
+    if parent ~= nil then
+      result = parent.args[frame.args[1]]
+      mw.log("i = " .. tostring(i) .. ", result = " .. tostring(result) )
+    else
+      mw.log("i = ".. tostring(i) .. ", no parent")
+    end
+    i = i+1
+  end
+  
+  if result == nil then result = "" end
+  
+  return result
+end
+
+--[[
+function p.gmatch(frame)
+
+This function applies the pattern matching function mw.ustring.match to an input string and returns a string containing matched values (only unique values).
+
+frame args used:
+1 	input to which pattern matching will be applied
+2 	pattern 
+3 	optional separator, defaults to ","
+4 	optional conjunction (separator between final 2 items), defaults to separator
+
+examples use case:
+{{#invoke:CspFunctions|gmatch|'sub-header sidebar' 'main sidebar'|([^ \'"]+)|,}} will return: sub-header,sidebar,main
+
+debug console test:
+=p.gmatch(mw.getCurrentFrame():newChild{args={"'sub-header sidebar' 'main sidebar'",'([^ \'"]+)',","}}) 
+
+--]]
+function p.gmatch(frame)
+  local layoutAreas = frame.args[1]
+  local pattern = frame.args[2]
+  local separator = frame.args[3]
+  local conjunction = frame.args[4]
+  
+  if separator == nil then separator = "" end
+  if conjunction == nil then conjunction = separator end
+  
+  local resultTable = {}
+  local duplicateCheck = {}
+  for item in mw.ustring.gmatch(layoutAreas,pattern) do
+    if duplicateCheck[item] == nil then
+      table.insert(resultTable,item)
+      duplicateCheck[item] = true
+    end
+  end
+  
+  return mw.text.listToText(resultTable,separator,conjunction)
+end
+
+
+return p

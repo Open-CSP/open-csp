@@ -1,4 +1,0 @@
-{{Base properties
-|Title=Default layout rows
-|Class=Setting
-}}

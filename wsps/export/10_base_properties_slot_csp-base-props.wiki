@@ -1,0 +1,13 @@
+{{Base properties
+|Class=Application page
+|Title=Template:Base properties
+|Version history={{Version history item 
+|Version number=1.1
+|Version description=Don't set a value to "Has version history" when there isn't one (this unnecessarily added the property to all pages)
+|Version date=2023-2-24 10:30:20
+}}{{Version history item 
+|Version number=1.0
+|Version description=Initial version
+|Version date=2022-12-02 08:58:50
+}}
+}}

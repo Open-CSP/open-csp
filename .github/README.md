@@ -13,17 +13,17 @@ The perfect open source Mediawiki framework for corporate use.
 ## Requirements
 
 To install the Open CSP framework, the following needs to be installed:
-- PHP version >=7.4 <8
+- PHP version >=8.0 < 9
 - Composer version >=2
-- Mediawiki version 1.35
+- Mediawiki version 1.39
 - ElasticSearch version 6.8
 
 ## Installation
 
 Follow these steps to set up your Open CSP wiki:
 
-0. [Install](https://www.mediawiki.org/wiki/Manual:Installing_MediaWiki) and [configure](https://www.mediawiki.org/wiki/Manual:Config_script) Mediawiki version 1.35 and make sure you can connect to an ElasticSearch instance.
-1. Copy the installation script from [this GitHub repo](https://raw.githubusercontent.com/Open-CSP/open-csp/main/.github/install_open_csp.sh) to your mediawiki server.
+0. [Install](https://www.mediawiki.org/wiki/Manual:Installing_MediaWiki) and [configure](https://www.mediawiki.org/wiki/Manual:Config_script) Mediawiki version 1.39 and make sure you can connect to an ElasticSearch instance.
+1. Copy the installation script from [this GitHub repo](https://raw.githubusercontent.com/Open-CSP/open-csp/REL1_39/.github/install_open_csp.sh) to your mediawiki server.
 2. Run the installation script
 ```sh
     ./install_csp.sh <mediawiki directory>

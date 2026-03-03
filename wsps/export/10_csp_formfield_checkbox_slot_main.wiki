@@ -1,0 +1,57 @@
+<noinclude>
+
+This is the '''Csp formfield/checkbox''' template. It should be called in the following format:
+
+<pre>
+{{Csp formfield/checkbox 
+|name= (text) 
+|required= (optional: "required")
+|value= (text)
+|allowedValues = (optional: "Checked value, unchecked value") e.g. "true,false". Defaults to checked value "Yes" and unchecked value empty
+}}
+</pre>
+
+== Example ==
+<form action="get">
+{{Csp formfield/checkbox
+|name=Default allowed values
+|value=Test checked
+}}
+{{Csp formfield/checkbox
+|name=True-false
+|value=Test checked
+|allowedValues=true,false
+}}
+{{Csp formfield/checkbox
+|name=True
+|value=Test checked
+|allowedValues=true,false
+}}
+<input type="submit"/>
+</form>
+
+Related templates:
+{{#ask:[[~*Csp formfield/*]] 
+|mainlabel=Page
+|format=table 
+|sort=Title
+}}
+
+
+</noinclude><includeonly><!--
+// hidden field for unchecked default value
+--><input type="hidden" 
+name="{{{name|}}}" 
+value="{{#explode:{{{allowedValues|}}}|,|1}}"
+/><!--
+// checkbox with label
+--><label><input type="checkbox" 
+id="checkbox-{{lc:{{anchorencode:{{{name|}}} }} }}"
+name="{{{name|}}}" 
+value="{{#if:{{{allowedValues|}}}|{{#explode:{{{allowedValues|}}}|,|0}}|Yes}}"
+checked="{{#ifeq:{{#if:{{{allowedValues|}}}|{{#explode:{{{allowedValues|}}}|,|0}}|Yes}}
+|{{{value|}}}
+|checked
+}}"
+required="{{{required|}}}"
+/>{{#if:{{{allowedValues|}}}|{{#explode:{{{allowedValues|}}}|,|0}}|Yes}}</label></includeonly>

@@ -1,0 +1,13 @@
+{{Base properties
+|Class=Application page
+|Title=Template:Create page form
+|Version history={{Version history item 
+|Version number=1.1
+|Version description=Added an additional fieldname (without input field) to csp-class-props _create because FlexForm does not allow it to be empty
+|Version date=2023-7-21 09:29:23
+}}{{Version history item 
+|Version number=1.0
+|Version description=Initial version
+|Version date=2022-12-02 09:28:14
+}}
+}}

@@ -1,0 +1,41 @@
+<noinclude>
+
+This is the '''New application page''' template. It should be called in the following format:
+
+<pre>
+{{safesubst:New application page}}
+</pre>
+
+for properties:
+
+<pre>
+{{safesubst:New application page
+|Has type=Number
+}}
+</pre>
+
+include default content for templates:
+
+<pre>
+{{safesubst:New application page
+|Content=example
+}}
+</pre>
+
+</noinclude><includeonly>{{safesubst:#switch:{{safesubst:NAMESPACENUMBER}}
+|102=[[Has type::{{safesubst:#if:{{{Has type|}}}|{{{Has type|}}}|Text }}]]
+|4<!-- project ("Wiki:") namespace -->
+|=
+|#default=<{{safesubst:#if:1|noinclude}}>
+
+This is the {{safesubst:#switch:{{safesubst:NAMESPACENUMBER}}
+|10='''{{safesubst:PAGENAME}}''' template
+|#default='''{{safesubst:FULLPAGENAME}}''' page}}. It should be called in the following format:
+
+<{{safesubst:#if:1|pre}}>
+{{{{safesubst:#switch:{{safesubst:NAMESPACENUMBER}}|=:|10=|274=&#35;widget:|#default={{safesubst:NAMESPACE}}:}}{{safesubst:PAGENAME}} }}
+<{{safesubst:#if:1|/}}{{safesubst:#if:1|pre}}>
+
+<{{safesubst:#if:1|/}}{{safesubst:#if:1|noinclude}}><{{safesubst:#if:1|includeonly}}>{{{Content|}}}
+
+<{{safesubst:#if:1|/}}{{safesubst:#if:1|includeonly}}>}}</includeonly>

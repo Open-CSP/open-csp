@@ -1,0 +1,9 @@
+{{Base properties
+|Class=Application page
+|Title=Template:Csp sidebar item
+|Version history={{Version history item 
+|Version number=1.0
+|Version description=This template replaces "Template:Sidebar item" 
+|Version date=2023-5-12 09:21:45
+}}
+}}

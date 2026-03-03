@@ -1,0 +1,31 @@
+<noinclude>
+
+This is the "Add version history item" template. It should be called in the following format:
+
+<pre>
+{{Add version history item
+|Type= (value options: minor, major) 
+|Description= (text) note description might have comma's wrapped around it which should be filterd, e.g. ",Example description,"
+}}
+</pre>
+
+or
+
+<pre>
+{{subst:Add version history item
+|Type=major
+|Description=Example description
+}}
+</pre>
+
+</noinclude><includeonly>{{safesubst:#af_foreach:{{safesubst:#invoke:VersionHistoryItems|get}} ||$data|{{Version history item 
+|Version number={{safesubst:#if:{{safesubst:#af_get:{{{$data}}}|Current version number}} |{{safesubst:#switch:{{{Type|}}}
+  |minor|#default={{safesubst:#explode:{{safesubst:#af_get:{{{$data}}}|Current version number}}|.|0}}.{{safesubst:#expr:{{safesubst:#explode:{{safesubst:#af_get:{{{$data}}}|Current version number}}|.|1}} + 1}}
+  |major={{safesubst:#expr:{{safesubst:#explode:{{safesubst:#af_get:{{{$data}}}|Current version number}}|.|0}} + 1}}.0
+  }}
+  |1.0
+  }}
+|Version description={{safesubst:#invoke:VersionHistoryItems|processDescriptionInput|{{{Description|}}}}}
+|Version date={{safesubst:#time: Y-n-d H:i:s |now}}
+}}{{safesubst:#af_get:{{{$data}}}|Version history unparsed}} }}
+}}</includeonly>

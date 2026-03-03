@@ -1,0 +1,13 @@
+{{Base properties
+|Class=Application page
+|Title=Property:Sub header template
+|Version history={{Version history item 
+|Version number=1.1
+|Version description=Changed type to page, as this property should contain pagenames as values
+|Version date=2023-3-23 12:27:48
+}}{{Version history item 
+|Version number=1.0
+|Version description=Initial version
+|Version date=2022-12-02 09:12:34
+}}
+}}

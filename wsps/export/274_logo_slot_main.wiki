@@ -1,2 +1,1 @@
-<noinclude>{{CSP alert}}</noinclude>
 <img src="/logo/Logo.svg" id="img_logo" />

@@ -1,0 +1,4 @@
+{{Csp class properties
+|Type=CSP Basis Example
+|Origin=CSP Basis
+}}

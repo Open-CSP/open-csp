@@ -1,55 +1,136 @@
-__NOTOC__{{#vardefine:@allow edit |{{#ifingroup:user|yes}} }}<!--
-  --><div>{{#ifeq:{{#var:@allow edit}} |yes |<span class="hide-when-ve-active" style="float:right">{{#widget:Button link |type=a |href={{fullurl:{{FULLPAGENAME}} |veaction=edit}} |buttontext=Edit |class=btn btn-secondary}}</span> }}<!--
-  --><div class="h1">{{#if:{{#caprint:$base[Base properties][Title]}} |{{#caprint:$base[Base properties][Title]}} |{{#getdisplaytitle:{{FULLPAGENAME}} }} }}</div><!--
-  --></div>
-  <div>
-<_form action="addToWiki">
-	<_edit target="{{PAGEID}}" template="Class definition properties" formfield="Parameters" mwslot="ws-class-props"/><_instance 
-		template-parent="Class definition properties" 
-		template="Parameter definition"
-		name="Parameters" 
-		default-content="{{#caprint:$class[Class definition properties][Parameters]||true}}"
-        >
-<div class="form-row align-items-center">
-<div class="form-group col-md-3"><_input title="Name of the field" type="text" class="form-control" name="Name" placeholder="Name" ></_input></div>
-<div class="form-group col-md-1"><div class="form-check form-check-inline"><_input class="form-check-input form-control-lg" type="checkbox" id="required" name="Required" title="Is this field a required field ?" value="true" default="false" /><_label for="required" class="form-check-label col-form-label-sm">Required</_label></div></div>
-<div class="form-group col-md-2">{{#cadefine:$value settings |{{Wiki:Setting/Parameter_formfield_types}} }}{{#cadefine:$values selected |{{#caprint:$class[Class definition properties][Parameters][Formfield type]}} }}
-{{#camerge:$value options |$value settings |$values selected }}{{#caunique:$value options}}<!-- 
- -->{{#tag:wsselect
-  |{{#tag:wsfield|(none)|type=option|value=}}
-{{#camap:$value options |__Value__|{{#tag:wsfield|__Value__|type=option|value=__Value__|selected={{#if:{{#casearch:$values selected|__Value__}}|selected}} }} |}}
-  |name=Formfield type |class=form-control |id=formfield-type-field  
-}}</div>
-<div class="form-group col-md-3"><_input type="text" class="form-control" name="Allowed values" placeholder="Allowed values" html="all" /></div>
-<div class="form-group col-md-1"><div class="form-check form-check-inline"><_input title="Allow multiple values?" type="checkbox" class="form-check-input form-control-lg" id="multiple" name="Multiple" value="true" default="false" /><_label for="multiple" class="form-check-label col-form-label-sm">Multiple</_label></div></div>
-<div class="form-group col-md-2">{{#cadefine:$value settings |{{Wiki:Setting/Available_slots}} }}{{#cadefine:$values selected |{{#caprint:$class[Class definition properties][Parameters][Slot]}} }}
-{{#camerge:$value options |$value settings |$values selected }}{{#caunique:$value options}}<!-- 
- -->{{#tag:wsselect
-  |{{#tag:wsfield|(none)|type=option|value=}}
-{{#camap:$value options |__Value__|{{#tag:wsfield|__Value__|type=option|value=__Value__|selected={{#if:{{#casearch:$values selected|__Value__}}|selected}} }} |}}
-  |name=Slot |class=form-control |id=formfield-type-field  
+<noinclude>
+
+This is the '''Class definition subheader''' template. It should be called in the following format:
+
+<pre>
+{{Class definition subheader }}
+</pre>
+
+</noinclude><includeonly>__NOTOC__<!--
+
+-->{{#af_foreach:{{#invoke:ClassDefinitionData|afExport}}||$data|<!--
+
+--><h2>Class</h2>
+<p>'''{{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Defines class|_text}}''' with pagetitle format {{#af_get:{{{$data}}}|var|pagetitleFormat}}</p><!--
+-->{{#if:{{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Allowed namespaces|_text}} |<p>Allowed namespaces:</p>
+<ul>{{#af_join:{{#af_map:{{#af_split:{{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Allowed namespaces|_text}}|,}}|@@|<li>{{{@@}}}</li>}}|\n}}</ul>
+}}<!--
+-->{{#if:{{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Short description|_text}}|<p>{{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Short description|_text}}</p> }}<!--
+--><p>Has version history: {{#ifeq:{{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Has version history|_text}}|true |'''true''' |false}}</p>
+
+<h2>Layout</h2>
+* Areas : {{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Layout areas|_text}}
+* Columns : {{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Layout columns|_text}}
+* Rows : {{#af_get:{{{$data}}}|csp-class-props|Csp class properties|1|Layout rows|_text}}
+
+<h2>Storage templates</h2>
+* Base properties: [[{{#af_get:{{{$data}}}|var|basePropsTemplate}}]]
+* Class properties: [[{{#af_get:{{{$data}}}|var|classPropsTemplate}}]]
+
+<h2>Component templates</h2>
+* Footer template: {{#if:{{#af_get:{{{$data}}}|var|footerTemplate}} |[[{{#af_get:{{{$data}}}|var|footerTemplate}}]] |(none) }}
+* Sidebar template: [[{{#af_get:{{{$data}}}|var|sidebarTemplate}}]]
+* Sub header template: [[{{#af_get:{{{$data}}}|var|subheaderTemplate}}]]
+
+<div class="tab-content"><!--
+--><input type="radio" id="parameter-view" name="toggle-parameter" checked="checked" class="d-none sidebar-view" /><!--
+--><div class="sidebar-view-tab">
+<span style="float:right"><label for="parameter-edit" class="btn btn-secondary">Edit</label></span>
+<h2>Defined parameters</h2>
+{{#ifeq:{{#af_get:{{{$data}}}|var|hasParameterDefinitions}}|yes|
+{{{!}} class="table sortable"
+! Name
+! Property
+! Slot
+! Formfield template
+! Display template
+! Allowed values
+! Required
+! Multiple
+{{#af_foreach:{{#af_get:{{{$data}}}|csp-data|CspParameterDefinitions}}||$parameter|<tr>
+<td>{{#af_get:{{{$parameter}}}|name}}</td>
+<td>{{#switch:{{#af_get:{{{$parameter}}}|propertyName}} 
+  |(none)=(none)
+  |#default=[[Property:{{#af_get:{{{$parameter}}}|propertyName}} |{{#af_get:{{{$parameter}}}|propertyName}}]] 
+  }}
+</td>
+<td>{{#af_get:{{{$parameter}}}|slot}}</td>
+<td>{{#switch:{{#af_get:{{{$parameter}}}|formfieldTemplate}} |= |(none)=(none) |#default=[[Template:{{#af_get:{{{$parameter}}}|formfieldTemplate}} |{{#af_get:{{{$parameter}}}|formfieldTemplate}}]] }}</td>
+<td>{{#switch:{{#af_get:{{{$parameter}}}|displayTemplate}} |= |(none)=(none) |#default=[[Template:{{#af_get:{{{$parameter}}}|displayTemplate}} |{{#af_get:{{{$parameter}}}|displayTemplate}}]] }}</td>
+<td>{{#af_get:{{{$parameter}}}|allowedValues}}</td>
+<td>{{#ifeq:{{#af_get:{{{$parameter}}}|required}} |required|Yes|No}}</td>
+<td>{{#ifeq:{{#af_get:{{{$parameter}}}|multiple}} |multiple|Yes|No}}</td>
+<tr>
 }}
+{{!}}}
+|''No parameters have been defined yet''
+}}
+</div><!-- end of .sidebar-view-tab 
+
+--><input type="radio" id="parameter-edit" name="toggle-parameter" class="d-none sidebar-edit" /><!--
+--><div class="sidebar-edit-tab"><!--
+--><span style="float:right"><label for="parameter-view" class="btn btn-secondary">Close</label></span>
+<h2>Edit parameters</h2>
+<div class="alert alert-info">
+* '''allowed values''' has different options depending on the chosen formfield template:
+** '''checked value,unchecked value''' e.g "Yes,No" for [[Template:Csp formfield/checkbox]]
+** '''SMW query''' e.g. "<nowiki>[[Class::Application page]]</nowiki>" for [[Template:Csp formfield/ask token]]
+** '''comma-separated list''' e.g. "A,B,C" for [[Template:Csp formfield/select]] and [[Template:Csp formfield/token]]
+* '''allowed values''' is parsed, so it is for example possible to transclude a page that contains the actual allowed values, like "<nowiki>{{Setting/select-options}}</nowiki>"
+* '''multiple''' is only used by [[Template:Csp formfield/token]] and [[Template:Csp formfield/ask token]]
 </div>
-</div>
-</_instance>
-<_input class="form-control btn btn-primary" type="submit" value="Save" />
-</_form>
+<form class="csp-parameter-definitions">
+<_edit target="{{FULLPAGENAME}}" mwslot="csp-data" format="json" template="jsonk|CspParameterDefinitions" formfield="CspParameterInstances" />
+<_instance name="CspParameterInstances" format="json" default-content="{{#slotdata:csp-data|{{FULLPAGENAME}}|CspParameterDefinitions}}" ><!--
+  --><div><!--
+  --><input type="text" name="name" placeholder="parameter name" title="Name" /><!--
+  --><input type="text" name="propertyName" placeholder="property name" title="Property name" /><!--
+  --><select name="slot" placeholder="choose a slot" title="Slotname"><!--
+    --><option value="csp-class-props">csp-class-props</option><!--
+    --><option value="csp-base-props">csp-base-props</option><!--
+  --></select><!--
+  --><input type="text" name="allowedValues" placeholder="Allowed values" title="Allowed values" /><!--
+  --><select name="required" placeholder="required?" title="Required" ><!--
+    --><option value="required">required</option><!--
+    --><option value=""></option><!--
+  --></select><!--
+  --><select name="multiple" placeholder="multiple?" title="Multiple" ><!--
+    --><option value="multiple">multiple</option><!--
+    --><option value=""></option><!--
+  --></select><!--
+  --><select name="showOnCreate" placeholder="show on create?" title="Show on create" ><!--
+    --><option value="true">true</option><!--
+    --><option value="false">false</option><!--
+  --></select><!--
+  --><_token name="formfieldTemplate" id="formfield-tokens" allowtags="allowtags" placeholder="formfieldTemplate" title="formfieldTemplate" allowclear ><!--
+    --><option value=""></option><!--
+    --><option value="(none)">(none)</option><!--
+    --><option value="Csp formfield/text">Csp formfield/text</option><!--
+    --><option value="Csp formfield/textarea">Csp formfield/textarea</option><!--
+    --><option value="Csp formfield/number">Csp formfield/number</option><!--
+    --><option value="Csp formfield/date">Csp formfield/date</option><!--
+    --><option value="Csp formfield/datetimelocal">Csp formfield/datetimelocal</option><!--
+    --><option value="Csp formfield/checkbox">Csp formfield/checkbox</option><!--
+    --><option value="Csp formfield/select">Csp formfield/select</option><!--
+    --><option value="Csp formfield/token">Csp formfield/token</option><!--
+    --><option value="Csp formfield/ask token">Csp formfield/ask token</option><!--
+  --></_token><!--
+  --><_token name="displayTemplate" id="display-tokens" allowtags="allowtags" placeholder="displayTemplate" title="displayTemplate" allowclear ><!--
+    --><option value=""></option><!--
+    --><option value="(none)">(none)</option><!--
+    --><option value="Csp parameter display/date">Csp parameter display/date</option><!--
+    --><option value="Csp parameter display/datetime">Csp parameter display/datetime</option><!--
+    --><option value="Csp parameter display/link">Csp parameter display/link</option><!--
+  --></_token><!--
+  // add hidden fields for custom parameter definition fields (if applicable)
+  -->{{#if:{{#af_get:{{{$data}}}|var|customParameterDefinitionFields}}|{{#af_foreach:{{#af_get:{{{$data}}}|var|customParameterDefinitionFields}}|$field||<input type="hidden" name="{{{$field}}}" />}} }}<!--
+--></div><!--
+--></_instance>
+<input type="submit" value="Save" class="btn btn-primary" />
+</form>
+</div><!-- end of .sidebar-edit-tab -->
+</div><!-- end of tab-content -->
 
-<h2>Automatically generated template code</h2>
-<ul class="nav nav-tabs" >
-<li class="nav-item">{{#widget:Link |type=a |href=#template-code-info |class=nav-link active |id=nav-home-tab |datatoggle=tab |text=Info}}</li>
-<li class="nav-item">{{#widget:Link |type=a |href=#template-code-page-properties |class=nav-link |id=nav-profile-tab |datatoggle=tab |text=Page properties template }}</li>
-<li class="nav-item">{{#widget:Link |type=a |href=#template-code-sidebar |class=nav-link |id=nav-contact-tab |datatoggle=tab |text=Sidebar template }}</li>
-</ul><!--
+}}<!-- end of #af_foreach
 
---><div class="tab-content">
-<div class="tab-pane fade show active" id="template-code-info" >Open one of the tabs to view automatically generated template code. This is meant to be used when creating new templates. 
-
-
-If you are modifying an existing template, it might still be useful to update the parameter definitions and use parts of the generated code, but be careful not to completely overwrite existing templates. Existing templates will likely have had other modifications that are not included in the automatically generated code.
-</div>
-<div class="tab-pane fade" id="template-code-page-properties" >
-
-{{Generate page properties template code |Class={{#caprint:$class[Class definition properties][Defines class]}} }}</div>
-<div class="tab-pane fade" id="template-code-sidebar" >{{Generate sidebar template code |Class={{#caprint:$class[Class definition properties][Defines class]}} }}</div>
-</div>
+--></includeonly>

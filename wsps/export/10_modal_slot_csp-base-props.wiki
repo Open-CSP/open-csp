@@ -1,0 +1,9 @@
+{{Base properties
+|Class=Application page
+|Title=Template:Modal
+|Version history={{Version history item 
+|Version number=1.0
+|Version description=Initial version
+|Version date=2022-11-28 11:32:11
+}}
+}}

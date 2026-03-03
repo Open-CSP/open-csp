@@ -1,1 +1,1 @@
-{"filename":"102_page_properties_template","pagetitle":"102_Page properties template","ns":102,"username":"Open CSP installation script","changed":"23-11-2021 07:39:56","pageid":74,"slots":"main","isFile":false,"description":"","tags":"Open CSP"}
+{"filename":"102_page_properties_template","pagetitle":"102_Page properties template","ns":102,"username":"Import script","changed":"23-11-2021 07:39:56","pageid":75,"slots":"main,csp-base-props,csp-class-props","models":"wikitext,wikitext,wikitext","isFile":false,"description":"","tags":"Open CSP"}

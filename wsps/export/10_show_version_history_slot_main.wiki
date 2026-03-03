@@ -1,0 +1,43 @@
+<noinclude>
+
+This is the '''Show version history''' template. It should be called in the following format:
+
+<pre>
+{{Show version history
+|Page= (optional: page) pagename of page for which version history is shown, defaults to current page
+}}
+</pre>
+
+<div class="row"><div class="col-3">
+{{Show version history |Page=Persoon/1}}
+</div></div>
+
+</noinclude><includeonly>{{#af_foreach:{{#invoke:VersionHistoryItems|get|page={{{Page|}}} }} ||$data|
+<div class="card version-history mt-3">
+<div class="card-header"><span style="float:right">{{#widget:Button link |href=#new-version-modal-{{PAGEID:{{#if:{{{Page|}}}|{{{Page|}}}|{{FULLPAGENAME}} }} }} |datatoggle=modal |class=btn btn-secondary |buttontext={{Fa|plus}} }}</span>
+<b class="d-block">Version history</b>
+</div>
+<ul class="list-group list-group-flush">
+{{#if:{{#af_get:{{{$data}}}|Version history}}|{{#af_foreach:{{#af_get:{{{$data}}}|Version history}} |$item-number|$item|{{#ifexpr:{{{$item-number}}} <= 20 |
+<li class="list-group-item">{{#af_get:{{{$item}}}|Version number|_text}} ({{#time:j M Y |{{#af_get:{{{$item}}}|Version date|_text}} }}) - {{#af_get:{{{$item}}}|Version description|_text}}</li>
+}} }} }}
+</ul>
+{{Modal
+|Targetid=new-version-modal-{{PAGEID:{{#if:{{{Page|}}}|{{{Page|}}}|{{FULLPAGENAME}} }} }}
+|ModalHeading=New version
+|BodyText=<form action="addToWiki">
+
+<_edit target="{{#if:{{{Page|}}} |{{{Page|}}} |{{PAGEID}} }}" template="Base properties" formfield="Version history" mwslot="csp-base-props" />
+
+<label for="new-version-minor"><input type="radio" id="new-version-minor" name="Version history[]" required="required" value="{{subst:Add version history item|Type=minor|Description=" checked="checked" /> Minor version update</label><br>
+<label for="new-version-major"><input type="radio" id="new-version-major" name="Version history[]" required="required" value="{{subst:Add version history item|Type=major|Description=" /> Major version update</label>
+<input type="text" required="required" name="Version history[]" class="form-control" placeholder="... describe version here" />
+<input type="hidden" name="Version history[]" value="}}" />
+
+<input type="submit" value="Save" class="btn btn-primary mt-3" /> 
+</form>
+|FooterText={{#widget:Button link |type=a |href=#new-version-modal-{{PAGEID:{{#if:{{{Page|}}}|{{{Page|}}}|{{FULLPAGENAME}} }} }} |datatoggle=modal |class=btn btn-default |buttontext=X}}
+|Hide link=Yes
+}}
+</div>
+}}</includeonly>

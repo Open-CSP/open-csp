@@ -1,0 +1,13 @@
+{{Base properties
+|Class=Application page
+|Title=Template:Class definition form
+|Version history={{Version history item 
+|Version number=1.1
+|Version description=Parameters are saved to slots, mwwrite changed to "Wiki:Class definition/[Defines class]", added noseo to the creates #121
+|Version date=2023-2-22 10:32:16
+}}{{Version history item 
+|Version number=1.0
+|Version description=Initial version
+|Version date=2022-12-02 08:55:22
+}}
+}}

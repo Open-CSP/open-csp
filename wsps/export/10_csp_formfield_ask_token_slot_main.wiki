@@ -1,0 +1,52 @@
+<noinclude>
+
+This is the '''Csp formfield/ask token''' template. It should be called in the following format:
+
+<pre>
+{{Csp formfield/ask token 
+|name= (text) 
+|multiple= (optional: "multiple") to allow selecting multiple values
+|required= (optional: "required")
+|value= (comma-seprated pagenames) selected values, e.g. "Template:Add version history item,Module:VersionHistoryItems"
+|allowedValues= (SMW query) e.g. "[[Class::Application page]]"
+}}
+</pre>
+
+== Example ==
+{{Csp formfield/ask token
+|name=Broodje2
+|value=
+|multiple=multiple
+|allowedValues=[[Class::Application page]]
+}}
+
+Related templates:
+{{#ask:[[~*Csp formfield/*]] 
+|mainlabel=Page
+|format=table 
+|sort=Title
+}}
+
+</noinclude><includeonly><_token 
+id="token-{{lc:{{anchorencode:{{{name|}}} }} }}" 
+name="{{{name|}}}[]" 
+class="form-control"
+multiple="{{{multiple|}}}"
+required="{{{required|}}}"
+input-length-trigger="1" 
+query="{{{allowedValues|}}}[[Title::!!!]](limit=999)(returntext=Title)"
+placeholder=""
+allowclear
+><!--
+// NOTE: placeholder is used because allowclear won't work without it (else there will be no way to clear filled fields when not using "multiple")
+
+// loop over value parameter using arrayfunctions to create selected options 
+-->
+{{#if:{{{value|}}} |{{#af_join:
+  {{#af_map:{{#af_split:{{{value|}}} }} 
+    |$value
+    |<option value="{{{$value}}}" selected="selected">{{#show:{{{$value}}}|?Title}}</option>
+  }}
+  |\n
+}} }} 
+</_token></includeonly>

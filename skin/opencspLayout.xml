@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<structure>
+    <grid class="flex-fill" mode="fluid">
+        <row class="row-CSPHeader">
+            <cell span="12">
+                <component type="OCSPHeader" class="noprint"/>
+            </cell>
+        </row>
+        <row class="csp-page-tools">
+            <component type="PageTools" class="noprint" />
+            <component type="PersonalTools" class="noprint" />
+        </row>
+        <row class="csp-grid">
+            <component type="OCSPSubHeader" class="cp-sub-header"/>
+            <component type="OCSPContent" class="cp-main"/>
+            <component type="OCSPSidebar" class="cp-sidebar"/>
+            <component type="OCSPFooter" class="cp-footer"/>
+        </row>
+        <row class="mt-1">
+            <cell>
+                <component type="NavbarHorizontal" collapsible="no" class="small mb-2">
+                    <component type="Toolbox" flatten="no" class="dropup">
+                        <modification type="ShowOnlyFor" group="sysop"/>
+                    </component>
+                    <component type="LangLinks" flatten="no" class="dropup"/>
+                </component>
+            </cell>
+        </row>
+        <row class="csp-page-tools"/>
+    </grid>
+</structure>

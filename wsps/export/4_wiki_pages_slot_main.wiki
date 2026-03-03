@@ -4,7 +4,7 @@
 |Targetid=new-page-modal
 |ModalHeading=New page
 |BodyText={{Create page form
-  |Class options=Wiki,Setting
+  |Class options=Setting
   }}
 |FooterText={{#widget:Button link |type=a |href=#new-page-modal |datatoggle=modal |class=btn btn-default |buttontext=X}}
 |Hide link=Yes
@@ -14,5 +14,3 @@
 -->
 <h2>Settings</h2>
 {{#ask:[[Class::Setting]] |?Modification date |mainlabel=Page |sort=Modification date |order=desc |default=No pages found |class=table table-striped sortable}}
-<h2>Wiki</h2>
-{{#ask:[[Class::Wiki]] |?Modification date |mainlabel=Page |sort=Modification date |order=desc |default=No pages found |class=table table-striped sortable}}

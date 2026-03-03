@@ -1,3 +1,0 @@
-{{Setting properties
-|Description=Default value of the layout rows in class definitions.
-}}

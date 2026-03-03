@@ -1,5 +1,4 @@
 <noinclude>
-{{CSP alert}}
 This is the '''Pages overview''' template. It should be called in the following format:
 
 <pre>
@@ -8,21 +7,21 @@ This is the '''Pages overview''' template. It should be called in the following 
 
 {{Pages overview}}
 
-</noinclude><includeonly>__NOTOC__{{#vardefine:@classes |{{#ask:[[Defines class::!Wiki]] [[Defines class::!Class definition]] |mainlabel=- |?Defines class= |limit=999 |sep=,}} }}<!--
+</noinclude><includeonly>__NOTOC__<!--
 
 -->{{#widget:Button link |href=#new-page-modal |datatoggle=modal |class=btn btn-primary |buttontext={{Fa|plus}} New page}}<!--
 -->{{Modal
 |Targetid=new-page-modal
 |ModalHeading=New page
+|BodyClass=card
 |BodyText={{Create page form
-  |Class options={{#var:@classes}}
+  |Class options={{#ask:[[Defines class::!Application page]] [[Defines class::!Class definition]] |mainlabel=- |?Defines class= |limit=999 |sep=,}}
   }}
 |FooterText={{#widget:Button link |type=a |href=#new-page-modal |datatoggle=modal |class=btn btn-default |buttontext=X}}
 |Hide link=Yes
 }}<!--
 
 
--->{{#caamap:{{#var:@classes}} |,|__Class__
-|<h2>__Class__</h2>{{#ask:[[Class::__Class__]] |?Modification date |mainlabel=Page |sort=Modification date |order=desc |default=No pages found |class=table table-striped sortable}}
-|<br>
-}}</includeonly>
+-->{{#af_join:{{#af_map:{{#af_split:{{#ask:[[Defines class::!Application page]] [[Defines class::!Class definition]] |mainlabel=- |?Defines class= |limit=999 |sep=,}}|,}}|__Class__
+|<h2>{{{__Class__}}}</h2>{{#ask:[[Class::{{{__Class__}}}]] |?Modification date |mainlabel=Page |sort=Modification date |order=desc |default=No pages found |class=table table-striped sortable}}
+}} }}</includeonly>

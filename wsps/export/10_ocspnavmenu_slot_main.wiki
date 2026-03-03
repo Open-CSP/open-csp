@@ -1,0 +1,70 @@
+<noinclude>
+This is the '''OCSPNavMenu''' template. It should be called in the following format:
+
+<pre>
+{{OCSPNavMenu
+|Input=(text) enter a list of pages, with each subitem on a new line and an empty line between main menu items (see example below). Use "*" to add a linktext different from the pagetitle.
+}}
+</pre>
+
+<pre>
+{{OCSPNavMenu
+|Input=Main Page*{{Fa|home}} Home
+
+Pages
+
+Search*Search
+
+{{Fa|lock}} Spaces
+Special:AddSpace*Add a Space
+Special:ActiveSpaces*Manage Active Spaces
+Special:ArchivedSpaces*Manage Archived Spaces
+
+{{Fa|lock}} Tools
+MediaWiki:Ocsp-navmenu*NavMenu
+MediaWiki:Ocsp-header*Header
+MediaWiki:Ocsp-footer*Footer
+Wiki:page-types*Page types
+Wiki:Wiki pages*Wiki pages
+File:Logo.png*Logo
+}}
+</pre>
+
+==Test==
+{{OCSPNavMenu
+|Input=Main Page*{{Fa|home}} Home
+
+Pages
+
+Search*Search
+
+{{#ifingroup:moderator,sysop |{{Fa|lock}} Spaces
+Special:AddSpace*Add a Space
+Special:ActiveSpaces*Manage Active Spaces
+Special:ArchivedSpaces*Manage Archived Spaces
+}}
+
+{{#ifingroup:sysop |{{Fa|lock}} Tools
+MediaWiki:Ocsp-navmenu*NavMenu
+MediaWiki:Ocsp-header*Header
+MediaWiki:Ocsp-footer*Footer
+-
+Wiki:page-types*Page types
+Wiki:Wiki pages*Wiki pages
+-
+File:Logo.png*Logo
+}}
+}}
+
+</noinclude><includeonly><!--
+--><div class="navbar navbar-dark navbar-expand-md bg-primary mt-3 mt-md-0" ><!--
+  -->{{#widget:Link |type=button |class=navbar-toggler |datatoggle=collapse |datatarget=#navbar1}}<!--
+  --><div class="collapse navbar-collapse justify-content-between w-100" id="navbar1"><!--
+    --><ul class="navbar-nav align-items-center"><!--
+      -->{{#invoke:OCSPNavMenu|innerMenu|input={{{Input|}}} }}<!--
+    --></ul><!-- 
+    --><div class="d-flex justify-conent-end"><!--
+       -->{{Login button}}<!-- 
+    --></div><!-- 
+ --></div><!--
+--></div></includeonly>
