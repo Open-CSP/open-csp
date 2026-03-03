@@ -74,12 +74,9 @@ $wgRestrictDisplayTitle = false;
 
 ##### FlexForm (formerly: WSForm)
 wfLoadExtension( 'FlexForm' );
-$wgFlexFormConfig['secure'] = false;
-$wgFlexFormConfig['auto_save_interval'] = 30000;
-$wgFlexFormConfig['auto_save_after_change'] = 3000;
+$wgFlexFormConfig['secure'] = true;
+$wgFlexFormConfig['sec_key'] = 'opencsp3';
 $wgFlexFormConfig['FlexFormDefaultTheme'] = "plain";
-$wgFlexFormConfig['rc_site_key'] = "";
-$wgFlexFormConfig['rc_secret_key'] = "";
 $wgFlexFormConfig['userscaneditallpages'] = true;
 $wgFlexFormConfig['hideEdit'] = false;
 $wgFlexFormConfig['renderonlyapprovedforms'] = false;
@@ -204,7 +201,6 @@ $wgMetaNamespace = "Wiki";
 $wgJobRunRate = 0;
 
 /** Skin settings **/
-wfLoadExtension( 'Bootstrap' );
 wfLoadSkin( 'chameleon' );
 $wgDefaultSkin = "chameleon";
 
